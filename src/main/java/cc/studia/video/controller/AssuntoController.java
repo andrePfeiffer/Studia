@@ -33,6 +33,13 @@ public class AssuntoController {
 		return "assunto/listar-assuntos";
 	}
 	
+	@PostMapping("/busca")
+	public String buscaAssunto(@RequestParam("busca") String busca, Model model) {
+		List<Assunto> assuntos = assuntoService.busca(busca);
+		model.addAttribute("assuntos", assuntos);
+		return "assunto/listar-assuntos";
+	}
+	
 	@GetMapping("/adiciona")
 	public String mostrarFormulario(Model model) {
 		Assunto assunto = new Assunto();
@@ -65,10 +72,4 @@ public class AssuntoController {
 		return "redirect:/assunto/verTodos";
 	}
 	
-	@PostMapping("/busca")
-	public String buscaAssunto(@RequestParam("busca") String busca, Model model) {
-		List<Assunto> assuntos = assuntoService.busca(busca);
-		model.addAttribute("assuntos", assuntos);
-		return "assunto/listar-assuntos";
-	}
 }
