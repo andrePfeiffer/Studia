@@ -1,5 +1,6 @@
 # Local configurations
 src/main/resources/persistence-mysql.properties
+target/
 
 # Compiled class file
 *.class
