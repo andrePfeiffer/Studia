@@ -24,17 +24,26 @@ public class AssuntoService {
 	public void salvarAssunto(Assunto assunto) {
 		assuntoDAO.salvarAssunto(assunto);
 	}
+	
+	@Transactional
+	public void editaAssunto(Assunto assunto) {
+		assuntoDAO.editaAssunto(assunto);
+	}
 
+	@Transactional
 	public Assunto ver(int id) {
 		return assuntoDAO.ver(id);
 	}
 
+	@Transactional
 	public void removeAssunto(int id) {
 		assuntoDAO.removeAssunto(id);
 		
 	}
 
+	@Transactional
 	public List<Assunto> busca(String busca) {
 		return assuntoDAO.buscar(busca);
 	}
+
 }

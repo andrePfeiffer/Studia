@@ -6,7 +6,8 @@
 		<title>Listar assuntos</title>
 	</head>
 	<body>
-	<form:form action="buscaAssuntos" method="POST">
+	<a href="adiciona">Adicionar assunto</a>
+	<form:form action="busca" method="POST">
 		Busca por assuntos: <input type="text" name="busca" />
 		<input type="submit" value="Buscar" />
 	</form:form>
@@ -17,10 +18,10 @@
 				<th>Ações</th>
 			</tr>
 			<c:forEach var="assunto" items="${assuntos}">
-				<c:url var="updateLink" value="/assunto/editaAssunto">
+				<c:url var="updateLink" value="/assunto/edita">
 					<c:param name="assuntoId" value="${assunto.id}" />
 				</c:url>
-				<c:url var="deleteLink" value="/assunto/removeAssunto">
+				<c:url var="deleteLink" value="/assunto/remove">
 					<c:param name="assuntoId" value="${assunto.id}" />
 				</c:url>
 				<tr>

@@ -33,33 +33,39 @@ public class AssuntoController {
 		return "assunto/listar-assuntos";
 	}
 	
-	@GetMapping("/adicionar")
+	@GetMapping("/adiciona")
 	public String mostrarFormulario(Model model) {
 		Assunto assunto = new Assunto();
 		model.addAttribute("assunto", assunto);
 		return "assunto/adicionar-assunto";
 	}
 	
-	@PostMapping("/adicionarAssunto")
+	@PostMapping("/adiciona")
 	public String adicionarAssunto(@ModelAttribute("assunto") Assunto assunto) {
 		assuntoService.salvarAssunto(assunto);
 		return "redirect:/assunto/verTodos";
 	}
 	
-	@GetMapping("/editaAssunto")
+	@GetMapping("/edita")
 	public String mostrarFormularioEdicao(@RequestParam("assuntoId") int id, Model model) {
 		Assunto assunto = assuntoService.ver(id);
 		model.addAttribute("assunto", assunto);
 		return "assunto/editar-assunto";
 	}
-	
-	@GetMapping("/delete")
+
+	@PostMapping("/edita")
+	public String editaAssunto(@ModelAttribute("assunto") Assunto assunto) {
+		assuntoService.editaAssunto(assunto);;
+		return "redirect:/assunto/verTodos";
+	}
+
+	@GetMapping("/remove")
 	public String removeAssunto(@RequestParam("assuntoId") int id) {
 		assuntoService.removeAssunto(id);
 		return "redirect:/assunto/verTodos";
 	}
 	
-	@PostMapping("/buscaAssuntos")
+	@PostMapping("/busca")
 	public String buscaAssunto(@RequestParam("busca") String busca, Model model) {
 		List<Assunto> assuntos = assuntoService.busca(busca);
 		model.addAttribute("assuntos", assuntos);

@@ -27,6 +27,11 @@ public class AssuntoDAO {
 		currentSession.save(assunto);
 	}
 
+	public void editaAssunto(Assunto assunto) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.update(assunto);
+	}
+	
 	public Assunto ver(int id) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Assunto assunto = currentSession.get(Assunto.class, id);
@@ -54,4 +59,5 @@ public class AssuntoDAO {
 		List<Assunto> assuntos = theQuery.getResultList();
 		return assuntos;
 	}
+
 }

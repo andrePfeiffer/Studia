@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form action="adiciona" modelAttribute="assunto" method="POST">
+	<form:form action="edita" modelAttribute="assunto" method="POST">
+		<form:hidden path="id"/>
 		<table>
 			<tbody>
 				<tr>
