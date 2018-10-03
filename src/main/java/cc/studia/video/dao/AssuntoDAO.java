@@ -43,7 +43,6 @@ public class AssuntoDAO {
 		Query theQuery = currentSession.createQuery("delete from Assunto where id=:assuntoId");
 		theQuery.setParameter("assuntoId", id);
 		theQuery.executeUpdate();
-		
 	}
 
 	public List<Assunto> buscar(String busca) {

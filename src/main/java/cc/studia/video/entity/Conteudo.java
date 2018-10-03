@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name="conteudo")
 public class Conteudo {
@@ -27,17 +29,13 @@ public class Conteudo {
 	@Column(name="descricao")
 	private String descricao;
 	
+	@Type(type="true_false")
 	@Column(name="publico")
-	private int publico;
+	private boolean publico;
 	
+	@Type(type="true_false")
 	@Column(name="aprovado")
-	private int aprovado;
-	
-	@Column(name="datacriado")
-	private String dataCriado;
-	
-	@Column(name="dataatualizado")
-	private String dataAtualizado;
+	private boolean aprovado;
 	
 	@OneToMany(mappedBy="conteudo", cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	private List<Comentario> comentarios;
@@ -78,36 +76,20 @@ public class Conteudo {
 		this.descricao = descricao;
 	}
 
-	public int getPublico() {
+	public boolean getPublico() {
 		return publico;
 	}
 
-	public void setPublico(int publico) {
+	public void setPublico(boolean publico) {
 		this.publico = publico;
 	}
 
-	public int getAprovado() {
+	public boolean getAprovado() {
 		return aprovado;
 	}
 
-	public void setAprovado(int aprovado) {
+	public void setAprovado(boolean aprovado) {
 		this.aprovado = aprovado;
-	}
-
-	public String getDataCriado() {
-		return dataCriado;
-	}
-
-	public void setDataCriado(String dataCriado) {
-		this.dataCriado = dataCriado;
-	}
-
-	public String getDataAtualizado() {
-		return dataAtualizado;
-	}
-
-	public void setDataAtualizado(String dataAtualizado) {
-		this.dataAtualizado = dataAtualizado;
 	}
 
 	public List<Comentario> getComentarios() {
