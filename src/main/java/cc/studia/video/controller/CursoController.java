@@ -78,9 +78,8 @@ public class CursoController {
 	}
 	
 	@PostMapping("/edita")
-	public String editaAssunto(@ModelAttribute("curso") Curso curso) {
+	public String editaCurso(@ModelAttribute("curso") Curso curso) {
 		conteudoService.editaConteudo(curso.getConteudo());
-		cursoService.editaCurso(curso);
 		return "redirect:/curso/verTodos";
 	}
 
