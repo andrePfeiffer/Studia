@@ -40,22 +40,22 @@ public class AssuntoDAO {
 
 	public void removeAssunto(int id) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query theQuery = currentSession.createQuery("delete from Assunto where id=:assuntoId");
-		theQuery.setParameter("assuntoId", id);
-		theQuery.executeUpdate();
+		Query query = currentSession.createQuery("delete from Assunto where id=:assuntoId");
+		query.setParameter("assuntoId", id);
+		query.executeUpdate();
 	}
 
 	public List<Assunto> buscar(String busca) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query theQuery = null;
+		Query query = null;
 		if (busca != null && busca.trim().length() > 0) {
-            theQuery = currentSession.createQuery("from Assunto where lower(nome) like :busca", Assunto.class);
-            theQuery.setParameter("busca", "%" + busca.toLowerCase() + "%");
+			query = currentSession.createQuery("from Assunto where lower(nome) like :busca", Assunto.class);
+			query.setParameter("busca", "%" + busca.toLowerCase() + "%");
         }
         else {
-            theQuery = currentSession.createQuery("from Assunto", Assunto.class);            
+        	query = currentSession.createQuery("from Assunto", Assunto.class);            
         }
-		List<Assunto> assuntos = theQuery.getResultList();
+		List<Assunto> assuntos = query.getResultList();
 		return assuntos;
 	}
 
