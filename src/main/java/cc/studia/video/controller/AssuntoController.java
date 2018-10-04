@@ -2,9 +2,12 @@ package cc.studia.video.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,15 +45,18 @@ public class AssuntoController {
 	
 	@GetMapping("/adiciona")
 	public String mostrarFormulario(Model model) {
-		Assunto assunto = new Assunto();
-		model.addAttribute("assunto", assunto);
+		model.addAttribute("assunto", new Assunto());
 		return "assunto/adicionar-assunto";
 	}
 	
 	@PostMapping("/adiciona")
-	public String adicionarAssunto(@ModelAttribute("assunto") Assunto assunto) {
-		assuntoService.salvarAssunto(assunto);
-		return "redirect:/assunto/verTodos";
+	public String adicionarAssunto(@ModelAttribute("assunto") @Valid Assunto assunto, BindingResult result) {
+		if(result.hasErrors()) {
+			return "assunto/adicionar-assunto";
+		}else {
+			assuntoService.salvarAssunto(assunto);
+			return "redirect:/assunto/verTodos";
+		}
 	}
 	
 	@GetMapping("/edita")

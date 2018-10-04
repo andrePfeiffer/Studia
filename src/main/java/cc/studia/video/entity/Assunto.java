@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="assunto")
@@ -15,9 +17,10 @@ public class Assunto {
 	@Column(name="id")
 	private int id;
 	
+	@Size(min=3, max=50)
 	@Column(name="nome")
 	private String nome;
-
+	
 	public int getId() {
 		return id;
 	}

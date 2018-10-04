@@ -13,7 +13,7 @@
 			<tbody>
 				<tr>
 					<td><label>Nome do assunto:</label></td>
-					<td><form:input path="nome" /></td>
+					<td><form:input path="nome" /><form:errors path="nome" /></td>
 				</tr>
 				<tr>
 					<td></td>
