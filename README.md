@@ -1,6 +1,6 @@
 # Studia
 
-Precisa criar o arquivo: /src/main/resources/persistance-mysql.properties
+Precisa criar o arquivo: /src/main/resources/persistence-mysql.properties
 
 jdbc.driver=com.mysql.jdbc.Driver
 jdbc.url=jdbc:mysql://localhost:3306/studia?useSSL=false&amp;serverTimezone=UTC
