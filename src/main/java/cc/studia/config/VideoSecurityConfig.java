@@ -1,4 +1,4 @@
-package cc.studia.video.config;
+package cc.studia.config;
 
 import javax.sql.DataSource;
 
@@ -19,13 +19,6 @@ public class VideoSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(myDataSource);
-		/*
-        UserBuilder users = User.withDefaultPasswordEncoder();
-        auth.inMemoryAuthentication()
-        .withUser(users.username("andre").password("test123").roles("EMPLOYEE", "MANAGER", "ADMIN"))
-        .withUser(users.username("mary").password("test123").roles("EMPLOYEE", "MANAGER"))
-        .withUser(users.username("susan").password("test123").roles("EMPLOYEE"));
-        */
 	}
 
 	@Override

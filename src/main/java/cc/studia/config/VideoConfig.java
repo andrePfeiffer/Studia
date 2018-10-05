@@ -1,4 +1,4 @@
-package cc.studia.video.config;
+package cc.studia.config;
 
 import java.beans.PropertyVetoException;
 import java.util.Properties;
@@ -28,7 +28,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan(basePackages="cc.studia.video")
+@ComponentScan(basePackages="cc.studia")
 @PropertySource("classpath:persistence-mysql.properties")
 public class VideoConfig implements WebMvcConfigurer {
 	

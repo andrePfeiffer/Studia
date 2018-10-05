@@ -1,11 +1,11 @@
-package cc.studia.video.service;
+package cc.studia.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cc.studia.video.dao.ConteudoDAO;
-import cc.studia.video.entity.Conteudo;
+import cc.studia.dao.ConteudoDAO;
+import cc.studia.entity.Conteudo;
 
 @Service
 public class ConteudoService {

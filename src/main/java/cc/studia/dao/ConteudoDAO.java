@@ -1,11 +1,11 @@
-package cc.studia.video.dao;
+package cc.studia.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import cc.studia.video.entity.Conteudo;
+import cc.studia.entity.Conteudo;
 
 @Repository
 public class ConteudoDAO {

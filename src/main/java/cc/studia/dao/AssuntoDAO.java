@@ -1,4 +1,4 @@
-package cc.studia.video.dao;
+package cc.studia.dao;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import cc.studia.video.entity.Assunto;
+import cc.studia.entity.Assunto;
 
 @Repository
 public class AssuntoDAO {

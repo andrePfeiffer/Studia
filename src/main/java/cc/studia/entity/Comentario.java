@@ -1,4 +1,4 @@
-package cc.studia.video.entity;
+package cc.studia.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

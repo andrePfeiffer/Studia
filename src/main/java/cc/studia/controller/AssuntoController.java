@@ -1,4 +1,4 @@
-package cc.studia.video.controller;
+package cc.studia.controller;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cc.studia.video.entity.Assunto;
-import cc.studia.video.service.AssuntoService;
+import cc.studia.entity.Assunto;
+import cc.studia.service.AssuntoService;
 
 @Controller
 @RequestMapping("/assunto")

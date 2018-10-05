@@ -1,4 +1,4 @@
-package cc.studia.video.service;
+package cc.studia.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cc.studia.video.dao.AulaDAO;
-import cc.studia.video.entity.Aula;
+import cc.studia.dao.AulaDAO;
+import cc.studia.entity.Aula;
 
 @Service
 public class AulaService {

@@ -1,4 +1,4 @@
-package cc.studia.video.config;
+package cc.studia.config;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

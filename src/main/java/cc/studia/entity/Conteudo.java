@@ -1,4 +1,4 @@
-package cc.studia.video.entity;
+package cc.studia.entity;
 
 import java.util.List;
 

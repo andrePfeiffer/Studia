@@ -1,4 +1,4 @@
-package cc.studia.video.config;
+package cc.studia.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
