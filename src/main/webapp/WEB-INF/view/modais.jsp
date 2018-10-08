@@ -1,0 +1,374 @@
+<!-- Modais -->
+
+<div id="promoveInstrutorModal" class="modal fade" role="dialog" style="width:100vw !important">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center><h3>Promover usuário à Instrutor</h3></center>
+            <button type="button" class="close" data-dismiss="modal"> &times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="panel panel-default">
+                            <div class="panel-heading c-list">
+                                <div class="row">
+                                    <div class="col-sm-4 form-inline" style="padding-top:10px;">
+                                        <input type="text" id="usuarioSearchField" class="form-control" placeholder="Pesquise por usuário">
+                                    </div>
+                                    <div class="col-sm-4 form-inline" style="padding-top:10px;">
+                                        <a class="btn btn-sm btn-primary display-4" id="searchUsersButton">
+                                                <span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                                                Pesquisar 
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>                
+                            <div class="row" style="display: none;">
+                                <div class="col-xs-12">
+                                    <div class="input-group c-edit2">
+                                        <input type="text" class="form-control" id="contact-list-edit2">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-edit2 text-muted"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="listaUsuarios" class="hidden">
+                                <ul class="list-group" id="contact-list">
+                                    <li class="list-group-item" id="1">
+                                        <form method="POST" action="/cursos">
+                                            <input type="text" id="userConta" class="form-control" placeholder="Usuário" readonly>
+                                            <br>
+                                            <select class="form-control">
+                                                <option>Selecione o assunto...</option>
+                                            </select>
+                                            <br>
+                                            <input type="submit" id="cadastroButton" class="btn btn-primary btn-block" value="Promover à Instrutor" style="margin:0px;">
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+            </div>      
+            <div class="modal-footer">
+                <div style="padding:10px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="CadastroAulaModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center><h3>Cadastro de nova aula</h3></center>
+            <button type="button" class="close" data-dismiss="modal"> &times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">  
+                    <form method="POST" action="/cursos">
+                        <input type="text" id="tituloAula" class="form-control" placeholder="Título" required>
+                        <br>
+                        <textarea type="text" id="descricaoAula" class="form-control" placeholder="Descrição aula" required></textarea>
+                        <br>
+                        <select class="form-control">
+                            <option>Selecione o assunto...</option>
+                        </select>
+                        <br>
+                        <input type="button" class="btn btn-primary" value="Salvar">
+                    </form>
+                </div>
+            </div>
+                                
+                        <div class="modal-footer">
+                            <div style="padding:10px"></div>
+                        </div>
+           
+        </div>
+    </div>
+</div>
+
+<div id="aprovaPerguntaModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <center><h3>Aprovar Perguntas</h3></center>
+        <button type="button" class="close" data-dismiss="modal"> &times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">  
+                <form method="POST" action="/cursos">
+                    <input type="text" id="assuntoPesquisa" class="form-control" placeholder="Assunto" required>
+                    <br>
+                    <input type="submit" id="PesquisaAssuntoButton" class="btn btn-primary btn-block" value="Pesquisar" style="margin:0px;">
+                </form>
+            </div>
+        </div>
+                            
+                    <div class="modal-footer">
+                        <div style="padding:10px"></div>
+                    </div>
+        
+    </div>
+</div>
+</div>
+
+<div id="aprovaConteudoModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <center><h3>Aprovar conteúdo</h3></center>
+        <button type="button" class="close" data-dismiss="modal"> &times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">  
+                <form method="POST" action="/cursos">
+                    <input type="text" id="assuntoPesquisa" class="form-control" placeholder="Assunto" required>
+                    <br>
+                    <input type="submit" id="PesquisaAssuntoButton" class="btn btn-primary btn-block" value="Pesquisar" style="margin:0px;">
+                </form>
+            </div>
+        </div>
+                            
+                    <div class="modal-footer">
+                        <div style="padding:10px"></div>
+                    </div>
+        
+    </div>
+</div>
+</div>
+
+
+<div id="aprovaPerguntaModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+    <div class="modal-header">
+        <center><h3>Aprovar Perguntas</h3></center>
+    <button type="button" class="close" data-dismiss="modal"> &times;</button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">  
+            <form method="POST" action="/cursos">
+                <input type="text" id="assuntoPesquisa" class="form-control" placeholder="Assunto" required>
+                <br>
+                <input type="submit" id="PesquisaAssuntoButton" class="btn btn-primary btn-block" value="Pesquisar" style="margin:0px;">
+            </form>
+        </div>
+    </div>
+                        
+                <div class="modal-footer">
+                    <div style="padding:10px"></div>
+                </div>
+    
+</div>
+</div>
+</div>
+
+
+<div id="respondePerguntaModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+    <div class="modal-header">
+        <center><h3>Responder perguntas</h3></center>
+    <button type="button" class="close" data-dismiss="modal"> &times;</button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">  
+            <form method="POST" action="/cursos">
+                <input type="text" id="assuntoPesquisa" class="form-control" placeholder="Assunto" required>
+                <br>
+                <input type="submit" id="PesquisaAssuntoButton" class="btn btn-primary btn-block" value="Pesquisar" style="margin:0px;">
+            </form>
+        </div>
+    </div>
+                        
+                <div class="modal-footer">
+                    <div style="padding:10px"></div>
+                </div>
+    
+</div>
+</div>
+</div>
+
+<div id="corrigeExercicioModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <center><h3>Corrigir exercícios</h3></center>
+        <button type="button" class="close" data-dismiss="modal"> &times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">  
+                <form method="POST" action="/cursos">
+                    <input type="text" id="assuntoPesquisa" class="form-control" placeholder="Assunto" required>
+                    <br>
+                    <input type="submit" id="PesquisaAssuntoButton" class="btn btn-primary btn-block" value="Pesquisar" style="margin:0px;">
+                </form>
+            </div>
+        </div>
+                            
+                    <div class="modal-footer">
+                        <div style="padding:10px"></div>
+                    </div>
+        
+    </div>
+</div>
+</div>
+
+<div id="respondePerguntaModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center><h3>Responder perguntas</h3></center>
+            <button type="button" class="close" data-dismiss="modal"> &times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">  
+                    <form method="POST" action="/cursos">
+                        <input type="text" id="assuntoPesquisa" class="form-control" placeholder="Assunto" required>
+                        <br>
+                        <input type="submit" id="PesquisaAssuntoButton" class="btn btn-primary btn-block" value="Pesquisar" style="margin:0px;">
+                    </form>
+                </div>
+            </div>
+                                
+                        <div class="modal-footer">
+                            <div style="padding:10px"></div>
+                        </div>
+            
+        </div>
+    </div>
+</div>
+
+<div id="mantemPermissaoModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <center><h3>Manter Permissões de usuários</h3></center>
+                <button type="button" class="close" data-dismiss="modal"> &times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">  
+                        <form method="POST" action="/cursos">
+                            <input type="text" id="assuntoPesquisa" class="form-control" placeholder="Assunto" required>
+                            <br>
+                            <input type="submit" id="PesquisaAssuntoButton" class="btn btn-primary btn-block" value="Pesquisar" style="margin:0px;">
+                        </form>
+                    </div>
+                </div>
+                                    
+                            <div class="modal-footer">
+                                <div style="padding:10px"></div>
+                            </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="mantemUsuarioModal" class="modal fade" role="dialog" style="width:100vw !important">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <center><h3>Manter contas de usuários</h3></center>
+                    <button type="button" class="close" data-dismiss="modal"> &times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="panel panel-default">
+                                    <div class="panel-heading c-list">
+                                        <div class="row">
+                                            <div class="col-sm-4 form-inline" style="padding-top:10px;">
+                                                <input type="text" id="usuarioContaSearchField" class="form-control" placeholder="Pesquise por usuário">
+                                            </div>
+                                            <div class="col-sm-4 form-inline" style="padding-top:10px;">
+                                                <a class="btn btn-sm btn-primary display-4" id="searchUsers2Button">
+                                                        <span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                                                        Pesquisar 
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>                
+                                    <div class="row" style="display: none;">
+                                        <div class="col-xs-12">
+                                            <div class="input-group c-edit2">
+                                                <input type="text" class="form-control" id="contact-list-edit2">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-edit2 text-muted"></span></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="listaUsuariosConta" class="hidden">
+                                        <ul class="list-group" id="contact-list">
+                                            <li class="list-group-item" id="1">
+                                                <form method="POST" action="/cursos">
+                                                    <input type="email" id="emailConta" class="form-control" placeholder="E-mail" required>
+                                                    <br>
+                                                    <input type="text" id="userConta2" class="form-control" placeholder="Usuário" required>
+                                                    <br>
+                                                    <br>
+                                                    <input type="submit" id="cadastroButton" class="btn btn-primary btn-block" value="Salvar" style="margin:0px;">
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>      
+                    <div class="modal-footer">
+                        <div style="padding:10px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div id="PesquisaAssuntoModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+    <div class="modal-header">
+        <center><h3>Pesquisar Assunto</h3></center>
+    <button type="button" class="close" data-dismiss="modal"> &times;</button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">  
+            <form method="POST" action="/cursos">
+                <input type="text" id="assuntoPesquisa" class="form-control" placeholder="Assunto" required>
+                <br>
+                <input type="submit" id="PesquisaAssuntoButton" class="btn btn-primary btn-block" value="Pesquisar" style="margin:0px;">
+            </form>
+        </div>
+    </div>
+                        
+                <div class="modal-footer">
+                    <div style="padding:10px"></div>
+                </div>
+   
+</div>
+</div>
+</div>
+
+<div id="CadastroAssuntoModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+    <div class="modal-header">
+        <center><h3>Cadastro de novo Assunto</h3></center>
+    <button type="button" class="close" data-dismiss="modal"> &times;</button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">  
+            <form method="POST" action="/cursos">
+                <input type="text" id="assuntoCadastro" class="form-control" placeholder="Assunto" required>
+                <br>
+                <input type="submit" id="cadastroButton" class="btn btn-primary btn-block" value="Cadastrar" style="margin:0px;">
+            </form>
+        </div>
+    </div>
+                        
+                <div class="modal-footer">
+                    <div style="padding:10px"></div>
+                </div>
+   
+</div>
+</div>
+</div>
