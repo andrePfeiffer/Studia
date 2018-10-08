@@ -14,4 +14,4 @@ connection.pool.maxIdleTime=3000
 
 hibernate.dialect=org.hibernate.dialect.MySQLDialect
 hibernate.show_sql=true
-hibernate.packagesToScan=cc.studia.video.entity
+hibernate.packagesToScan=cc.studia.entity
