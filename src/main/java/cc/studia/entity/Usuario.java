@@ -1,10 +1,17 @@
 package cc.studia.entity;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +30,13 @@ public class Usuario {
 	
 	@Column(name="email")
 	private String email;
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "usuario_perfil", 
+	joinColumns = @JoinColumn(name = "idusuario"), 
+	inverseJoinColumns = @JoinColumn(name = "idperfil"))
+	private Collection<Perfil> perfils;
+
 
 	public int getId() {
 		return id;
@@ -55,6 +69,15 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public Collection<Perfil> getPerfils() {
+		return perfils;
+	}
+
+	public void setPerfils(Collection<Perfil> perfils) {
+		this.perfils = perfils;
+	}
+	
 	
 	
 }

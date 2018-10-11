@@ -34,7 +34,7 @@ public class VideoConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	private Environment env;
-	
+
 	@Bean
 	public DataSource myDataSource() {
 		ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
