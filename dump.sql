@@ -1,18 +1,18 @@
  SET NAMES utf8 ;
 
-CREATE TABLE `authorities` (
-  `username` varchar(50) NOT NULL,
-  `authority` varchar(50) NOT NULL,
-  UNIQUE KEY `authorities_idx_1` (`username`,`authority`),
-  CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
-) ENGINE=InnoDB;
-
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `enabled` tinyint(1) NOT NULL,
   PRIMARY KEY (`username`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `authorities` (
+  `username` varchar(50) NOT NULL,
+  `authority` varchar(50) NOT NULL,
+  UNIQUE KEY `authorities_idx_1` (`username`,`authority`),
+  CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
 ) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS `usuario`;
@@ -200,7 +200,7 @@ CREATE TABLE `resposta` (
   KEY `fk_resposta_pergunta_idx` (`idPergunta`),
   CONSTRAINT `fk_resposta_comentario` FOREIGN KEY (`idComentario`) REFERENCES `comentario` (`id`),
   CONSTRAINT `fk_resposta_pergunta` FOREIGN KEY (`idPergunta`) REFERENCES `pergunta` (`idcomentario`)
-) ENGINE;
+) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS `avaliacomentario`;
 CREATE TABLE `avaliacomentario` (

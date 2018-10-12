@@ -29,12 +29,13 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages="cc.studia")
-@PropertySource("classpath:persistence-mysql.properties")
-public class VideoConfig implements WebMvcConfigurer {
+@PropertySource(value="classpath:persistence-mysql.properties")
+@PropertySource(value="classpath:mysql-override.properties", ignoreResourceNotFound=true)
+public class CustomConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	private Environment env;
-	
+
 	@Bean
 	public DataSource myDataSource() {
 		ComboPooledDataSource securityDataSource = new ComboPooledDataSource();

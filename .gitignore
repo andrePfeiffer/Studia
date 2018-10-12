@@ -1,5 +1,5 @@
 # Local configurations
-src/main/resources/persistence-mysql.properties
+src/main/resources/mysql-username.properties
 target/
 
 # Compiled class file

@@ -9,7 +9,7 @@
     <div style="width:100%">
         <img src="${pageContext.request.contextPath}/assets/images/cursosOut.jpg" style="width:100%"/>
         <span style="position:absolute; top:15%; left:10%; font-size:5vw; color:white">Cursos online gratuitos de tecnologia.</span>
-        <security:authorize access="hasRole('ADMIN')">
+        <security:authorize access="hasAuthority('ADMIN')">
 	        User: <security:authentication property="principal.username" /><br />
 	        Role: <security:authentication property="principal.authorities" /><br />
 	    </security:authorize>
