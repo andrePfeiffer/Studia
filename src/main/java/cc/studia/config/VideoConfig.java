@@ -29,7 +29,8 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages="cc.studia")
-@PropertySource("classpath:persistence-mysql.properties")
+@PropertySource(value="classpath:persistence-mysql.properties")
+@PropertySource(value="classpath:mysql-override.properties", ignoreResourceNotFound=true)
 public class VideoConfig implements WebMvcConfigurer {
 	
 	@Autowired
