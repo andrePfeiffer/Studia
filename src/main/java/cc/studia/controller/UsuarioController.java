@@ -26,7 +26,7 @@ public class UsuarioController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    if (auth != null){    
 	    	HttpSession session = request.getSession();
-	    	Usuario usuarioLogado = (Usuario) session.getAttribute("user");
+	    	Usuario usuarioLogado = (Usuario) session.getAttribute("usuario");
 	    	if(usuarioLogado != null) {
 		    	if(usuarioLogado.getNome().equals(auth.getName())) {
 		    		String mensagem = "Usuario logado e verificado";

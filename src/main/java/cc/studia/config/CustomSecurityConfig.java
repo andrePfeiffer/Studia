@@ -14,7 +14,7 @@ import cc.studia.service.UsuarioService;
 
 @Configuration
 @EnableWebSecurity
-public class VideoSecurityConfig extends WebSecurityConfigurerAdapter {
+public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Autowired
     private UsuarioService usuarioService;
