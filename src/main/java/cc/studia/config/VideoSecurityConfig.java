@@ -10,14 +10,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import cc.studia.service.IUsuarioService;
+import cc.studia.service.UsuarioService;
 
 @Configuration
 @EnableWebSecurity
 public class VideoSecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Autowired
-    private IUsuarioService usuarioService;
+    private UsuarioService usuarioService;
 	
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
@@ -30,19 +30,20 @@ public class VideoSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/").hasRole("EMPLOYEE")
-			.antMatchers("/admin/**").hasRole("ADMIN")
-			
-			.and().formLogin()
-			.loginPage("/showMyLoginPage")
-			.loginProcessingUrl("/autenticateTheUser")
-			.successHandler(customAuthenticationSuccessHandler)
-			.permitAll()
-			
-			.and().logout().permitAll()
-			
-			.and().exceptionHandling()
-			.accessDeniedPage("/showMyLoginPage?denied");
+		.antMatchers("/").permitAll()
+		.antMatchers("/curso/**").hasAuthority("EMPLOYEE")
+		.antMatchers("/admin/**").hasAuthority("ADMIN")
+		
+		.and().formLogin()
+		.loginPage("/showMyLoginPage")
+		.loginProcessingUrl("/autenticateTheUser")
+		.successHandler(customAuthenticationSuccessHandler)
+		.permitAll()
+		
+		.and().logout().permitAll()
+		
+		.and().exceptionHandling()
+		.accessDeniedPage("/showMyLoginPage?denied");
 	}
 	
 	@Bean

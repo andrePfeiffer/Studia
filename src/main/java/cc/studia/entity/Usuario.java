@@ -1,11 +1,11 @@
 package cc.studia.entity;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,11 +31,13 @@ public class Usuario {
 	@Column(name="email")
 	private String email;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "usuario_perfil", 
-	joinColumns = @JoinColumn(name = "idusuario"), 
-	inverseJoinColumns = @JoinColumn(name = "idperfil"))
-	private Collection<Perfil> perfils;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "usuario_perfil", 
+			joinColumns = @JoinColumn(name = "idusuario"), 
+			inverseJoinColumns = @JoinColumn(name = "idperfil")
+	)
+	private List<Perfil> perfils = new ArrayList<>();
 
 
 	public int getId() {
@@ -70,11 +72,11 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public Collection<Perfil> getPerfils() {
+	public List<Perfil> getPerfils() {
 		return perfils;
 	}
 
-	public void setPerfils(Collection<Perfil> perfils) {
+	public void setPerfils(List<Perfil> perfils) {
 		this.perfils = perfils;
 	}
 	

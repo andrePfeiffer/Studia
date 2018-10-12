@@ -9,12 +9,11 @@ import org.springframework.stereotype.Repository;
 import cc.studia.entity.Usuario;
 
 @Repository
-public class UsuarioDAO implements IUsuarioDAO {
+public class UsuarioDAO {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Override
 	public Usuario findByUserName(String theUserName) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<Usuario> theQuery = currentSession.createQuery("from Usuario where nome=:uName", Usuario.class);
@@ -29,7 +28,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 		return theUser;
 	}
 
-	@Override
 	public void save(Usuario theUser) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		currentSession.saveOrUpdate(theUser);

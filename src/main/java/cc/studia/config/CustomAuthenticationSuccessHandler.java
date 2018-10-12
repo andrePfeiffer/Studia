@@ -13,13 +13,13 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import cc.studia.entity.Usuario;
-import cc.studia.service.IUsuarioService;
+import cc.studia.service.UsuarioService;
 
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     @Autowired
-    private IUsuarioService usuarioService;
+    private UsuarioService usuarioService;
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
@@ -33,9 +33,13 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
 		Usuario theUser = usuarioService.findByUserName(userName);
 		
+	
 		// now place in the session
 		HttpSession session = request.getSession();
 		session.setAttribute("user", theUser);
+		
+		System.out.println(authentication.getAuthorities());
+		
 		
 		// forward to home page
 		

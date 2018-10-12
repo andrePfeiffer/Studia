@@ -1,12 +1,17 @@
 package cc.studia.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,8 +28,11 @@ public class Perfil {
 	private Papel papel;
 	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idassunto", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="idassunto", nullable=true, insertable=false, updatable=false)
 	private Assunto assunto;
+	
+	@ManyToMany(mappedBy="perfils", cascade = CascadeType.ALL)
+	private List<Usuario> usuarios = new ArrayList<>();
 
 	public int getId() {
 		return id;
@@ -49,6 +57,21 @@ public class Perfil {
 	public void setAssunto(Assunto assunto) {
 		this.assunto = assunto;
 	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	@Override
+	public String toString() {
+		return "Perfil [id=" + id + ", papel=" + papel + ", assunto=" + assunto + ", usuarios=" + usuarios + "]";
+	}
+	
+	
 	
 	
 }
