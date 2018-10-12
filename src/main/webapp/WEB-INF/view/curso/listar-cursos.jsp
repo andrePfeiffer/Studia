@@ -68,12 +68,8 @@
         
         </ul>
     </div>
-</div>
-</div>
-	
-	
 	
 		
-	<%@ include file = "../foot.jsp" %>
+	<%@ include file = "../footer.jsp" %>
 	</body>
 </html>
