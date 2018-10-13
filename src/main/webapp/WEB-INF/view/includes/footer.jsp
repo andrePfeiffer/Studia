@@ -1,5 +1,4 @@
-</div>
-</div>
+
     <section class="cid-qSgoZc68Wc" id="footer1-17" style="padding-top: 0 !important;">
         <div class="container">
             <div class="footer-lower">
@@ -19,6 +18,12 @@
             </div>
         </div>
     </section>
+    <footer class="mbr-small-footer mbr-section mbr-section-nopadding" id="footer2-p" style="background-color: rgba(51, 50, 50, 0.95);; padding-top: 0.875rem; padding-bottom: 0.875rem;">
+
+        <div class="container">
+            <p style="text-align: center;margin: auto;padding: 0;color: #acacac;">Desenvolvido por <a target="_blank" href="#" style="color:#f76f3e;text-decoration:none;">TeamPuc</a></p>
+        </div>
+    </footer>
     
     <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i></i></a></div>
     <input name="animation" type="hidden">
@@ -38,8 +43,26 @@
     <script src="${pageContext.request.contextPath}/assets/theme/js/script.js"></script>
     <script src="${pageContext.request.contextPath}/assets/slidervideo/script.js"></script>
     <script src="${pageContext.request.contextPath}/assets/formoid/formoid.min.js"></script>
-    
-    
+
+<c:if test="${param.front}">
+    <script type="text/javascript">
+            $("#userLogin").keyup(function(){
+                var user = $("#userLogin").val();
+                setUserName(user);
+            })
+            
+            $("#userCadastro").keyup(function(){
+                var user = $("#userCadastro").val();
+                setUserName(user);
+            })
+            
+        function setUserName(user){
+            // Salva dados na sessão
+        localStorage.setItem("username", user);
+        }
+    </script>
+</c:if>    
+<c:if test="${!param.front}">
     <script type="text/javascript">
         $( "#cursoSearch" ).keyup(function() {
             var actualInput = $( "#cursoSearch" ).val();
@@ -116,4 +139,6 @@
     })
     
 </script>
-    
+</c:if>    
+    	</body>
+</html>

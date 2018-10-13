@@ -197,6 +197,8 @@
 
 </section>
 <br><br><br><br><br><br>
+
+<c:if test="${param.modal}">
 <!-- Modais -->
 
 <div id="promoveInstrutorModal" class="modal fade" role="dialog" style="width:100vw !important">
@@ -571,3 +573,4 @@
 </div>
 </div>
 </div>
+</c:if>

@@ -1,5 +1,7 @@
-	<%@ include file = "../includes/header.jsp" %>
-	
+<jsp:include page="../includes/header.jsp">
+	<jsp:param name="modal" value="true" />
+</jsp:include>
+  	
 		
 		
 	<!-- Corpo -->
@@ -64,8 +66,7 @@
         
         </ul>
     </div>
-	
-		
-	<%@ include file = "../includes/footer.jsp" %>
-	</body>
-</html>
+
+<jsp:include page="../includes/footer.jsp">
+	<jsp:param name="front" value="false" />
+</jsp:include>		
