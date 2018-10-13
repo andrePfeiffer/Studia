@@ -21,19 +21,27 @@ public class Assunto {
 	private String nome;
 	
 	public int getId() {
+		System.out.println(">>> GETTER ID DO ASSUNTO <<<");
 		return id;
 	}
 
 	public void setId(int id) {
+		System.out.println(">>> SETTER ID DO ASSUNTO <<<");
 		this.id = id;
 	}
 
 	public String getNome() {
+		System.out.println(">>> GETTER NOME DO ASSUNTO <<<");
 		return nome;
 	}
 
 	public void setNome(String nome) {
+		System.out.println(">>> SETTER NOME DO ASSUNTO <<<");
 		this.nome = nome;
+	}
+	
+	public Assunto() {
+		System.out.println(">>> OBJETO ASSUNTO CRIADO <<<");
 	}
 	
 }

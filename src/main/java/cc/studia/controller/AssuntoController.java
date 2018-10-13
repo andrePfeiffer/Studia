@@ -31,6 +31,7 @@ public class AssuntoController {
 	
 	@GetMapping("/verTodos")
 	public String listarAssuntos(Model model) {
+		System.out.println(">>> CONTROLLER VERTODOS <<<");
 		List<Assunto> assuntos = assuntoService.verTodos();
 		model.addAttribute("assuntos", assuntos);
 		return "assunto/listar-assuntos";
@@ -38,6 +39,7 @@ public class AssuntoController {
 	
 	@PostMapping("/busca")
 	public String buscaAssunto(@RequestParam("busca") String busca, Model model) {
+		System.out.println(">>> CONTROLLER BUSCA <<<");
 		List<Assunto> assuntos = assuntoService.busca(busca);
 		model.addAttribute("assuntos", assuntos);
 		return "assunto/listar-assuntos";
@@ -45,12 +47,14 @@ public class AssuntoController {
 	
 	@GetMapping("/adiciona")
 	public String mostrarFormulario(Model model) {
+		System.out.println(">>> CONTROLLER ADICIONA GET <<<");
 		model.addAttribute("assunto", new Assunto());
 		return "assunto/adicionar-assunto";
 	}
 	
 	@PostMapping("/adiciona")
 	public String adicionarAssunto(@ModelAttribute("assunto") @Valid Assunto assunto, BindingResult result) {
+		System.out.println(">>> CONTROLLER ADICIONA POST <<<");
 		if(result.hasErrors()) {
 			return "assunto/adicionar-assunto";
 		}else {
@@ -61,6 +65,7 @@ public class AssuntoController {
 	
 	@GetMapping("/edita")
 	public String mostrarFormularioEdicao(@RequestParam("assuntoId") int id, Model model) {
+		System.out.println(">>> CONTROLLER EDITA GET <<<");
 		Assunto assunto = assuntoService.ver(id);
 		model.addAttribute("assunto", assunto);
 		return "assunto/editar-assunto";
@@ -68,12 +73,14 @@ public class AssuntoController {
 
 	@PostMapping("/edita")
 	public String editaAssunto(@ModelAttribute("assunto") Assunto assunto) {
+		System.out.println(">>> CONTROLLER EDITA POST <<<");
 		assuntoService.editaAssunto(assunto);;
 		return "redirect:/assunto/verTodos";
 	}
 
 	@GetMapping("/remove")
 	public String removeAssunto(@RequestParam("assuntoId") int id) {
+		System.out.println(">>> CONTROLLER REMOVE <<<");
 		assuntoService.removeAssunto(id);
 		return "redirect:/assunto/verTodos";
 	}

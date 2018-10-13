@@ -17,6 +17,7 @@ public class AssuntoDAOImpl implements AssuntoDAO {
 	
 	@Override
 	public List<Assunto> verTodos() {
+		System.out.println(">>> DAO VERTODOS <<<");
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<Assunto> query = currentSession.createQuery("from Assunto", Assunto.class);
 		List<Assunto> assuntos = query.getResultList();

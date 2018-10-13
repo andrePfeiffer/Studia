@@ -18,30 +18,35 @@ public class AssuntoServiceImpl implements AssuntoService {
 	@Override
 	@Transactional
 	public List<Assunto> verTodos() {
+		System.out.println(">>> SERVICE VERTODOS <<<");
 		return assuntoDAO.verTodos();
 	}
 	
 	@Override
 	@Transactional
 	public void salvarAssunto(Assunto assunto) {
+		System.out.println(">>> SERVICE SALVAR <<<");
 		assuntoDAO.salvarAssunto(assunto);
 	}
 	
 	@Override
 	@Transactional
 	public void editaAssunto(Assunto assunto) {
+		System.out.println(">>> SERVICE EDITA <<<");
 		assuntoDAO.editaAssunto(assunto);
 	}
 
 	@Override
 	@Transactional
 	public Assunto ver(int id) {
+		System.out.println(">>> SERVICE VER <<<");
 		return assuntoDAO.ver(id);
 	}
 
 	@Override
 	@Transactional
 	public void removeAssunto(int id) {
+		System.out.println(">>> SERVICE REMOVE <<<");
 		assuntoDAO.removeAssunto(id);
 		
 	}
@@ -49,6 +54,7 @@ public class AssuntoServiceImpl implements AssuntoService {
 	@Override
 	@Transactional
 	public List<Assunto> busca(String busca) {
+		System.out.println(">>> SERVICE BUSCA <<<");
 		return assuntoDAO.buscar(busca);
 	}
 
