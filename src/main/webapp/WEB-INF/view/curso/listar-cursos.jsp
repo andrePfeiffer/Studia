@@ -1,11 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"  %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ include file = "../styles&Scripts.jsp" %>
-<%@ include file = "../menus.jsp" %>
-<%@ include file = "../modais.jsp" %>
+	<%@ include file = "../includes/header.jsp" %>
 	
 		
 		
@@ -34,9 +27,13 @@
         </div>
         <ul class="list-group" id="contact-list">
         
-        <!-- Início da lista de cursos carregada pelo forEach -->
-		
 			<c:forEach var="curso" items="${cursos}">		
+				<c:url var="updateLink" value="/curso/edita">
+					<c:param name="cursoId" value="${curso.conteudo.id}" />
+				</c:url>
+				<c:url var="deleteLink" value="/curso/remove">
+					<c:param name="cursoId" value="${curso.conteudo.id}" />
+				</c:url>
 
 	            <li class="list-group-item" id="1">
 	                    <div class="col-xs-12 col-sm-3">
@@ -56,7 +53,6 @@
 	                    <a href="#" data-toggle="tooltip" data-placement="top" ><span class="mbri-search mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
 	                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="${updateLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
 	                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="${deleteLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-trash mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
-	                    <!--  &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-toggle="tooltip" data-placement="top" ><span class="mbri-hearth mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>  -->
 	                    <br><br>
 	                    </div>
 	                    <div class="clearfix"><br/></div>
@@ -70,6 +66,6 @@
     </div>
 	
 		
-	<%@ include file = "../footer.jsp" %>
+	<%@ include file = "../includes/footer.jsp" %>
 	</body>
 </html>
