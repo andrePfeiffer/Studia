@@ -1,3 +1,7 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../includes/header.jsp">
 	<jsp:param name="modal" value="true" />
 </jsp:include>
@@ -30,6 +34,9 @@
         <ul class="list-group" id="contact-list">
         
 			<c:forEach var="curso" items="${cursos}">		
+				<c:url var="showLink" value="/curso/ver">
+					<c:param name="cursoId" value="${curso.conteudo.id}" />
+				</c:url>
 				<c:url var="updateLink" value="/curso/edita">
 					<c:param name="cursoId" value="${curso.conteudo.id}" />
 				</c:url>
@@ -52,7 +59,7 @@
 	                    </div>
 	                    <div class="col-xs-12 col-sm-2">
 	                    <br><br>
-	                    <a href="#" data-toggle="tooltip" data-placement="top" ><span class="mbri-search mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
+	                    <a href="${showLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-search mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
 	                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="${updateLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
 	                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="${deleteLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-trash mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
 	                    <br><br>
