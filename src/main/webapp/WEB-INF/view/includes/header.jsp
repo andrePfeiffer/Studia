@@ -125,27 +125,28 @@
         <div class="menu-logo">
             <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="/">
+                    <a href="${pageContext.request.contextPath}">
                         <div id="logo"><img src="${pageContext.request.contextPath}/assets/images/studia.png" title="" style="height: 3.8rem;"></div>
                     </a>
                 </span>
             </div>
         </div>
+        
+		<security:authorize access="isAuthenticated()">
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link link dropdown-toggle text-secondary display-4" href="/cursos" data-toggle="dropdown-submenu" aria-expanded="false">
+                    <a class="nav-link link dropdown-toggle text-secondary display-4" href="${pageContext.request.contextPath}/curso/verTodos" data-toggle="dropdown-submenu" aria-expanded="false">
                         <span class="mbri-hot-cup mbr-iconfont mbr-iconfont-btn"></span>
                         Cursos
                     </a>
                     <div class="dropdown-menu">
-                            <a class="dropdown-item text-secondary display-4 submenu" href="/cursos"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Listar Cursos</a>
-                        <a class="dropdown-item text-secondary display-4 submenu" href="/cursos/manter"><span class="mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Manter Cursos</a>
+                            <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/curso/verTodos"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Listar Cursos</a>
+                        <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/curso/adicionar"><span class="mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Manter Cursos</a>
                         
                     </div>
                 </li>
-                <% /*
                 <li class="nav-item dropdown">
                     <a class="nav-link link dropdown-toggle text-secondary display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">
                         <span class="mbri-flag mbr-iconfont mbr-iconfont-btn"></span>
@@ -160,22 +161,18 @@
                 <li class="nav-item">
                         <a class="nav-link link text-secondary display-4" href="/favoritos"><span class="mbri-hearth mbr-iconfont mbr-iconfont-btn"></span>Favoritos</a>
                 </li>
-                */ %>
                 <li class="nav-item dropdown">
                     <a class="nav-link link dropdown-toggle text-secondary display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">
                         <span class="mbri-setting3 mbr-iconfont mbr-iconfont-btn"></span>
                         Opções
                     </a>
                     <div class="dropdown-menu" style="text-align:left !important">
-                <% /*
                         <a class="dropdown-item text-secondary display-4 submenu"   data-toggle="modal" data-target="#promoveInstrutorModal" aria-expanded="false"><span class="mbri-up mbr-iconfont mbr-iconfont-btn"></span>Promover à instrutor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a class="dropdown-item text-secondary display-4 submenu"   data-toggle="modal" data-target="#aprovaConteudoModal" aria-expanded="false"><span class="mbri-like mbr-iconfont mbr-iconfont-btn"></span>Aprovar conteúdos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a class="dropdown-item text-secondary display-4 submenu"   data-toggle="modal" data-target="#aprovaPerguntaModal" aria-expanded="false"><span class="mbri-like mbr-iconfont mbr-iconfont-btn"></span>Aprovar perguntas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a class="dropdown-item text-secondary display-4 submenu"   data-toggle="modal" data-target="#respondePerguntaModal" aria-expanded="false"><span class="mbri-cust-feedback mbr-iconfont mbr-iconfont-btn"></span>Responder perguntas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a class="dropdown-item text-secondary display-4 submenu"   data-toggle="modal" data-target="#corrigeExercicioModal" aria-expanded="false"><span class="mbri-success mbr-iconfont mbr-iconfont-btn"></span>Corrigir exercícios&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a class="dropdown-item text-secondary display-4 submenu"   data-toggle="modal" data-target="#mantemPermissaoModal" aria-expanded="false"><span class="mbri-key mbr-iconfont mbr-iconfont-btn"></span>Manter permissões&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                */ %>
-                        
                         <a class="dropdown-item text-secondary display-4 submenu"   data-toggle="modal" data-target="#mantemUsuarioModal" aria-expanded="false"><span class="mbri-users mbr-iconfont mbr-iconfont-btn"></span>Manter contas de usuários</a>
                         
                     </div>
@@ -187,12 +184,26 @@
                             <label id="usuarioAtual"></label> &nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item text-secondary display-4 submenu" href="/"><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn"></span>Alterar Conta</a>
-                            <a class="dropdown-item text-secondary display-4 submenu" href="/"><span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Sair&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                            <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/usuario/editar"><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn"></span>Alterar Conta</a>
+                            <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/logout"><span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Sair&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         </div>
                 </li>
             </ul>
         </div>
+        </security:authorize>
+        <security:authorize access="isAnonymous()">
+                <div class="navbar-buttons mbr-section-btn">
+                    <a class="btn btn-sm btn-primary display-4" data-toggle="modal" data-target="#loginModal">
+                        <span class="mbri-lock mbr-iconfont mbr-iconfont-btn"></span>
+                        Login 
+                    </a>
+                    <a class="btn btn-sm btn-default display-4" data-toggle="modal" data-target="#CadastroUsuarioModal">
+                        <span class="mbri-plus mbr-iconfont mbr-iconfont-btn"></span>
+                        Incluir conta 
+                    </a>
+                </div>
+        </security:authorize>
+        
     </nav>
 
 </section>
@@ -558,10 +569,11 @@
     </div>
     <div class="modal-body">
         <div class="form-group">  
-            <form method="POST" action="/cursos">
-                <input type="text" id="assuntoCadastro" class="form-control" placeholder="Assunto" required>
+            <form action="${pageContext.request.contextPath}/assunto/adiciona" method="POST">
+            	<input name="nome" class="form-control" />
                 <br>
                 <input type="submit" id="cadastroButton" class="btn btn-primary btn-block" value="Cadastrar" style="margin:0px;">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </div>
     </div>
