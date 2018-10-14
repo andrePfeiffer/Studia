@@ -42,6 +42,15 @@ public class Assunto {
 	
 	public Assunto() {
 		System.out.println(">>> OBJETO ASSUNTO CRIADO <<<");
+		System.out.println(this.toString());
 	}
+
+	@Override
+	public String toString() {
+		return "Assunto [id=" + id + ", nome=" + nome + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ "]";
+	}
+	
+	
 	
 }
