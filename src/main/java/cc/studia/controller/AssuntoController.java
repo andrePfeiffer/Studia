@@ -2,12 +2,9 @@ package cc.studia.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,7 +48,7 @@ public class AssuntoController {
 		model.addAttribute("assunto", new Assunto());
 		return "assunto/adicionar-assunto";
 	}
-	
+	/*
 	@PostMapping("/adiciona")
 	public String adicionarAssunto(@ModelAttribute("assunto") @Valid Assunto assunto, BindingResult result) {
 		System.out.println(">>> CONTROLLER ADICIONA POST <<<");
@@ -61,6 +58,17 @@ public class AssuntoController {
 			assuntoService.salvarAssunto(assunto);
 			return "redirect:/assunto/verTodos";
 		}
+	}
+	*/
+	@PostMapping("/adiciona")
+	public String adicionarAssunto(@RequestParam("nome") String nome) {
+		System.out.println(">>> CONTROLLER ADICIONA POST <<<");
+		if(nome != null) {
+			Assunto assunto = new Assunto();
+			assunto.setNome(nome);
+			assuntoService.salvarAssunto(assunto);
+		}
+		return "redirect:/assunto/verTodos";
 	}
 	
 	@GetMapping("/edita")
