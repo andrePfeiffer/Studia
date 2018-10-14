@@ -26,6 +26,7 @@ public class AssuntoServiceImpl implements AssuntoService {
 	@Transactional
 	public void salvarAssunto(Assunto assunto) {
 		System.out.println(">>> SERVICE SALVAR <<<");
+		System.out.println(assunto.toString());
 		assuntoDAO.salvarAssunto(assunto);
 	}
 	
@@ -33,6 +34,7 @@ public class AssuntoServiceImpl implements AssuntoService {
 	@Transactional
 	public void editaAssunto(Assunto assunto) {
 		System.out.println(">>> SERVICE EDITA <<<");
+		System.out.println(assunto.toString());
 		assuntoDAO.editaAssunto(assunto);
 	}
 
