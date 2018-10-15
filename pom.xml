@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>video Maven Webapp</name>
+	<name>Studia Maven Project</name>
 
 	<properties>
 		<springframework.version>5.1.0.RELEASE</springframework.version>
@@ -70,6 +70,12 @@
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.0</version>
 		</dependency>
 		
 

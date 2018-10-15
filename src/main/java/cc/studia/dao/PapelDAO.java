@@ -5,5 +5,6 @@ import cc.studia.entity.Papel;
 public interface PapelDAO {
 
 	Papel findRoleByName(String theRoleName);
+	public Papel ver(int id);
 
 }

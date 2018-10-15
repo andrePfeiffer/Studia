@@ -21,20 +21,25 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    
+    @Autowired
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(authenticationProvider());
 	}
-
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
+		http.csrf().disable()
+		.authorizeRequests()
 		.antMatchers("/").permitAll()
 		.antMatchers("/curso/**").hasAuthority("EMPLOYEE")
 		.antMatchers("/admin/**").hasAuthority("ADMIN")
 		
 		.and().formLogin()
+		.failureHandler(customAuthenticationFailureHandler)
 		.loginPage("/showMyLoginPage")
 		.loginProcessingUrl("/autenticateTheUser")
 		.successHandler(customAuthenticationSuccessHandler)

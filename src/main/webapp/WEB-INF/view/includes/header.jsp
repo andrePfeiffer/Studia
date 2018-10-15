@@ -209,8 +209,68 @@
 </section>
 <br><br><br><br><br><br>
 
-<c:if test="${param.modal}">
 <!-- Modais -->
+<div id="CadastroUsuarioModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <center><h3>Cadastro de novo usuário</h3></center>
+                <button type="button" class="close" data-dismiss="modal"> &times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">  
+                	<form onsubmit="return false">
+                            <input type="email" id="emailCadastro" name="emailCadastro" class="form-control" placeholder="E-mail" required>
+                            <br>
+                            <input type="text" id="userCadastro" name="userCadastro" class="form-control" placeholder="Usuário desejado" required>
+                            <br>
+                            <input type="password" id="senhaCadastro1" name="senhaCadastro1" class="form-control" placeholder="Senha" required>
+                            <br>
+                            <input type="password" id="senhaCadastro2" name="senhaCadastro2" class="form-control" placeholder="Confirme a senha" required>
+                            <br>
+                        	<center><label style="color:red" id="cadastroUsuarioError"></label></center>
+                            <input type="submit" id="cadastroUsuarioButton" class="btn btn-primary btn-block" value="Entrar" style="margin:0px;">
+                    </form>
+                    </div>
+                </div>
+                                    
+                            <div class="modal-footer">
+                                <div style="padding:10px"></div>
+                            </div>
+               
+            </div>
+        </div>
+    </div>
+<div id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center><h3>Login</h3></center>
+            <button type="button" class="close" data-dismiss="modal"> &times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">  
+                	<form onsubmit="return false">
+                        <input type="text" name="username" id="userLogin" class="form-control" placeholder="Usuário" required>
+                        <br>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Senha" required>
+                        <br>
+                        <center><label style="color:red" id="loginError"></label></center>
+                        <input type="submit" id="loginButton" class="btn btn-primary btn-block" value="Entrar" style="margin:0px;">
+                    </form>
+                        <br>
+                        <br>
+                        <a href="resetSenha.html" style="color:blue" id="resetPass">Redefinir senha</a>
+                </div>
+            </div>
+                                
+                        <div class="modal-footer">
+                            <div style="padding:10px"></div>
+                        </div>
+           
+        </div>
+    </div>
+</div>
 
 <div id="promoveInstrutorModal" class="modal fade" role="dialog" style="width:100vw !important">
     <div class="modal-dialog">
@@ -585,4 +645,3 @@
 </div>
 </div>
 </div>
-</c:if>

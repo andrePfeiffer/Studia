@@ -4,17 +4,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cc.studia.entity.Usuario;
+import cc.studia.service.UsuarioService;
 
 @Controller
 public class UsuarioController {
+	
+	@Autowired
+	UsuarioService usuarioService;
 	
 	@GetMapping("/")
 	public String showHome() {
@@ -36,6 +43,29 @@ public class UsuarioController {
 
 	    }
 		return "plain-login";
+	}
+	
+	@ResponseBody
+	@PostMapping("/adicionarUsuario")
+	public String adicionarUsuario(HttpServletRequest request, Model model) {
+		String email = request.getParameter("emailCadastro");
+		String login = request.getParameter("userCadastro");
+		String senha = request.getParameter("senhaCadastro1");
+		
+		if(!senha.equals(request.getParameter("senhaCadastro2"))){
+			return "false1";
+		}
+		if(usuarioService.existeEmail(email)) {
+			return "false2";
+		}
+		if(usuarioService.existeLogin(login)) {
+			return "false3";
+		}
+		if(senha.length() < 4) {
+			return "false4";
+		}
+		usuarioService.save(email, login, senha);
+		return "true";
 	}
 	
 	@GetMapping("/admin")

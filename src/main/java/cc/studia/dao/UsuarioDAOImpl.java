@@ -1,5 +1,7 @@
 package cc.studia.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -35,4 +37,29 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		currentSession.saveOrUpdate(theUser);
 	}
 
+	@Override
+	public boolean existeEmail(String email) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Usuario> theQuery = currentSession.createQuery("from Usuario where email=:uEmail", Usuario.class);
+		theQuery.setParameter("uEmail", email);
+		List<Usuario> usuarios = theQuery.getResultList();
+		if(usuarios.isEmpty()) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean existeLogin(String login) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Usuario> theQuery = currentSession.createQuery("from Usuario where nome=:uNome", Usuario.class);
+		theQuery.setParameter("uNome", login);
+		List<Usuario> usuarios = theQuery.getResultList();
+		if(usuarios.isEmpty()) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 }

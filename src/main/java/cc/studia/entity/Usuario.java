@@ -80,6 +80,17 @@ public class Usuario {
 		this.perfils = perfils;
 	}
 	
+	public void addPerfil(Perfil perfil) {
+		this.perfils.add(perfil);
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", senha=" + senha + ", email=" + email + ", perfils=" + perfils
+				+ "]";
+	}
+	
+	
 	
 	
 }

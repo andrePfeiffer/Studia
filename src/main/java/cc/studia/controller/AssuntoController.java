@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import cc.studia.entity.Assunto;
 import cc.studia.service.AssuntoService;
@@ -34,6 +35,14 @@ public class AssuntoController {
 		return "assunto/listar-assuntos";
 	}
 	
+	@ResponseBody
+	@GetMapping("/verTodosAPI")
+	public List<Assunto> listarAssuntosAPI(Model model) {
+		System.out.println(">>> CONTROLLER VERTODOS <<<");
+		List<Assunto> assuntos = assuntoService.verTodos();
+		return assuntos;
+	}
+
 	@PostMapping("/busca")
 	public String buscaAssunto(@RequestParam("busca") String busca, Model model) {
 		System.out.println(">>> CONTROLLER BUSCA <<<");

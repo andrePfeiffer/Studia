@@ -2,14 +2,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"  %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Insert title here</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-</head>
-<body>
+<jsp:include page="includes/header.jsp">
+	<jsp:param name="modal" value="false" />
+</jsp:include>
+    
+        <security:authorize access="hasAuthority('ADMIN')">
+	        User: <security:authentication property="principal.username" /><br />
+	        Role: <security:authentication property="principal.authorities" /><br />
+	    </security:authorize>
+        <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+        	<input type="submit" value="Logout" />
+        </form:form>
+        <security:authorize access="isAuthenticated()">
+        	<h1>logado</h1>
+        </security:authorize>
+        <security:authorize access="isAnonymous()">
+        	<h1>nao logado</h1>
+        </security:authorize>
+    
+    <!-- INICIO TEXTO -->
+    <section class="mbr-section article content1 cid-qSg7ltdNzT" id="content2-w">
+        <div class="container">
+            <div class="media-container-row">
+                <div class="mbr-text col-12 col-md-12 mbr-fonts-style display-7" style="text-align: justify;font-family=font-family: 'Yantramanav', sans-serif;">
         <security:authorize access="hasAuthority('EMPLOYEE')">
         <h1>é EMPLOYEE</h1>
         </security:authorize>
@@ -40,5 +55,16 @@
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 	 -->
 </form:form>
-</body>
-</html>
+                    <blockquote>
+                        <p>
+						</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FIM TEXTO -->
+    
+<jsp:include page="includes/footer.jsp">
+	<jsp:param name="front" value="true" />
+</jsp:include>

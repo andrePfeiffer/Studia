@@ -44,7 +44,6 @@
     <script src="${pageContext.request.contextPath}/assets/slidervideo/script.js"></script>
     <script src="${pageContext.request.contextPath}/assets/formoid/formoid.min.js"></script>
 
-<c:if test="${param.front}">
     <script type="text/javascript">
             $("#userLogin").keyup(function(){
                 var user = $("#userLogin").val();
@@ -61,8 +60,6 @@
         localStorage.setItem("username", user);
         }
     </script>
-</c:if>    
-<c:if test="${!param.front}">
     <script type="text/javascript">
         $( "#cursoSearch" ).keyup(function() {
             var actualInput = $( "#cursoSearch" ).val();
@@ -138,7 +135,81 @@
         
     })
     
+    $("#loginButton").click(function(){
+    	if($('#userLogin').val().length > 0 && $('#password').val().length > 0){
+	    	$.ajax({
+	    		type: "POST",
+	    		url: "${pageContext.request.contextPath}/autenticateTheUser",
+	    		data: {username: $('#userLogin').val(), password: $('#password').val()},
+	    		async: true,
+	    	success: function(response){
+	    		if(response == "false"){
+	    			$('#loginError').text('Usuário ou senha incorretos');	
+	    		}else{
+	    			window.location.href='${pageContext.request.contextPath}';
+	    		}
+	    		
+	    	},
+	    	error: function(jqXHR, textStatus, errorThrown){
+	    		console.log(textStatus);
+	    		console.log(errorThrown);
+	    	}
+	    	});
+    	}
+    })
+    
+    $("#cadastroUsuarioButton").click(function(){
+    	console.log("click")
+    	if(
+    			$('#emailCadastro').val().length > 0 && 
+    			$('#userCadastro').val().length > 0 && 
+    			$('#senhaCadastro1').val().length > 0 && 
+    			$('#senhaCadastro2').val().length > 0
+    			){
+    		console.log("if")
+	    	$.ajax({
+	    		type: "POST",
+	    		url: "${pageContext.request.contextPath}/adicionarUsuario",
+	    		data: {
+	    			emailCadastro: $('#emailCadastro').val(), 
+	    			userCadastro: $('#userCadastro').val(),
+	    			senhaCadastro1: $('#senhaCadastro1').val(), 
+	    			senhaCadastro2: $('#senhaCadastro2').val()
+	    			},
+	    		async: true,
+	    	success: function(response){
+	    		console.log(response)
+	    		if(response == "false1"){
+	    			$('#cadastroUsuarioError').text('As senhas devem ser idênticas');	
+	    		}else if(response == "false2"){
+	    			$('#cadastroUsuarioError').text('O email informado já está vinculado a outro usuário existente no sistema');
+	    		}else if(response == "false3"){
+	    			$('#cadastroUsuarioError').text('O usuário informado já existe');
+	    		}else if(response == "false4"){
+	    			$('#cadastroUsuarioError').text('A senha não atende aos requisitos de segurança');
+	    		}else{
+	    			window.location.href='${pageContext.request.contextPath}';
+	    		}
+	    	},
+	    	error: function(jqXHR, textStatus, errorThrown){
+	    		console.log(textStatus);
+	    		console.log(errorThrown);
+	    	}
+	    	});
+   		}
+    })
+
+    
 </script>
-</c:if>    
+<input type="email" id="emailCadastro" name="emailCadastro" class="form-control" placeholder="E-mail" required>
+                            <br>
+                            <input type="text" id="userCadastro" name="userCadastro" class="form-control" placeholder="Usuário desejado" required>
+                            <br>
+                            <input type="password" id="senhaCadastro1" name="senhaCadastro1" class="form-control" placeholder="Senha" required>
+                            <br>
+                            <input type="password" id="senhaCadastro2" name="senhaCadastro2" class="form-control" placeholder="Confirme a senha" required>
+                            <br>
+                            <input type="submit" id="cadastroButton" class="btn btn-primary btn-block" value="Entrar" style="margin:0px;">
+
     	</body>
 </html>

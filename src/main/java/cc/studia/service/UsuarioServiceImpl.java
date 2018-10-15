@@ -11,9 +11,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cc.studia.dao.PerfilDAO;
 import cc.studia.dao.UsuarioDAO;
 import cc.studia.entity.Papel;
 import cc.studia.entity.Perfil;
@@ -23,37 +25,35 @@ import cc.studia.entity.Usuario;
 public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Autowired
-	private UsuarioDAO usuarioDao;
-
+	private UsuarioDAO usuarioDAO;
+	
+	@Autowired
+	private PerfilService perfilService;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@Transactional
 	public Usuario findByUserName(String userName) {
 		// check the database if the user already exists
-		return usuarioDao.findByUserName(userName);
+		return usuarioDAO.findByUserName(userName);
 	}
 
 	@Transactional
-	public void save(Usuario usuario) {
-		/*
-		Usuario user = new Usuario();
-		 // assign user details to the user object
-		user.setUserName(crmUser.getUserName());
-		user.setPassword(passwordEncoder.encode(crmUser.getPassword()));
-		user.setFirstName(crmUser.getFirstName());
-		user.setLastName(crmUser.getLastName());
-		user.setEmail(crmUser.getEmail());
-
-		// give user default role of "employee"
-		user.setRoles(Arrays.asList(papelDao.findRoleByName("ROLE_EMPLOYEE")));
-		*/
-
-		 // save user in the database
-		usuarioDao.save(usuario);
+	public void save(String email, String login, String senha) {
+		Usuario usuario = new Usuario();
+		usuario.setEmail(email);
+		usuario.setNome(login);
+		usuario.setSenha(passwordEncoder.encode(senha));
+		Perfil perfil = perfilService.ver(2);
+		usuario.addPerfil(perfil);
+		usuarioDAO.save(usuario);
 	}
 
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		Usuario user = usuarioDao.findByUserName(userName);
+		Usuario user = usuarioDAO.findByUserName(userName);
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
@@ -105,4 +105,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return retorno;
 	}
 
+	@Override
+	@Transactional
+	public boolean existeEmail(String email) {
+		return usuarioDAO.existeEmail(email);
+	}
+
+	@Override
+	@Transactional
+	public boolean existeLogin(String login) {
+		return usuarioDAO.existeLogin(login);
+	}
 }
