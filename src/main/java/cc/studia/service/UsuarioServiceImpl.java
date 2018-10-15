@@ -15,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cc.studia.dao.PerfilDAO;
 import cc.studia.dao.UsuarioDAO;
 import cc.studia.entity.Papel;
 import cc.studia.entity.Perfil;
@@ -35,7 +34,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Transactional
 	public Usuario findByUserName(String userName) {
-		// check the database if the user already exists
 		return usuarioDAO.findByUserName(userName);
 	}
 
@@ -57,16 +55,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
-		System.out.println("usuarioService");
-		System.out.println(user.getNome());
-		System.out.println(user.getPerfils());
-		/*
-		return new org.springframework.security.core.userdetails.User(
-					user.getNome(), 
-					user.getSenha(),
-					mapRolesToAuthorities(user.getPerfils())
-				);
-		*/
         UserDetails userDetails =  new org.springframework.security.core.userdetails.User(
         		user.getNome(),
         		user.getSenha(),
@@ -76,31 +64,14 @@ public class UsuarioServiceImpl implements UsuarioService {
         		true,
         		mapRolesToAuthorities(user.getPerfils())
 		); 
-        System.out.println(">>> getauthorities <<<");
-        System.out.println(userDetails.getAuthorities());
-        
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return userDetails;
 	}
 
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Perfil> perfils) {
-		System.out.println(">>> MAP ROLES TO AUTHORITIES <<<");
-		System.out.println(">>> PERFILS <<<");
-		perfils.forEach((temp) -> {
-            System.out.println(temp);
-		});
 		Collection<Papel> papeis = perfils.stream().map(perfil -> perfil.getPapel()).collect(Collectors.toList());
-		System.out.println(">>> PAPEIS <<<");
-		papeis.forEach((temp) -> {
-            System.out.println(temp.getNome());
-		});
-		
 		Collection<GrantedAuthority> retorno = papeis.stream().map(papel -> new SimpleGrantedAuthority(papel.getNome())).collect(Collectors.toList());
-		System.out.println(">>> RETORNO <<<");
-		retorno.forEach((temp) -> {
-            System.out.println(temp);
-		});
 		
 		return retorno;
 	}

@@ -52,7 +52,7 @@ public class AssuntoDAOImpl implements AssuntoDAO {
 	public void removeAssunto(int id) {
 		System.out.println(">>> DAO REMOVE <<<");
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query query = currentSession.createQuery("delete from Assunto where id=:assuntoId");
+		Query<?> query = currentSession.createQuery("delete from Assunto where id=:assuntoId");
 		query.setParameter("assuntoId", id);
 		query.executeUpdate();
 	}
@@ -61,7 +61,7 @@ public class AssuntoDAOImpl implements AssuntoDAO {
 	public List<Assunto> buscar(String busca) {
 		System.out.println(">>> DAO BUSCA <<<");
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query query = null;
+		Query<Assunto> query = null;
 		if (busca != null && busca.trim().length() > 0) {
 			query = currentSession.createQuery("from Assunto where lower(nome) like :busca", Assunto.class);
 			query.setParameter("busca", "%" + busca.toLowerCase() + "%");

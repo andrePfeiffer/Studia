@@ -45,7 +45,7 @@ public class CursoDAOImpl implements CursoDAO {
 	@Override
 	public List<Curso> busca(String busca) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query theQuery = null;
+		Query<Curso> theQuery = null;
 		if (busca != null && busca.trim().length() > 0) {
             theQuery = currentSession.createQuery("from Curso where lower(conteudo.nome) like :busca or lower(conteudo.descricao) like :busca", Curso.class);
             theQuery.setParameter("busca", "%" + busca.toLowerCase() + "%");
@@ -60,7 +60,7 @@ public class CursoDAOImpl implements CursoDAO {
 	@Override
 	public void removeCurso(int id) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query theQuery = currentSession.createQuery("delete from Curso where id=:cursoId");
+		Query<?> theQuery = currentSession.createQuery("delete from Curso where id=:cursoId");
 		theQuery.setParameter("cursoId", id);
 		theQuery.executeUpdate();
 	}

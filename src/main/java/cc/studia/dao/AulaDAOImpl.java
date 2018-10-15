@@ -45,7 +45,7 @@ public class AulaDAOImpl implements AulaDAO {
 	@Override
 	public List<Aula> busca(String busca) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query theQuery = null;
+		Query<Aula> theQuery = null;
 		if (busca != null && busca.trim().length() > 0) {
             theQuery = currentSession.createQuery("from Aula where lower(conteudo.nome) like :busca or lower(conteudo.descricao) like :busca", Aula.class);
             theQuery.setParameter("busca", "%" + busca.toLowerCase() + "%");
@@ -60,7 +60,7 @@ public class AulaDAOImpl implements AulaDAO {
 	@Override
 	public void removeAula(int id) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query theQuery = currentSession.createQuery("delete from Aula where id=:aulaId");
+		Query<?> theQuery = currentSession.createQuery("delete from Aula where id=:aulaId");
 		theQuery.setParameter("aulaId", id);
 		theQuery.executeUpdate();
 	}
