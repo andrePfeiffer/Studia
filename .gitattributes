@@ -1,4 +1,4 @@
-src/main/assets/* linguist-vendored
+src/main/webapp/assets/* linguist-vendored
 
 # Handle line endings automatically for files detected as text
 # and leave all files detected as binary untouched.
