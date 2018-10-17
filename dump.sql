@@ -1,229 +1,298 @@
- SET NAMES utf8 ;
+SET NAMES utf8mb4;
+--
+-- Assunto
+--
+DROP TABLE IF EXISTS `Assunto`;
+CREATE TABLE `Assunto` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `enabled` tinyint(1) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB;
+--
+-- Usuario
+--
+DROP TABLE IF EXISTS `Usuario`;
+CREATE TABLE `Usuario` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `senha` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `authorities` (
-  `username` varchar(50) NOT NULL,
-  `authority` varchar(50) NOT NULL,
-  UNIQUE KEY `authorities_idx_1` (`username`,`authority`),
-  CONSTRAINT `authorities_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
-) ENGINE=InnoDB;
+DROP TABLE IF EXISTS `Papel`;
+CREATE TABLE `Papel` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `nome` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mantemConteudo` char(1) COLLATE utf8mb4_unicode_ci DEFAULT 'F',
+  `aprovaConteudo` char(1) COLLATE utf8mb4_unicode_ci DEFAULT 'F',
+  PRIMARY KEY (`id`)
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE `usuario` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) NOT NULL,
-  `senha` varchar(10) NOT NULL,
-  `email` varchar(64) NOT NULL,
+DROP TABLE IF EXISTS `Perfil`;
+CREATE TABLE `Perfil` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `idPapel` int unsigned NOT NULL,
+  `idAssunto` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB;
-
-DROP TABLE IF EXISTS `papel`;
-CREATE TABLE `papel` (
-  `id` int(11) unsigned NOT NULL,
-  `nome` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `mantemConteudo` tinyint(4) NOT NULL,
-  `aprovaConteudo` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB;
-
- DROP TABLE IF EXISTS `assunto`;
-CREATE TABLE `assunto` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB;
-
-DROP TABLE IF EXISTS `perfil`;
-CREATE TABLE `perfil` (
-  `id` int(11) unsigned NOT NULL,
-  `idPapel` int(11) unsigned NOT NULL,
-  `idAssunto` int(11) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `idPapel_idx` (`idPapel`),
   KEY `idAssunto_idx` (`idAssunto`),
-  KEY `fk_perfil_papel_idx` (`idPapel`),
-  CONSTRAINT `fk_perfil_assunto` FOREIGN KEY (`idAssunto`) REFERENCES `assunto` (`id`),
-  CONSTRAINT `fk_perfil_papel` FOREIGN KEY (`idPapel`) REFERENCES `papel` (`id`)
-) ENGINE=InnoDB;
+  CONSTRAINT `fk_perfil_papel` 
+  FOREIGN KEY (`idPapel`) REFERENCES `Papel` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_perfil_assunto` 
+  FOREIGN KEY (`idAssunto`) REFERENCES `Assunto` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `usuario_perfil`;
-CREATE TABLE `usuario_perfil` (
-  `idUsuario` int(10) unsigned NOT NULL,
-  `idPerfil` int(10) unsigned NOT NULL,
-  UNIQUE KEY `id_UNIQUE` (`idUsuario`),
-  UNIQUE KEY `idPapel_UNIQUE` (`idPerfil`),
-  CONSTRAINT `fk_usuarioperfil_perfil` FOREIGN KEY (`idPerfil`) REFERENCES `perfil` (`id`),
-  CONSTRAINT `fk_usuarioperfil_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB;
+DROP TABLE IF EXISTS `Usuario_Perfil`;
+CREATE TABLE `Usuario_Perfil` (
+  `idUsuario` int unsigned NOT NULL,
+  `idPerfil` int unsigned NOT NULL,
+  PRIMARY KEY (`idUsuario`,`idPerfil`),
+  CONSTRAINT `fk_usuario_perfil_perfil` 
+  FOREIGN KEY (`idPerfil`) REFERENCES `Perfil` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_usuario_perfil_usuario` 
+  FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `conteudo`;
-CREATE TABLE `conteudo` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) NOT NULL,
-  `descricao` text,
-  `publico` char(1) NOT NULL,
-  `aprovado` char(1) NOT NULL,
+--
+-- Conteudo
+--
+DROP TABLE IF EXISTS `Conteudo`;
+CREATE TABLE `Conteudo` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descricao` text COLLATE utf8mb4_unicode_ci,
+  `publico` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'F',
+  `aprovado` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'F',
   `dataCriado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `dataAtualizado` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `idAssunto` int(10) unsigned NOT NULL,
-  `idAutor` int(10) unsigned DEFAULT NULL,
-  `idAprovador` int(10) unsigned DEFAULT NULL,
+  `dataAtualizado` datetime DEFAULT 
+  CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `idAutor` int unsigned NOT NULL,
+  `idAprovador` int unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `idAssunto_idx` (`idAssunto`),
   KEY `idAutor_idx` (`idAutor`),
-  KEY `fk_conteudo_usuario2_idx` (`idAprovador`),
-  CONSTRAINT `fk_conteudo_assunto` FOREIGN KEY (`idAssunto`) REFERENCES `assunto` (`id`),
-  CONSTRAINT `fk_conteudo_usuario1` FOREIGN KEY (`idAutor`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `fk_conteudo_usuario2` FOREIGN KEY (`idAprovador`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB;
+  KEY `id_Aprovador_idx` (`idAprovador`),
+  CONSTRAINT `fk_conteudo_usuario1` 
+  FOREIGN KEY (`idAutor`) REFERENCES `Usuario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_conteudo_usuario2` 
+  FOREIGN KEY (`idAprovador`) REFERENCES `Usuario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `favorito`;
-CREATE TABLE `favorito` (
-  `idUsuario` int(10) unsigned NOT NULL,
-  `idConteudo` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`idUsuario`),
-  KEY `idConteudo_idx` (`idConteudo`),
-  CONSTRAINT `fk_favorito_conteudo` FOREIGN KEY (`idConteudo`) REFERENCES `conteudo` (`id`),
-  CONSTRAINT `fk_favorito_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB;
-
-DROP TABLE IF EXISTS `curso`;
-CREATE TABLE `curso` (
-  `idConteudo` int(10) unsigned NOT NULL,
+DROP TABLE IF EXISTS `Curso`;
+CREATE TABLE `Curso` (
+  `idConteudo` int unsigned NOT NULL,
+  `idAssunto` int unsigned NOT NULL,
   PRIMARY KEY (`idConteudo`),
-  CONSTRAINT `fk_curso_conteudo` FOREIGN KEY (`idConteudo`) REFERENCES `conteudo` (`id`)
-) ENGINE=InnoDB;
+  KEY `idAssunto_idx` (`idAssunto`),
+  CONSTRAINT `fk_curso_conteudo` 
+  FOREIGN KEY (`idConteudo`) REFERENCES `Conteudo` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_curso_assunto` 
+  FOREIGN KEY (`idAssunto`) REFERENCES `Assunto` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `aula`;
-CREATE TABLE `aula` (
-  `idConteudo` int(10) unsigned NOT NULL,
-  `idCurso` int(10) unsigned NOT NULL,
+DROP TABLE IF EXISTS `Aula`;
+CREATE TABLE `Aula` (
+  `idConteudo` int unsigned NOT NULL,
+  `idCurso` int unsigned NOT NULL,
+  `ordem` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`idConteudo`),
-  KEY `fk_aula_curso_id_idx` (`idCurso`),
-  CONSTRAINT `fk_aula_conteudo` FOREIGN KEY (`idConteudo`) REFERENCES `conteudo` (`id`),
-  CONSTRAINT `fk_aula_curso` FOREIGN KEY (`idCurso`) REFERENCES `curso` (`idconteudo`)
-) ENGINE=InnoDB;
+  KEY `idCurso_idx` (`idCurso`),
+  CONSTRAINT `fk_aula_conteudo` 
+  FOREIGN KEY (`idConteudo`) REFERENCES `Conteudo` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_aula_curso` 
+  FOREIGN KEY (`idCurso`) REFERENCES `Curso` (`idconteudo`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `componenteaula`;
-CREATE TABLE `componenteaula` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `publico` tinyint(4) NOT NULL,
-  `descricao` longtext NOT NULL,
-  `idAula` int(10) unsigned NOT NULL,
+DROP TABLE IF EXISTS `ComponenteAula`;
+CREATE TABLE `ComponenteAula` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `publico` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'F',
+  `descricao` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idAula` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idAula_idx` (`idAula`),
-  CONSTRAINT `fk_componenteaula_aula` FOREIGN KEY (`idAula`) REFERENCES `aula` (`idconteudo`)
-) ENGINE=InnoDB;
+  CONSTRAINT `fk_componenteaula_aula` 
+  FOREIGN KEY (`idAula`) REFERENCES `Aula` (`idconteudo`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `material`;
-CREATE TABLE `material` (
-  `idComponente` int(10) unsigned NOT NULL,
-  `arquivo` varchar(200) NOT NULL,
-  `tipoArquivo` varchar(20) NOT NULL,
+DROP TABLE IF EXISTS `Exercicio`;
+CREATE TABLE `Exercicio` (
+  `idComponente` int unsigned NOT NULL,
   PRIMARY KEY (`idComponente`),
-  CONSTRAINT `fk_material_componenteaula` FOREIGN KEY (`idComponente`) REFERENCES `componenteaula` (`id`)
-) ENGINE=InnoDB;
+  CONSTRAINT `fk_exercicio_componenteaula` 
+  FOREIGN KEY (`idComponente`) REFERENCES `ComponenteAula` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `video`;
-CREATE TABLE `video` (
-  `idComponente` int(10) unsigned NOT NULL,
-  `arquivo` varchar(200) NOT NULL,
-  `tipoArquivo` varchar(45) NOT NULL,
+DROP TABLE IF EXISTS `Video`;
+CREATE TABLE `Video` (
+  `idComponente` int unsigned NOT NULL,
+  `arquivo` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipoArquivo` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`idComponente`),
-  CONSTRAINT `fk_video_componenteaula` FOREIGN KEY (`idComponente`) REFERENCES `componenteaula` (`id`)
-) ENGINE=InnoDB;
+  CONSTRAINT `fk_video_componenteaula` 
+  FOREIGN KEY (`idComponente`) REFERENCES `ComponenteAula` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `exercicio`;
-CREATE TABLE `exercicio` (
-  `idComponente` int(10) unsigned NOT NULL,
+DROP TABLE IF EXISTS `Material`;
+CREATE TABLE `Material` (
+  `idComponente` int unsigned NOT NULL,
+  `arquivo` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipoArquivo` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`idComponente`),
-  CONSTRAINT `fk_exercicio_componenteaula` FOREIGN KEY (`idComponente`) REFERENCES `componenteaula` (`id`)
-) ENGINE=InnoDB;
+  CONSTRAINT `fk_material_componenteaula` 
+  FOREIGN KEY (`idComponente`) REFERENCES `ComponenteAula` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `solucao`;
-CREATE TABLE `solucao` (
-  `idExercicio` int(10) unsigned NOT NULL,
-  `idAutor` int(10) unsigned NOT NULL,
-  `descricao` longtext NOT NULL,
+DROP TABLE IF EXISTS `Solucao`;
+CREATE TABLE `Solucao` (
+  `idExercicio` int unsigned NOT NULL,
+  `idAutor` int unsigned NOT NULL,
+  `descricao` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `nota` float DEFAULT NULL,
-  `idRevisor` int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (`idExercicio`),
-  KEY `idAutor_idx` (`idAutor`),
-  KEY `fk_solucao_usuario2_idx` (`idRevisor`),
-  CONSTRAINT `fk_solucao_exercicio` FOREIGN KEY (`idExercicio`) REFERENCES `exercicio` (`idcomponente`),
-  CONSTRAINT `fk_solucao_usuario1` FOREIGN KEY (`idAutor`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `fk_solucao_usuario2` FOREIGN KEY (`idRevisor`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB;
+  `idRevisor` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`idExercicio`, `idAutor`),
+  KEY `idRevisor_idx` (`idRevisor`),
+  CONSTRAINT `fk_solucao_exercicio` 
+  FOREIGN KEY (`idExercicio`) REFERENCES `Exercicio` (`idcomponente`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_solucao_usuario1` 
+  FOREIGN KEY (`idAutor`) REFERENCES `Usuario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_solucao_usuario2` 
+  FOREIGN KEY (`idRevisor`) REFERENCES `Usuario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `comentario`;
-CREATE TABLE `comentario` (
-  `id` int(10) unsigned NOT NULL,
-  `descricao` longtext NOT NULL,
-  `idUsuario` int(10) unsigned NOT NULL,
-  `dataCriado` date NOT NULL,
-  `idConteudo` int(10) unsigned NOT NULL,
+--
+-- Comentario
+--
+DROP TABLE IF EXISTS `Comentario`;
+CREATE TABLE `Comentario` (
+  `id` int unsigned NOT NULL,
+  `descricao` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idUsuario` int unsigned NOT NULL,
+  `dataCriado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idConteudo` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idUsuario_idx` (`idUsuario`),
   KEY `idConteudo_idx` (`idConteudo`),
-  CONSTRAINT `fk_comentario_conteudo` FOREIGN KEY (`idConteudo`) REFERENCES `conteudo` (`id`),
-  CONSTRAINT `fk_comentario_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB;
+  CONSTRAINT `fk_comentario_conteudo` 
+  FOREIGN KEY (`idConteudo`) REFERENCES `Conteudo` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_comentario_usuario` 
+  FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `pergunta`;
-CREATE TABLE `pergunta` (
-  `idComentario` int(10) unsigned NOT NULL,
-  `respondida` tinyint(4) NOT NULL,
-  `aprovada` tinyint(4) NOT NULL,
-  `idAprovador` int(10) unsigned DEFAULT NULL,
+DROP TABLE IF EXISTS `Pergunta`;
+CREATE TABLE `Pergunta` (
+  `idComentario` int unsigned NOT NULL,
+  `respondida` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'F',
+  `aprovada` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'F',
+  `idAprovador` int unsigned DEFAULT NULL,
   PRIMARY KEY (`idComentario`),
   KEY `idAprovador_idx` (`idAprovador`),
-  CONSTRAINT `fk_pergunta_comentario` FOREIGN KEY (`idComentario`) REFERENCES `comentario` (`id`),
-  CONSTRAINT `fk_pergunta_usuario` FOREIGN KEY (`idAprovador`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB;
+  CONSTRAINT `fk_pergunta_comentario` 
+  FOREIGN KEY (`idComentario`) REFERENCES `Comentario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_pergunta_usuario` 
+  FOREIGN KEY (`idAprovador`) REFERENCES `Usuario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `resposta`;
-CREATE TABLE `resposta` (
-  `idComentario` int(10) unsigned NOT NULL,
-  `idPergunta` int(10) unsigned NOT NULL,
+DROP TABLE IF EXISTS `Resposta`;
+CREATE TABLE `Resposta` (
+  `idComentario` int unsigned NOT NULL,
+  `idPergunta` int unsigned NOT NULL,
   PRIMARY KEY (`idComentario`),
-  KEY `fk_resposta_pergunta_idx` (`idPergunta`),
-  CONSTRAINT `fk_resposta_comentario` FOREIGN KEY (`idComentario`) REFERENCES `comentario` (`id`),
-  CONSTRAINT `fk_resposta_pergunta` FOREIGN KEY (`idPergunta`) REFERENCES `pergunta` (`idcomentario`)
-) ENGINE=InnoDB;
+  KEY `idPergunta_idx` (`idPergunta`),
+  CONSTRAINT `fk_resposta_comentario` 
+  FOREIGN KEY (`idComentario`) REFERENCES `Comentario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_resposta_pergunta` 
+  FOREIGN KEY (`idPergunta`) REFERENCES `Pergunta` (`idcomentario`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `avaliacomentario`;
-CREATE TABLE `avaliacomentario` (
-  `idUsuario` int(10) unsigned NOT NULL,
-  `idComentario` int(10) unsigned NOT NULL,
-  `ehUtil` tinyint(4) NOT NULL,
-  PRIMARY KEY (`idUsuario`),
-  KEY `idComentario_idx` (`idComentario`),
-  CONSTRAINT `fk_avaliacomentario_comentario` FOREIGN KEY (`idComentario`) REFERENCES `comentario` (`id`),
-  CONSTRAINT `fk_avaliacomentario_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB;
+--
+-- Avaliacao
+--
+DROP TABLE IF EXISTS `AvaliaConteudo`;
+CREATE TABLE `AvaliaConteudo` (
+  `idUsuario` int unsigned NOT NULL,
+  `idConteudo` int unsigned NOT NULL,
+  `ehUtil` char(1) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`idUsuario`,`idConteudo`),
+  CONSTRAINT `fk_avaliaconteudo_conteudo` 
+  FOREIGN KEY (`idConteudo`) REFERENCES `Conteudo` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_avaliaconteudo_usuario` 
+  FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `avaliaconteudo`;
-CREATE TABLE `avaliaconteudo` (
-  `idUsuario` int(10) unsigned NOT NULL,
-  `idConteudo` int(10) unsigned NOT NULL,
-  `ehUtil` tinyint(4) NOT NULL,
-  PRIMARY KEY (`idUsuario`),
-  KEY `idConteudo_idx` (`idConteudo`),
-  CONSTRAINT `fk_avaliaconteudo_conteudo` FOREIGN KEY (`idConteudo`) REFERENCES `conteudo` (`id`),
-  CONSTRAINT `fk_avaliaconteudo_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB;
+DROP TABLE IF EXISTS `AvaliaComentario`;
+CREATE TABLE `AvaliaComentario` (
+  `idUsuario` int unsigned NOT NULL,
+  `idComentario` int unsigned NOT NULL,
+  `ehUtil` char(1) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`idUsuario`,`idComentario`),
+  CONSTRAINT `fk_avaliacomentario_comentario` 
+  FOREIGN KEY (`idComentario`) REFERENCES `Comentario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_avaliacomentario_usuario` 
+  FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `users` VALUES ('john','{noop}test123',1),('mary','{noop}test123',1),('susan','{noop}test123',1);
-INSERT INTO `authorities` VALUES ('john','ROLE_EMPLOYEE'),('mary','ROLE_EMPLOYEE'),('mary','ROLE_MANAGER'),('susan','ROLE_ADMIN'),('susan','ROLE_EMPLOYEE');
+--
+-- Favorito
+--
+DROP TABLE IF EXISTS `Favorito`;
+CREATE TABLE `Favorito` (
+  `idUsuario` int unsigned NOT NULL,
+  `idConteudo` int unsigned NOT NULL,
+  PRIMARY KEY (`idUsuario`,`idConteudo`),
+  CONSTRAINT `fk_favorito_conteudo` 
+  FOREIGN KEY (`idConteudo`) REFERENCES `Conteudo` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_favorito_usuario` 
+  FOREIGN KEY (`idUsuario`) REFERENCES `Usuario` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
