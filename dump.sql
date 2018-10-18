@@ -295,4 +295,27 @@ CREATE TABLE `Favorito` (
 ) 
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Criação de papel, perfil e usuario padrões
+--
+INSERT INTO `Papel` (id, nome, mantemConteudo, aprovaConteudo) 
+VALUES (1, 'Administrador', 'T', 'T');
+INSERT INTO `Papel` (id, nome, mantemConteudo, aprovaConteudo) 
+VALUES (2, 'Aluno', 'F', 'F');
+INSERT INTO `Papel` (id, nome, mantemConteudo, aprovaConteudo) 
+VALUES (3, 'Instrutor', 'T', 'F');
+INSERT INTO `Papel` (id, nome, mantemConteudo, aprovaConteudo) 
+VALUES (4, 'Coordenador Acadêmico', 'T', 'T');
+
+INSERT INTO `Perfil` (id, idPapel) values (1, 1);
+INSERT INTO `Perfil` (id, idPapel) values (2, 2);
+
+--
+-- Senha padrão com o valor ‘root’
+--
+INSERT INTO `Usuario` (id, nome, senha, email) values 
+(1, 'root', '$2a$10$jxqFF6RTc1/dSwwiDaE9cuYbjMQk7UdHCPlbh7kC4ElLZzciEk3uK', 'admin@studia.cc');
+
+INSERT INTO `Usuario_Perfil` (idUsuario, idPerfil) values (1, 1);
+
 
