@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"  %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="../includes/header.jsp">
-	<jsp:param name="modal" value="true" />
-</jsp:include>
+<jsp:include page="../includes/header.jsp" />
   	
 		
 		
@@ -51,7 +49,7 @@
 	                    </div>
 	                    <div class="col-xs-12 col-sm-7">
 	                    <br>
-	                        <span class="cursoName text-info">${curso.conteudo.assunto.nome}</span>
+	                        <span class="cursoName text-info">${curso.assunto.nome}</span>
 	                        <h4><strong>${curso.conteudo.nome}</strong></h4>
 	                        <div style="margin:7px">
 	                            <label>${curso.conteudo.descricao}</label>                           
@@ -74,6 +72,4 @@
         </ul>
     </div>
 
-<jsp:include page="../includes/footer.jsp">
-	<jsp:param name="front" value="false" />
-</jsp:include>		
+<jsp:include page="../includes/footer.jsp" />

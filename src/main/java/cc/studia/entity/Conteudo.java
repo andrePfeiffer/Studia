@@ -41,10 +41,6 @@ public class Conteudo {
 	private List<Comentario> comentarios;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idassunto")
-	private Assunto assunto;
-	
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="idautor")
 	private Usuario autor;
 	
@@ -98,14 +94,6 @@ public class Conteudo {
 
 	public void setComentarios(List<Comentario> comentarios) {
 		this.comentarios = comentarios;
-	}
-
-	public Assunto getAssunto() {
-		return assunto;
-	}
-
-	public void setAssunto(Assunto assunto) {
-		this.assunto = assunto;
 	}
 
 	public Usuario getAutor() {

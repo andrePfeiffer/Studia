@@ -3,6 +3,7 @@ package cc.studia.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import cc.studia.entity.Curso;
 import cc.studia.service.AssuntoService;
 import cc.studia.service.ConteudoService;
 import cc.studia.service.CursoService;
+import cc.studia.service.UsuarioService;
 
 @Controller
 @RequestMapping("/curso")
@@ -30,6 +32,9 @@ public class CursoController {
 
 	@Autowired
 	public AssuntoService assuntoService;
+	
+	@Autowired
+	public UsuarioService usuarioService;
 
 	@GetMapping("/")
 	public String home() {
@@ -52,19 +57,29 @@ public class CursoController {
 	
 	@GetMapping("/adiciona")
 	public String mostrarFormulario(Model model) {
-		Curso curso = new Curso();
-		model.addAttribute("curso", curso);
 		List<Assunto> assuntos = assuntoService.verTodos();
 		model.addAttribute("assuntos", assuntos);
 		return "curso/adicionar-curso";
 	}
 	
 	@PostMapping("/adiciona")
-	public String adicionarCurso(@ModelAttribute("curso") Curso curso, @RequestParam("assuntoId") int assuntoId) {
+	public String adicionarCurso(
+			Authentication authentication,
+			@RequestParam("conteudoPublico") boolean conteudoPublico,
+			@RequestParam("assuntoId") int assuntoId,
+			@RequestParam("nome") String nome,
+			@RequestParam("descricao") String descricao) {
 		Assunto assunto = assuntoService.ver(assuntoId);
-		Conteudo conteudo = curso.getConteudo();
-		conteudo.setAssunto(assunto);
+		Conteudo conteudo = new Conteudo();
+		conteudo.setAutor(usuarioService.findByUserName(authentication.getName()));
+		conteudo.setNome(nome);
+		conteudo.setDescricao(descricao);
+		conteudo.setAprovado(false);
+		conteudo.setPublico(conteudoPublico);
 		int conteudoId = conteudoService.salvarConteudo(conteudo);
+		Curso curso = new Curso();
+		curso.setConteudo(conteudo);
+		curso.setAssunto(assunto);
 		curso.setIdConteudo(conteudoId);
 		cursoService.salvarCurso(curso);
 		return "redirect:/curso/verTodos";

@@ -19,6 +19,10 @@ public class Curso {
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="idconteudo", nullable=false, insertable=false, updatable=false)
 	private Conteudo conteudo;
+	
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name="idassunto")
+	private Assunto assunto;
 
 	public int getIdConteudo() {
 		return idConteudo;
@@ -36,5 +40,12 @@ public class Curso {
 		this.conteudo = conteudo;
 	}
 	
+	public Assunto getAssunto() {
+		return assunto;
+	}
+
+	public void setAssunto(Assunto assunto) {
+		this.assunto = assunto;
+	}
 	
 }
