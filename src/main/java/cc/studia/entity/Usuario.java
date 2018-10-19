@@ -17,6 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="usuario")
 public class Usuario {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
@@ -83,7 +84,7 @@ public class Usuario {
 	public void addPerfil(Perfil perfil) {
 		this.perfils.add(perfil);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nome=" + nome + ", senha=" + senha + ", email=" + email + ", perfils=" + perfils

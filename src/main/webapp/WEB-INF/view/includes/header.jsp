@@ -260,7 +260,7 @@
                     </form>
                         <br>
                         <br>
-                        <a href="resetSenha.html" style="color:blue" id="resetPass">Redefinir senha</a>
+                        <a href="${pageContext.request.contextPath}/reset-senha" style="color:blue" id="resetPass">Redefinir senha</a>
                 </div>
             </div>
                                 

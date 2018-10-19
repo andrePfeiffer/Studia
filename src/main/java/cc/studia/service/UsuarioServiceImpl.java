@@ -1,9 +1,20 @@
  package cc.studia.service;
 
 import java.util.Collection;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,6 +33,9 @@ import cc.studia.entity.Usuario;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
+	
+	@Autowired
+	private Environment env;
 	
 	@Autowired
 	private UsuarioDAO usuarioDAO;
@@ -86,5 +100,34 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Transactional
 	public boolean existeLogin(String login) {
 		return usuarioDAO.existeLogin(login);
+	}
+	
+	@Override
+	public void enviarEmail() {
+		Properties props = System.getProperties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+        Session session = Session.getDefaultInstance(props,
+        		new javax.mail.Authenticator() {
+                     protected PasswordAuthentication getPasswordAuthentication() 
+                     {
+                           return new PasswordAuthentication(env.getProperty("smtp.mail"), env.getProperty("smtp.password"));
+                     }
+                });
+	    try {
+	          Message message = new MimeMessage(session);
+	          message.setFrom(new InternetAddress(env.getProperty("smtp.mail"))); //Remetente
+	          Address[] toUser = InternetAddress.parse("andre@pfeiffer.com.br");  
+	          message.setRecipients(Message.RecipientType.TO, toUser);
+	          message.setSubject("Enviando email com JavaMail");//Assunto
+	          message.setText("Enviei este email utilizando JavaMail com minha conta GMail!");
+	          Transport.send(message);
+	          System.out.println("Feito!!!");
+	     } catch (MessagingException e) {
+	          throw new RuntimeException(e);
+	    }
 	}
 }

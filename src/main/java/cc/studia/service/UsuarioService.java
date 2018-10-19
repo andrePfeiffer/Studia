@@ -9,4 +9,5 @@ public interface UsuarioService extends UserDetailsService {
 	public void save(String email, String login, String senha);
 	public boolean existeEmail(String email);
 	public boolean existeLogin(String login);
+	public void enviarEmail();
 }

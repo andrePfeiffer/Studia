@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cc.studia.entity.Usuario;
@@ -79,5 +80,24 @@ public class UsuarioController {
 	        new SecurityContextLogoutHandler().logout(request, response, auth);
 	    }
 	    return "redirect:/showMyLoginPage?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
+	}
+	
+	@GetMapping("/reset-senha")
+	public String recuperaSenhaForm() {
+	    return "reset-senha";
+	}
+
+	@PostMapping("/reset-senha")
+	public String recuperaSenha(@RequestParam("userLogin") String userLogin, Model model) {
+		Usuario usuario = usuarioService.findByUserName(userLogin);
+		if(usuario == null) {
+    		String mensagem = "Usuario não encontrado";
+	    	model.addAttribute("mensagem", mensagem);			
+		}else {
+			usuarioService.enviarEmail();
+    		String mensagem = "Email enviado com link para redefinição de senha";
+	    	model.addAttribute("mensagem", mensagem);			
+		}
+	    return "reset-senha";
 	}
 }

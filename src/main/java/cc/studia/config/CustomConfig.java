@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -29,6 +30,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages="cc.studia")
+@PropertySource(value="classpath:mail-username.properties")
 @PropertySource(value="classpath:persistence-mysql.properties")
 @PropertySource(value="classpath:mysql-override.properties", ignoreResourceNotFound=true)
 public class CustomConfig implements WebMvcConfigurer {
@@ -84,6 +86,11 @@ public class CustomConfig implements WebMvcConfigurer {
 		return txManager;
 	}
 	
+	@Bean 
+	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+	    return new PropertySourcesPlaceholderConfigurer();
+	}
+	
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -102,6 +109,4 @@ public class CustomConfig implements WebMvcConfigurer {
 		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
 		return validator;
 	}
-    
-    
 }
