@@ -35,8 +35,8 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
-		.antMatchers("/curso/**").hasAuthority("EMPLOYEE")
-		.antMatchers("/admin/**").hasAuthority("ADMIN")
+		.antMatchers("/curso/**").hasAuthority("Administrador")
+		.antMatchers("/admin/**").hasAuthority("Administrador")
 		
 		.and().formLogin()
 		.failureHandler(customAuthenticationFailureHandler)
