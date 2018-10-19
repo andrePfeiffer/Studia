@@ -1,5 +1,8 @@
  package cc.studia.service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -50,7 +53,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario findByUserName(String userName) {
 		return usuarioDAO.findByUserName(userName);
 	}
+	
+	@Override
+	@Transactional
+	public void atualizaSenha(Usuario usuario, String senha) {
+		usuario.setSenha(passwordEncoder.encode(senha));
+		usuarioDAO.save(usuario);
+	}
 
+	@Override
 	@Transactional
 	public void save(String email, String login, String senha) {
 		Usuario usuario = new Usuario();
@@ -103,8 +114,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 	
 	@Override
-	public void enviarEmail() {
+	public void enviarEmailRecuperarSenha(Usuario usuario) {
 		Properties props = System.getProperties();
+		String code = gerarCodigo(usuario.getNome());
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -120,14 +132,36 @@ public class UsuarioServiceImpl implements UsuarioService {
 	    try {
 	          Message message = new MimeMessage(session);
 	          message.setFrom(new InternetAddress(env.getProperty("smtp.mail"))); //Remetente
-	          Address[] toUser = InternetAddress.parse("andre@pfeiffer.com.br");  
+	          Address[] toUser = InternetAddress.parse(usuario.getEmail());  
 	          message.setRecipients(Message.RecipientType.TO, toUser);
-	          message.setSubject("Enviando email com JavaMail");//Assunto
-	          message.setText("Enviei este email utilizando JavaMail com minha conta GMail!");
+	          message.setSubject("Recuperação de senha do Studia");//Assunto
+	          message.setText("Para recuperar a sua senha clique aqui:\n http://localhost:8080/video/nova-senha?code=" + code);
 	          Transport.send(message);
-	          System.out.println("Feito!!!");
 	     } catch (MessagingException e) {
 	          throw new RuntimeException(e);
 	    }
+	}
+	
+	@Override
+	public String gerarCodigo(String login) {
+		String hash1 = "aasd01232las";
+		String hash2 = "0asdasladsa,0s0s";
+		String code = hash1 + login + hash2;
+		
+		MessageDigest digest;
+		try {
+			digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(code.getBytes(StandardCharsets.UTF_8));
+			StringBuilder sb = new StringBuilder();
+			for (byte b : hash) {
+				sb.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+			}
+			code = sb.toString();
+			return code;
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return "erro";
+		
 	}
 }

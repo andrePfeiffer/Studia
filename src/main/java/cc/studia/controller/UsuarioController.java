@@ -94,10 +94,51 @@ public class UsuarioController {
     		String mensagem = "Usuario não encontrado";
 	    	model.addAttribute("mensagem", mensagem);			
 		}else {
-			usuarioService.enviarEmail();
+			usuarioService.enviarEmailRecuperarSenha(usuario);
     		String mensagem = "Email enviado com link para redefinição de senha";
 	    	model.addAttribute("mensagem", mensagem);			
 		}
 	    return "reset-senha";
+	}
+	
+	@GetMapping("/nova-senha")
+	public String novaSenhaForm(@RequestParam("code") String code, Model model) {
+    	model.addAttribute("code", code);			
+	    return "nova-senha";
+	}
+	
+	@PostMapping("/nova-senha")
+	public String novaSenha(
+			@RequestParam("code") String code, 
+			@RequestParam("userLogin") String userLogin, 
+			@RequestParam("senha1") String senha1, 
+			@RequestParam("senha2") String senha2, 
+			Model model) {
+		Usuario usuario = usuarioService.findByUserName(userLogin);
+		String mensagem = null;
+		if(usuario == null) {
+    		mensagem = "Usuario não encontrado";
+	    	model.addAttribute("mensagem", mensagem);			
+		}else {
+			String codigo = usuarioService.gerarCodigo(usuario.getNome());
+			if(!codigo.equals(code)) {
+				mensagem = "O seu link expirou";
+		    	model.addAttribute("mensagem", mensagem);			
+			}
+		}
+		if(senha1.length() < 4) {
+			mensagem = "A senha não atende aos requisitos de segurança";
+			model.addAttribute("mensagem", mensagem);
+		}
+		if(!senha1.equals(senha2)){
+			mensagem = "As senhas devem ser idênticas";
+			model.addAttribute("mensagem", mensagem);
+		}
+		if(mensagem == null){
+			usuarioService.atualizaSenha(usuario, senha1);
+    		mensagem = "Senha alterada com sucesso";
+	    	model.addAttribute("mensagem", mensagem);			
+		}
+	    return "nova-senha";
 	}
 }

@@ -1,5 +1,5 @@
 ## Progress  
-UCS01 3/5  
+UCS01 5/5  
 UCS02 7/8  
 UCS04 0/3  
 UCS05 0/2  
@@ -12,20 +12,9 @@ UCS01 - FA2
 ## UCS01 Autenticar usuário  
 ~~**FT: login**~~  
 ~~**Fluxo Alternativo 1:** O nome de usuário ou a senha não são válidos.~~  
-**Fluxo Alternativo 2:** Ator escolhe a opção de redefinição de senha.  
-4 Sistema envia um link de redefinição de senha para o e-mail vinculado ao usuário.  
-5 Ator acessa o link enviado para o email.  
-6 Sistema solicita que o ator informe nova senha e confirmação da nova senha.  
-7 Ator preenche a nova senha e a confirmação da nova senha e confirma.  
-8 Sistema verifica que a nova senha e a confirmação informadas têm os mesmos valores e que atendem aos requisitos de segurança.  
-9 Sistema exibe uma mensagem de confirmação da redefinição de senha.  
-10 Retorna ao passo 2 do Fluxo Típico.  
-
+~~**Fluxo Alternativo 2:** Ator escolhe a opção de redefinição de senha.~~  
 ~~**Fluxo Alternativo 3:** Nome de usuário informado não foi encontrado para a redefinição de senha.~~  
-
-**Fluxo Alternativo 4:** Erro na nova senha informada.  
-1 Sistema exibe mensagem de erro na redefinição da senha.  
-2 Retorna ao passo 6 do Fluxo Alternativo 2.  
+~~**Fluxo Alternativo 4:** Erro na nova senha informada.~~  
 
 ## UCS02 Manter conta  
 **FT:** listar contas para administrador  
