@@ -108,6 +108,10 @@
             margin-bottom: 5px;
             padding-top:5px;
         }
+        
+        .mensagemErro{
+        	color: red;
+        }
     </style>
 
 </head>
@@ -143,7 +147,7 @@
                     </a>
                     <div class="dropdown-menu">
                             <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/curso/verTodos"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Listar Cursos</a>
-                        <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/curso/adicionar"><span class="mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Manter Cursos</a>
+                        <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/curso/adiciona"><span class="mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Manter Cursos</a>
                         
                     </div>
                 </li>
@@ -181,10 +185,10 @@
                         <a class="nav-link link dropdown-toggle text-secondary btn btn-sm btn-primary display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <span class="mbri-user mbr-iconfont mbr-iconfont-btn"></span>
-                            <label id="usuarioAtual"></label> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <label id="usuarioAtual"><security:authentication property="principal.username" /></label> &nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/usuario/editar"><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn"></span>Alterar Conta</a>
+                            <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/editar-usuario"><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn"></span>Alterar Conta</a>
                             <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/logout"><span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Sair&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         </div>
                 </li>
@@ -207,46 +211,45 @@
     </nav>
 
 </section>
-<br><br><br><br><br><br>
+<br><br><br><br>
 
 <!-- Modais -->
 <div id="CadastroUsuarioModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <center><h3>Cadastro de novo usuário</h3></center>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<center><h3>Cadastro de novo usuário</h3></center>
                 <button type="button" class="close" data-dismiss="modal"> &times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">  
-                	<form onsubmit="return false">
-                            <input type="email" id="emailCadastro" name="emailCadastro" class="form-control" placeholder="E-mail" required>
-                            <br>
-                            <input type="text" id="userCadastro" name="userCadastro" class="form-control" placeholder="Usuário desejado" required>
-                            <br>
-                            <input type="password" id="senhaCadastro1" name="senhaCadastro1" class="form-control" placeholder="Senha" required>
-                            <br>
-                            <input type="password" id="senhaCadastro2" name="senhaCadastro2" class="form-control" placeholder="Confirme a senha" required>
-                            <br>
-                        	<center><label style="color:red" id="cadastroUsuarioError"></label></center>
-                            <input type="submit" id="cadastroUsuarioButton" class="btn btn-primary btn-block" value="Entrar" style="margin:0px;">
-                    </form>
-                    </div>
-                </div>
-                                    
-                            <div class="modal-footer">
-                                <div style="padding:10px"></div>
-                            </div>
-               
-            </div>
-        </div>
-    </div>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">  
+					<form onsubmit="return false">
+						<input type="email" id="emailCadastro" name="emailCadastro" class="form-control" placeholder="E-mail" required>
+						<br>
+						<input type="text" id="userCadastro" name="userCadastro" class="form-control" placeholder="Usuário desejado" required>
+						<br>
+						<input type="password" id="senhaCadastro1" name="senhaCadastro1" class="form-control" placeholder="Senha" required>
+						<br>
+						<input type="password" id="senhaCadastro2" name="senhaCadastro2" class="form-control" placeholder="Confirme a senha" required>
+						<br>
+						<center><label class="mensagemErro" id="cadastroUsuarioError"></label></center>
+						<input type="submit" id="cadastroUsuarioButton" class="btn btn-primary btn-block" value="Entrar" style="margin:0px;">
+                   	</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div style="padding:10px"></div>
+			</div>
+		</div>
+	</div>
+</div>
+    
 <div id="loginModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <center><h3>Login</h3></center>
-            <button type="button" class="close" data-dismiss="modal"> &times;</button>
+	            <button type="button" class="close" data-dismiss="modal"> &times;</button>
             </div>
             <div class="modal-body">
                 <div class="form-group">  
@@ -255,7 +258,7 @@
                         <br>
                         <input type="password" name="password" id="password" class="form-control" placeholder="Senha" required>
                         <br>
-                        <center><label style="color:red" id="loginError"></label></center>
+                        <center><label class="mensagemErro" id="loginError"></label></center>
                         <input type="submit" id="loginButton" class="btn btn-primary btn-block" value="Entrar" style="margin:0px;">
                     </form>
                         <br>
@@ -263,15 +266,154 @@
                         <a href="${pageContext.request.contextPath}/reset-senha" style="color:blue" id="resetPass">Redefinir senha</a>
                 </div>
             </div>
-                                
-                        <div class="modal-footer">
-                            <div style="padding:10px"></div>
-                        </div>
-           
+			<div class="modal-footer">
+				<div style="padding:10px"></div>
+			</div>
         </div>
     </div>
 </div>
 
+
+<div id="CadastroAulaModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center><h3>Cadastro de nova aula</h3></center>
+	            <button type="button" class="close" data-dismiss="modal"> &times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">  
+                    <form method="POST" action="/cursos">
+                        <input type="text" id="tituloAula" class="form-control" placeholder="Título" required>
+                        <br>
+                        <textarea type="text" id="descricaoAula" class="form-control" placeholder="Descrição aula" required></textarea>
+                        <br>
+                        <select class="form-control">
+                            <option>Selecione o assunto...</option>
+                        </select>
+                        <br>
+                        <input type="button" class="btn btn-primary" value="Salvar">
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div style="padding:10px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="PesquisaAssuntoModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<center><h3>Pesquisar Assunto</h3></center>
+					<button type="button" class="close" data-dismiss="modal"> &times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">  
+					<form method="POST" action="${pageContext.request.contextPath}/assunto/busca">
+						<input type="text" id="assuntoPesquisa" name="busca" class="form-control" placeholder="Assunto" required>
+						<br>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+						<input type="submit" id="PesquisaAssuntoButton" class="btn btn-primary btn-block" value="Pesquisar" style="margin:0px;">
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div style="padding:10px"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="CadastroAssuntoModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+    		<div class="modal-header">
+        		<center><h3>Cadastro de novo Assunto</h3></center>
+    			<button type="button" class="close" data-dismiss="modal"> &times;</button>
+    		</div>
+    		<div class="modal-body">
+        		<div class="form-group">  
+            		<form action="${pageContext.request.contextPath}/assunto/adiciona" method="POST">
+            			<input name="nome" class="form-control" />
+                		<br>
+                		<input type="submit" id="cadastroButton" class="btn btn-primary btn-block" value="Cadastrar" style="margin:0px;">
+                		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            		</form>
+        		</div>
+    		</div>
+                        
+			<div class="modal-footer">
+				<div style="padding:10px"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="mantemUsuarioModal" class="modal fade" role="dialog" style="width:100vw !important">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center><h3>Manter contas de usuários</h3></center>
+            <button type="button" class="close" data-dismiss="modal"> &times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="panel panel-default">
+                            <div class="panel-heading c-list">
+                                <div class="row">
+                                    <div class="col-sm-4 form-inline" style="padding-top:10px;">
+                                        <input type="text" id="usuarioContaSearchField" class="form-control" placeholder="Pesquise por usuário">
+                                    </div>
+                                    <div class="col-sm-4 form-inline" style="padding-top:10px;">
+                                        <a class="btn btn-sm btn-primary display-4" id="searchUsers2Button">
+                                                <span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                                                Pesquisar 
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>                
+                            <div class="row" style="display: none;">
+                                <div class="col-xs-12">
+                                    <div class="input-group c-edit2">
+                                        <input type="text" class="form-control" id="contact-list-edit2">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-edit2 text-muted"></span></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="listaUsuariosConta" class="hidden">
+                                <ul class="list-group" id="contact-list">
+                                    <li class="list-group-item" id="1">
+                                        <form method="POST" action="/cursos">
+                                            <input type="email" id="emailConta" class="form-control" placeholder="E-mail" required>
+                                            <br>
+                                            <input type="text" id="userConta2" class="form-control" placeholder="Usuário" required>
+                                            <br>
+                                            <br>
+                                            <input type="submit" id="cadastroButton" class="btn btn-primary btn-block" value="Salvar" style="margin:0px;">
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+            </div>      
+            <div class="modal-footer">
+                <div style="padding:10px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Futuro -->
 <div id="promoveInstrutorModal" class="modal fade" role="dialog" style="width:100vw !important">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -329,38 +471,6 @@
         </div>
     </div>
 </div>
-
-<div id="CadastroAulaModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <center><h3>Cadastro de nova aula</h3></center>
-            <button type="button" class="close" data-dismiss="modal"> &times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">  
-                    <form method="POST" action="/cursos">
-                        <input type="text" id="tituloAula" class="form-control" placeholder="Título" required>
-                        <br>
-                        <textarea type="text" id="descricaoAula" class="form-control" placeholder="Descrição aula" required></textarea>
-                        <br>
-                        <select class="form-control">
-                            <option>Selecione o assunto...</option>
-                        </select>
-                        <br>
-                        <input type="button" class="btn btn-primary" value="Salvar">
-                    </form>
-                </div>
-            </div>
-                                
-                        <div class="modal-footer">
-                            <div style="padding:10px"></div>
-                        </div>
-           
-        </div>
-    </div>
-</div>
-
 <div id="aprovaPerguntaModal" class="modal fade" role="dialog">
 <div class="modal-dialog">
     <div class="modal-content">
@@ -538,110 +648,3 @@
         </div>
     </div>
 
-    <div id="mantemUsuarioModal" class="modal fade" role="dialog" style="width:100vw !important">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <center><h3>Manter contas de usuários</h3></center>
-                    <button type="button" class="close" data-dismiss="modal"> &times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <div class="panel panel-default">
-                                    <div class="panel-heading c-list">
-                                        <div class="row">
-                                            <div class="col-sm-4 form-inline" style="padding-top:10px;">
-                                                <input type="text" id="usuarioContaSearchField" class="form-control" placeholder="Pesquise por usuário">
-                                            </div>
-                                            <div class="col-sm-4 form-inline" style="padding-top:10px;">
-                                                <a class="btn btn-sm btn-primary display-4" id="searchUsers2Button">
-                                                        <span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>
-                                                        Pesquisar 
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>                
-                                    <div class="row" style="display: none;">
-                                        <div class="col-xs-12">
-                                            <div class="input-group c-edit2">
-                                                <input type="text" class="form-control" id="contact-list-edit2">
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-edit2 text-muted"></span></button>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="listaUsuariosConta" class="hidden">
-                                        <ul class="list-group" id="contact-list">
-                                            <li class="list-group-item" id="1">
-                                                <form method="POST" action="/cursos">
-                                                    <input type="email" id="emailConta" class="form-control" placeholder="E-mail" required>
-                                                    <br>
-                                                    <input type="text" id="userConta2" class="form-control" placeholder="Usuário" required>
-                                                    <br>
-                                                    <br>
-                                                    <input type="submit" id="cadastroButton" class="btn btn-primary btn-block" value="Salvar" style="margin:0px;">
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>      
-                    <div class="modal-footer">
-                        <div style="padding:10px"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-<div id="PesquisaAssuntoModal" class="modal fade" role="dialog">
-<div class="modal-dialog">
-<div class="modal-content">
-    <div class="modal-header">
-        <center><h3>Pesquisar Assunto</h3></center>
-    <button type="button" class="close" data-dismiss="modal"> &times;</button>
-    </div>
-    <div class="modal-body">
-        <div class="form-group">  
-            <form method="POST" action="/cursos">
-                <input type="text" id="assuntoPesquisa" class="form-control" placeholder="Assunto" required>
-                <br>
-                <input type="submit" id="PesquisaAssuntoButton" class="btn btn-primary btn-block" value="Pesquisar" style="margin:0px;">
-            </form>
-        </div>
-    </div>
-                        
-                <div class="modal-footer">
-                    <div style="padding:10px"></div>
-                </div>
-   
-</div>
-</div>
-</div>
-
-<div id="CadastroAssuntoModal" class="modal fade" role="dialog">
-<div class="modal-dialog">
-<div class="modal-content">
-    <div class="modal-header">
-        <center><h3>Cadastro de novo Assunto</h3></center>
-    <button type="button" class="close" data-dismiss="modal"> &times;</button>
-    </div>
-    <div class="modal-body">
-        <div class="form-group">  
-            <form action="${pageContext.request.contextPath}/assunto/adiciona" method="POST">
-            	<input name="nome" class="form-control" />
-                <br>
-                <input type="submit" id="cadastroButton" class="btn btn-primary btn-block" value="Cadastrar" style="margin:0px;">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </form>
-        </div>
-    </div>
-                        
-                <div class="modal-footer">
-                    <div style="padding:10px"></div>
-                </div>
-   
-</div>
-</div>
-</div>
