@@ -35,7 +35,7 @@
 					<td>${aula.conteudo.descricao}</td>
 					<td>${aula.conteudo.publico}</td>
 					<td>${aula.conteudo.aprovado}</td>
-					<td>${aula.conteudo.assunto.nome}</td>
+					<td>${aula.curso.assunto.nome}</td>
 					<td>${aula.curso.conteudo.nome}</td>
 					<td><a href="${updateLink}">Edita</a> | <a href="${deleteLink}" onclick="if(!(confirm('Você tem certeza que quer deletar essa aula?'))) return false">Remove</a></td>
 				</tr>

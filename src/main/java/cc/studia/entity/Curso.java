@@ -1,11 +1,15 @@
 package cc.studia.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +27,9 @@ public class Curso {
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="idassunto")
 	private Assunto assunto;
+	
+	@OneToMany(mappedBy="curso", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Aula> aulas;
 
 	public int getIdConteudo() {
 		return idConteudo;
@@ -46,6 +53,14 @@ public class Curso {
 
 	public void setAssunto(Assunto assunto) {
 		this.assunto = assunto;
+	}
+
+	public List<Aula> getAulas() {
+		return aulas;
+	}
+
+	public void setAulas(List<Aula> aulas) {
+		this.aulas = aulas;
 	}
 	
 }

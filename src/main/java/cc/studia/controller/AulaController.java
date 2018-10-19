@@ -3,6 +3,7 @@ package cc.studia.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import cc.studia.service.AssuntoService;
 import cc.studia.service.AulaService;
 import cc.studia.service.ConteudoService;
 import cc.studia.service.CursoService;
+import cc.studia.service.UsuarioService;
 
 @Controller
 @RequestMapping("/aula")
@@ -35,6 +37,9 @@ public class AulaController {
 
 	@Autowired
 	public AssuntoService assuntoService;
+	
+	@Autowired
+	public UsuarioService usuarioService;
 
 	@GetMapping("/")
 	public String home() {
@@ -67,17 +72,26 @@ public class AulaController {
 	}
 	
 	@PostMapping("/adiciona")
-	public String adicionarAula(@ModelAttribute("aula") Aula aula, @RequestParam("assuntoId") int assuntoId, @RequestParam("cursoId") int cursoId) {
-		Assunto assunto = assuntoService.ver(assuntoId);
+	public String adicionarAula(
+			Authentication authentication,
+			@RequestParam("tituloAula") String tituloAula,
+			@RequestParam("descricaoAula") String descricaoAula, 
+			@RequestParam("aulaPublica") boolean aulaPublica, 
+			@RequestParam("cursoId") int cursoId) {
 		Curso curso = cursoService.ver(cursoId);
-		Conteudo conteudo = aula.getConteudo();
-		conteudo.setAssunto(assunto);
+		Conteudo conteudo = new Conteudo();
+		conteudo.setAutor(usuarioService.findByUserName(authentication.getName()));
+		conteudo.setNome(tituloAula);
+		conteudo.setDescricao(descricaoAula);
+		conteudo.setPublico(aulaPublica);
 		int conteudoId = conteudoService.salvarConteudo(conteudo);
+		Aula aula = new Aula();
 		aula.setIdConteudo(conteudoId);
+		aula.setConteudo(conteudo);
 		aula.setIdCurso(cursoId);
 		aula.setCurso(curso);
 		aulaService.salvarAula(aula);
-		return "redirect:/aula/verTodos";
+		return "redirect:/curso/ver?cursoId=" + cursoId;
 	}
 	
 	@GetMapping("/edita")

@@ -283,16 +283,17 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">  
-                    <form method="POST" action="/cursos">
-                        <input type="text" id="tituloAula" class="form-control" placeholder="Título" required>
+                	<form method="POST" action="${pageContext.request.contextPath}/aula/adiciona">
+                        <input type="text" name="tituloAula" id="tituloAula" class="form-control" placeholder="Título" required>
                         <br>
-                        <textarea type="text" id="descricaoAula" class="form-control" placeholder="Descrição aula" required></textarea>
+                        <textarea type="text" name="descricaoAula" id="descricaoAula" class="form-control" placeholder="Descrição aula" required></textarea>
                         <br>
-                        <select class="form-control">
-                            <option>Selecione o assunto...</option>
-                        </select>
-                        <br>
-                        <input type="button" class="btn btn-primary" value="Salvar">
+	                    <label class="radio-inline"><input type="radio" name="aulaPublica" value="true" checked>Aula pública</label>
+	                    <label class="radio-inline"><input type="radio" name="aulaPublica" value="false">Aula privada</label>
+	                    <br><br>
+						<input type="hidden" name="cursoId" value="${curso.conteudo.id}" />
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <input type="submit" class="btn btn-primary" value="Salvar">
                     </form>
                 </div>
             </div>

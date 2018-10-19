@@ -7,7 +7,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,7 +46,14 @@ public class CursoController {
 		model.addAttribute("cursos", cursos);
 		return "curso/listar-cursos";
 	}
-	
+
+	@GetMapping("/ver")
+	public String listarCursos(@RequestParam("cursoId") int cursoId, Model model) {
+		Curso curso = cursoService.ver(cursoId);
+		model.addAttribute("curso", curso);
+		return "curso/ver-curso";
+	}
+
 	@PostMapping("/busca")
 	public String buscaCurso(@RequestParam("busca") String busca, Model model) {
 		List<Curso> cursos = cursoService.busca(busca);
@@ -93,8 +99,16 @@ public class CursoController {
 	}
 	
 	@PostMapping("/edita")
-	public String editaCurso(@ModelAttribute("curso") Curso curso) {
-		conteudoService.editaConteudo(curso.getConteudo());
+	public String editaCurso(
+			@RequestParam("conteudoId") int conteudoId,
+			@RequestParam("nome") String nome,
+			@RequestParam("descricao") String descricao,
+			@RequestParam("conteudoPublico") boolean conteudoPublico) {
+		Conteudo conteudo = conteudoService.ver(conteudoId);
+		conteudo.setNome(nome);
+		conteudo.setDescricao(descricao);
+		conteudo.setPublico(conteudoPublico);
+		conteudoService.editaConteudo(conteudo);
 		return "redirect:/curso/verTodos";
 	}
 

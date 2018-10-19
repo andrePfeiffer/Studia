@@ -1,48 +1,56 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<form:form action="edita" modelAttribute="curso" method="POST">
-		<form:hidden path="conteudo.id"/>
-		<form:hidden path="conteudo.assunto.id"/>
-		<table>
-			<tbody>
-				<tr>
-					<td><label>Nome:</label></td>
-					<td><form:input path="conteudo.nome" /></td>
-				</tr>
-				<tr>
-					<td><label>Descrição:</label></td>
-					<td><form:input path="conteudo.descricao" /></td>
-				</tr>
-				<tr>
-					<td><label>Conteúdo público:</label></td>
-					<td>				
-						<form:radiobutton path="conteudo.publico" value="true" /> público<br />
-						<form:radiobutton path="conteudo.publico" value="false" /> privado
-					</td>
-				</tr>
-				<tr>
-					<td><label>Conteúdo aprovado:</label></td>
-					<td>				
-						<form:radiobutton path="conteudo.aprovado" value="true" /> sim<br />
-						<form:radiobutton path="conteudo.aprovado" value="false" /> não
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" value="Salvar" /></td>
-				</tr>
-			</tbody>
-		</table>
-	</form:form>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="../includes/header.jsp" />
+<div class="panel panel-default">
+        <div class="panel-heading c-list">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-1">
+                    <span class="title"><h3>Painel de manutenção de cursos</h3></span>
+                </div>
+                <div class="col-sm-2 col-sm-offset-1 form-inline" style="padding-top:10px;">
+                        <a class="btn btn-sm btn-primary display-4" id="exibeCursoButton">
+                                <span class="mbri-plus mbr-iconfont mbr-iconfont-btn"></span>
+                                Criar Curso
+                        </a>
+                </div>
+                <div class="col-sm-3 form-inline" style="padding-top:10px;">
+                    <input type="text" id="cursoedit2" class="form-control" placeholder="Pesquise por assunto">
+                </div>
+            </div>
+        </div>                
+        <div class="row" style="display: none;">
+            <div class="col-xs-12">
+                <div class="input-group c-edit2">
+                    <input type="text" class="form-control" id="contact-list-edit2">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-edit2 text-muted"></span></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div id="formWrapper">
+	
+            <form action="${pageContext.request.contextPath}/curso/edita" method="POST">
+            	<input type="hidden" name="conteudoId" value="${curso.conteudo.id}" />
+                <Div class="container">
+                    <h2>Edição de curso</h2>
+                    <label>Título</label>
+                    <input type="text" name="nome" class="form-control" value="${curso.conteudo.nome}" required/>
+                    <br>
+                    <label>Descrição</label>
+                    <input type="text" name="descricao" class="form-control" value="${curso.conteudo.descricao}" required/>
+                    <br>
+                    <label class="radio-inline"><input type="radio" name="conteudoPublico" value="true" <c:if test="${curso.conteudo.publico}">checked</c:if>>Curso público</label>
+                    <label class="radio-inline"><input type="radio" name="conteudoPublico" value="false" <c:if test="${!curso.conteudo.publico}">checked</c:if>>Curso privado</label>
+                    <br><br>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <input type="submit" value="Salvar" class="btn btn-primary">
 
-</body>
-</html>
+                </Div>
+                <br>
+            </form>
+        </div>
+    </div>
+<jsp:include page="../includes/footer.jsp" />

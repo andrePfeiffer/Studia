@@ -50,6 +50,7 @@
                     <label class="radio-inline"><input type="radio" name="conteudoPublico" value="true" checked>Curso público</label>
                     <label class="radio-inline"><input type="radio" name="conteudoPublico" value="false">Curso privado</label>
                     <br><br>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <input type="submit" value="Salvar" class="btn btn-primary">
                 </Div>
                 <br>
