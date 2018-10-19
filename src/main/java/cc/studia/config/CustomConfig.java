@@ -94,6 +94,7 @@ public class CustomConfig implements WebMvcConfigurer {
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		viewResolver.setContentType("text/html;charset=UTF-8");
 		viewResolver.setPrefix("/WEB-INF/view/");
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
