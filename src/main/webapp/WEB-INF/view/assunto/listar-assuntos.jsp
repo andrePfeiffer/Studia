@@ -43,17 +43,15 @@
 				<div class="col-xs-12 col-sm-7">
 					<br>
 					<span class="cursoName text-info">${assunto.nome}</span>
-					<a href="${updateLink}">Edita</a> | <a href="${deleteLink}" onclick="if(!(confirm('Você tem certeza que quer deletar esse assunto?'))) return false">Remove</a>
 				</div>
 				<div class="col-xs-12 col-sm-2">
-					<br><br>
-                    <a href="../cursos/curso" data-toggle="tooltip" data-placement="top" >
-                       	<span class="mbri-search mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span>
-					</a>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                    <a href="${showLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-search mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
 					<a href="#" data-toggle="tooltip" data-placement="top" >
 						<span class="mbri-hearth mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span>
 					</a>                        
+	                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="${updateLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
+	                    <a href="${deleteLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-trash mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<br><br>
 				</div>
 				<div class="clearfix"><br/></div>
