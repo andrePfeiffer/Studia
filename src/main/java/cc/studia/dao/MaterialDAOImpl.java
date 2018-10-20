@@ -6,10 +6,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import cc.studia.entity.Aula;
 import cc.studia.entity.Material;
 
+@Repository
 public class MaterialDAOImpl implements MaterialDAO {
 
 	@Autowired

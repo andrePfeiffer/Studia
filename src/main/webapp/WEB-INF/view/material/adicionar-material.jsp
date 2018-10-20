@@ -33,18 +33,18 @@
         </div>
         <div id="formWrapper">
 	<h2>Message : ${message}</h2>
-            <form action="${pageContext.request.contextPath}/video/adiciona" method="POST" enctype="multipart/form-data">
+            <form action="${pageContext.request.contextPath}/material/adiciona" method="POST" enctype="multipart/form-data">
             	<input type="hidden" name="aulaId" value="${aula.conteudo.id}" />
                 <Div class="container">
-                    <h2>Adicionar video</h2>
+                    <h2>Adicionar material</h2>
                     <label>Arquivo</label>
-                    <input type="file" name="video" class="form-control" required />
+                    <input type="file" name="material" class="form-control" required />
                     <br>
                     <label>Descrição</label>
                     <input type="text" name="descricao" class="form-control" required/>
                     <br>
-                    <label class="radio-inline"><input type="radio" name="videoPublico" value="true" checked />Video público</label>
-                    <label class="radio-inline"><input type="radio" name="videoPublico" value="false" />Video privado</label>
+                    <label class="radio-inline"><input type="radio" name="materialPublico" value="true" checked />Material público</label>
+                    <label class="radio-inline"><input type="radio" name="materialPublico" value="false" />Material privado</label>
                     <br><br>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <input type="submit" value="Salvar" class="btn btn-primary">

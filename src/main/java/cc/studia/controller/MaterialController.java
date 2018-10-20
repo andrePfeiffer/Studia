@@ -16,14 +16,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import cc.studia.entity.Aula;
 import cc.studia.entity.ComponenteAula;
-import cc.studia.entity.Video;
+import cc.studia.entity.Material;
 import cc.studia.service.AulaService;
 import cc.studia.service.ComponenteAulaService;
-import cc.studia.service.VideoService;
+import cc.studia.service.MaterialService;
 
 @Controller
-@RequestMapping("/video")
-public class VideoController {
+@RequestMapping("/material")
+public class MaterialController {
 	
 	@Autowired
 	public AulaService aulaService;
@@ -32,23 +32,23 @@ public class VideoController {
 	public ComponenteAulaService componenteAulaService;
 	
 	@Autowired
-	public VideoService videoService;
+	public MaterialService materialService;
 	
-	private static String UPLOADED_FOLDER = "C:\\Users\\andre\\eclipse-workspace\\video\\src\\main\\webapp\\videos\\";
+	private static String UPLOADED_FOLDER = "C:\\Users\\andre\\eclipse-workspace\\video\\src\\main\\webapp\\material\\";
 	
 	@GetMapping("/adiciona")
 	public String mostrarFormulario(@RequestParam("aulaId") int aulaId, Model model) {
 		Aula aula = aulaService.ver(aulaId);
 		model.addAttribute("aula", aula);
-		return "video/adicionar-video";
+		return "material/adicionar-material";
 	}
 
 	@PostMapping("/adiciona")
 	public String adicionaVideo(
-			@RequestParam("video") MultipartFile file,
+			@RequestParam("material") MultipartFile file,
 			@RequestParam("aulaId") int aulaId,
 			@RequestParam("descricao") String descricao,
-			@RequestParam("videoPublico") boolean videoPublico,
+			@RequestParam("materialPublico") boolean materialPublico,
 			Model model) {
         if (!file.isEmpty()) {
             try {
@@ -56,20 +56,17 @@ public class VideoController {
                 Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
                 Files.write(path, bytes);
                 ComponenteAula componenteAula = new ComponenteAula();
-                System.out.println(aulaId);
                 componenteAula.setAula(aulaService.ver(aulaId));
                 componenteAula.setIdAula(aulaId);
                 componenteAula.setDescricao(descricao);
-                componenteAula.setPublico(videoPublico);
+                componenteAula.setPublico(materialPublico);
                 int componenteAulaId = componenteAulaService.salvar(componenteAula);
-                Video video = new Video();
-                video.setArquivo(file.getOriginalFilename());
-                video.setTipoArquivo(file.getContentType());
-                video.setComponenteAula(componenteAula);
-                video.setIdComponente(componenteAulaId);
-                videoService.salvar(video);
-                
-                
+                Material material = new Material();
+                material.setArquivo(file.getOriginalFilename());
+                material.setTipoArquivo(file.getContentType());
+                material.setComponenteAula(componenteAula);
+                material.setIdComponente(componenteAulaId);
+                materialService.salvar(material);
             } catch (IOException e) {
                 e.printStackTrace();
             }

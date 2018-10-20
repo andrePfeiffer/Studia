@@ -11,9 +11,9 @@
                     </span>
                 </div>
                 <div class="col-sm-7 col-offset-5">
-                    <input type="button" class="btn btn-primary" value="Adicionar Material" onclick="">
-                    <input type="button" class="btn btn-primary" value="Adicionar Video" onclick="">
-                    <input type="button" class="btn btn-primary" value="Adicionar Exercício" onclick="">
+                    <input type="button" class="btn btn-primary" value="Adicionar Material" onclick="window.location.href='${pageContext.request.contextPath}/material/adiciona?aulaId=${aula.conteudo.id}'">
+                    <input type="button" class="btn btn-primary" value="Adicionar Video" onclick="window.location.href='${pageContext.request.contextPath}/video/adiciona?aulaId=${aula.conteudo.id}'">
+                    <input type="button" class="btn btn-primary" value="Adicionar Exercício" onclick="window.location.href='${pageContext.request.contextPath}/exercicio/adiciona?aulaId=${aula.conteudo.id}'">
                 </div>
             </div>
         </div>                
