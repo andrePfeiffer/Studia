@@ -1,9 +1,9 @@
 ## Progress  
 UCS01 5/5  
-UCS02 7/8  
+UCS02 6/8  
 UCS04 0/3  
 UCS05 0/2  
-UCS09 0/16  
+UCS09 3/16  
 
 ## Working on  
 UCS01 - FA2  
@@ -95,18 +95,9 @@ UCS01 - FA2
 2 O sistema retorna o curso ou uma lista de cursos, de acordo com a palavra chave de entrada, com a opção “Editar Curso” para os cursos criados pelo ator.  
 3 Retorna ao passo 3 do Fluxo Típico.  
 
-**Fluxo Alternativo 2:** Incluir curso.  
-1 Sistema solicita ao Instrutor que informe Título, Descrição e Assunto e exibe a opção “Salvar”.  
-2 Ator preenche as informações acima e seleciona a opção “Salvar”.  
-3 Sistema exibe mensagem de curso gravado com sucesso.  
-4 Retorna ao passo 2 do Fluxo Típico.  
+~~**Fluxo Alternativo 2:** Incluir curso.~~  
 
-**Fluxo Alternativo 3:** Adicionar aula.  
-1 Sistema solicita ao Ator que informe Título, Descrição, Assunto e se a aula é pública ou privada e exibe a opção “Salvar”.  
-2 Ator preenche as informações acima e seleciona a opção “Salvar”.  
-3 Sistema retorna com sucesso a verificação das condições necessárias para a validação da aula.  
-4 Sistema exibe mensagem de aula gravada com sucesso.  
-5 Retorna ao passo 4 do Fluxo Típico.  
+~~**Fluxo Alternativo 3:** Adicionar aula.~~  
 
 **Fluxo Alternativo 4:** Validação da aula falha ao incluir aula.  
 1 Sistema mostra uma mensagem com os erros na validação da aula.  
@@ -147,14 +138,7 @@ UCS01 - FA2
 3 Sistema exibe mensagem de material gravado com sucesso.  
 4 Retorna ao passo 1 do Fluxo Alternativo 5.  
 
-**Fluxo Alternativo 11:** Ator seleciona adicionar vídeo.  
-1 Sistema solicita ao Ator que informe o arquivo de vídeo.  
-2 Ator escolhe um arquivo de vídeo.  
-3 Sistema verifica que o vídeo possui o tamanho e formato correto.  
-4 Sistema retorna com uma mensagem de vídeo no formato e tamanho corretos para o ator e solicita ao Ator que informe a descrição e se o vídeo é público ou privado e exibe a opção “salvar”.  
-5 Ator preenche as informações acima e seleciona a opção “Salvar”.  
-6 Sistema exibe mensagem de vídeo gravado com sucesso.  
-7 Retorna ao passo 1 do Fluxo Alternativo 5  
+~~**Fluxo Alternativo 11:** Ator seleciona adicionar vídeo.~~  
 
 **Fluxo Alternativo 12:** Sistema verifica que o vídeo não possui tamanho correto.errado  
 1 Sistema retorna com mensagem informando que o tamanho do vídeo está errado e qual é o tamanho e formato aceitáveis  
