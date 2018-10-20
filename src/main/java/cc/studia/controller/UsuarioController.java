@@ -69,6 +69,62 @@ public class UsuarioController {
 		return "true";
 	}
 	
+	@GetMapping("/edita-usuario")
+	public String editarUsuarioForm(Authentication authentication, Model model) {
+		Usuario usuario = usuarioService.findByUserName(authentication.getName());
+    	model.addAttribute("usuario", usuario);
+    	return "edita-usuario";
+	}
+	
+	@PostMapping("/edita-usuario")
+	public String editarUsuario(Authentication authentication, HttpServletRequest request, Model model) {
+		String email = request.getParameter("email");
+		String login = request.getParameter("login");
+		String senhaAntiga = request.getParameter("senhaAntiga");
+		String novaSenha1 = request.getParameter("novaSenha1");
+		String novaSenha2 = request.getParameter("novaSenha2");
+		Usuario usuario = usuarioService.findByUserName(authentication.getName());
+		String mensagem = "";
+		if(!usuarioService.verificaSenha(usuario, senhaAntiga)) {
+			mensagem = mensagem + "A senha antiga esta errada '" + senhaAntiga + "'<br>";
+		}
+		if(usuarioService.existeEmail(email)) {
+			if(!usuario.getEmail().equals(email)) {
+				mensagem = mensagem + "O email selecionado já esta cadastrado no sistema<br>";
+			}else {
+				usuario.setEmail(email);
+			}
+		}else {
+			usuario.setEmail(email);
+		}
+		if(usuarioService.existeLogin(login)) {
+			if(!usuario.getNome().equals(login)) {
+				mensagem = mensagem + "O nome de usuário selecionado já esta cadastrado no sistema<br>";
+			}else {
+				usuario.setNome(login);
+			}
+		}else {
+			usuario.setNome(login);
+		}
+		if(mensagem.length() == 0) {
+			usuarioService.atualiza(usuario);
+			mensagem = mensagem + "Usuário atualizado com sucesso<br>";
+		}
+		if(novaSenha1.length() > 0) {
+			if(novaSenha1.length() < 4) {
+				mensagem = mensagem + "A senha nova deve ter pelo menos 4 caracteres<br>";
+			}else if(!novaSenha1.equals(novaSenha2)) {
+				mensagem = mensagem + "A confirmação da senha nova não é igual a senha nova<br>";
+			}else {
+				usuarioService.atualizaSenha(usuario, novaSenha1);
+			}
+		}
+		
+    	model.addAttribute("mensagem", mensagem);
+    	model.addAttribute("usuario", usuario);
+    	return "edita-usuario";
+	}
+	
 	@GetMapping("/admin")
 	public String showMyAdminPage() {
 		return "home";

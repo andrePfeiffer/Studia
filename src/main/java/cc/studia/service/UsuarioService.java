@@ -12,4 +12,6 @@ public interface UsuarioService extends UserDetailsService {
 	public void enviarEmailRecuperarSenha(Usuario usuario);
 	public void atualizaSenha(Usuario usuario, String senha);
 	public String gerarCodigo(String login);
+	void atualiza(Usuario usuario);
+	boolean verificaSenha(Usuario usuario, String senha);
 }

@@ -1,9 +1,12 @@
+## Tarefas críticas  
+Ordenação de aulas, ordenação de componentes da aula  
+  
 ## Progress  
 UCS01 5/5  
-UCS02 6/8  
+UCS02 7/8  
 UCS04 0/3  
 UCS05 0/2  
-UCS09 3/16  
+UCS09 6/16  
 
 ## Working on  
 UCS09
@@ -26,16 +29,7 @@ UCS09
 6 Fim do caso de uso.  
 
 ~~**Fluxo Alternativo 1:** O ator não está autenticado no sistema.~~  
-**Fluxo Alternativo 2:** O ator está autenticado no sistema mas não é administrador.  
-1 Sistema exibe a opção “Alterar sua Conta”.  
-2 Ator seleciona a opção “Alterar sua Conta”.  
-3 Sistema exibe as informações (nome de usuário e e-mail) da conta do ator.  
-4 Ator edita as informações que deseja alterar e confirma.  
-5 Sistema valida os dados informados pelo ator.  
-6 Sistema altera as informações da conta.  
-7 Sistema exibe mensagem informando que a conta foi alterada com sucesso.  
-8 Fim do caso de uso.  
-
+~~**Fluxo Alternativo 2:** O ator está autenticado no sistema mas não é administrador.~~  
 ~~**Fluxo Alternativo 3:** O nome de usuário já existe.~~  
 ~~**Fluxo Alternativo 4:** O e-mail já está vinculado a outro usuário existente no sistema.~~  
 ~~**Fluxo Alternativo 5:** As senhas não são idênticas.~~  
@@ -90,29 +84,15 @@ UCS09
 6 Sistema exibe a mensagem de curso gravado com sucesso.  
 7 Fim do caso de uso.  
 
-**Fluxo Alternativo 1:** Pesquisar curso.  
-1 O ator entra com uma ou mais palavras chave do assunto requerido.  
-2 O sistema retorna o curso ou uma lista de cursos, de acordo com a palavra chave de entrada, com a opção “Editar Curso” para os cursos criados pelo ator.  
-3 Retorna ao passo 3 do Fluxo Típico.  
-
+~~**Fluxo Alternativo 1:** Pesquisar curso.~~  
 ~~**Fluxo Alternativo 2:** Incluir curso.~~  
-
 ~~**Fluxo Alternativo 3:** Adicionar aula.~~  
-
-**Fluxo Alternativo 4:** Validação da aula falha ao incluir aula.  
-1 Sistema mostra uma mensagem com os erros na validação da aula.  
-2 Retorna ao passo 1 do Fluxo Alternativo 3.  
+~~**Fluxo Alternativo 4:** Validação da aula falha ao incluir aula.~~  
 
 **Fluxo Alternativo 5:** Editar aula.  
 1 Sistema exibe ao Ator em campos editáveis Título, Descrição, Assunto e se a aula é pública ou privada e exibe a opção “Salvar” com cada campo contendo os valores previamente preenchidos, uma lista ordenável de materiais, vídeos e exercícios da aula com uma opção de “remover” para cada item e as opções de “adicionar vídeo”, “adicionar material” e “adicionar exercício”.  
-2 Ator preenche as informações acima e seleciona a opção “Salvar”.  
-3 Sistema retorna com sucesso a verificação das condições necessárias para a validação da aula.  
-4 Sistema exibe mensagem de aula gravada com sucesso.  
-5 Retorna ao passo 4 do Fluxo Típico.  
 
-**Fluxo Alternativo 6:** Validação da aula falha ao editar aula.  
-1 Sistema mostra uma mensagem com os erros na validação da aula.  
-2 Retorna ao passo 1 do Fluxo Alternativo 5.  
+~~**Fluxo Alternativo 6:** Validação da aula falha ao editar aula.~~  
 
 **Fluxo Alternativo 7:** Ator seleciona adicionar exercício.  
 1 Sistema solicita ao Ator que informe a descrição, se o exercício é público ou privado e exibe a opção “salvar”.  

@@ -188,7 +188,7 @@
                             <label id="usuarioAtual"><security:authentication property="principal.username" /></label> &nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/editar-usuario"><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn"></span>Alterar Conta</a>
+                            <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/edita-usuario"><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn"></span>Alterar Conta</a>
                             <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/logout"><span class="mbri-logout mbr-iconfont mbr-iconfont-btn"></span>Sair&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         </div>
                 </li>

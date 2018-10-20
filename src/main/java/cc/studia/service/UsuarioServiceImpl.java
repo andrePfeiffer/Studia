@@ -60,6 +60,21 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuario.setSenha(passwordEncoder.encode(senha));
 		usuarioDAO.save(usuario);
 	}
+	
+	@Override
+	public boolean verificaSenha(Usuario usuario, String senha) {
+		if(passwordEncoder.matches(senha, usuario.getSenha())) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	@Transactional
+	public void atualiza(Usuario usuario) {
+		usuarioDAO.save(usuario);
+	}
 
 	@Override
 	@Transactional

@@ -7,7 +7,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -109,9 +108,17 @@ public class AulaController {
 	}
 	
 	@PostMapping("/edita")
-	public String editaAula(@ModelAttribute("aula") Aula aula) {
-		conteudoService.editaConteudo(aula.getConteudo());
-		return "redirect:/aula/verTodos";
+	public String editaAula(
+			@RequestParam("conteudoId") int conteudoId,
+			@RequestParam("nome") String nome,
+			@RequestParam("descricao") String descricao, 
+			@RequestParam("conteudoPublico") boolean conteudoPublico){
+		Conteudo conteudo = conteudoService.ver(conteudoId);
+		conteudo.setPublico(conteudoPublico);
+		conteudo.setDescricao(descricao);
+		conteudo.setNome(nome);
+		conteudoService.editaConteudo(conteudo);
+		return "redirect:/aula/edita?aulaId=" + conteudoId;
 	}
 
 	@GetMapping("/remove")

@@ -3,16 +3,12 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"  %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="../includes/header.jsp" />
-<div class="panel panel-default">
+        <div class="panel panel-default">
         <div class="panel-heading c-list">
             <div class="row">
                 <div class="col-sm-3">
                     <span class="title">
-                    <h3>
-                    ${aula.curso.conteudo.nome}
-                    -
-                    ${aula.conteudo.nome}
-                    </h3></span>
+                    </span>
                 </div>
                 <div class="col-sm-7 col-offset-5">
                     <input type="button" class="btn btn-primary" value="Adicionar Material" onclick="">
@@ -21,18 +17,25 @@
                 </div>
             </div>
         </div>                
-        <div class="row" style="display: none;">
-            <div class="col-xs-12">
-                <div class="input-group c-edit2">
-                    <input type="text" class="form-control" id="contact-list-edit2">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-edit2 text-muted"></span></button>
-                    </span>
-                </div>
+        <div class="container" style="margin-top:40px; margin-left:0px;">
+            <div class="col-md-3">
+            <ul class="list-group" style="color:black !important" id="mainPanel">
+            <c:forEach var="componenteAula" items="${aula.componenteAulas}">
+                <li class="list-group-item" id="content1"> <a href="componente-aula/ver?componenteId=${componenteAula.id}">${componenteAula.descricao}</a></li>
+            </c:forEach>
+            </ul>
             </div>
-        </div>
-        <div id="formWrapper">
-	
+            <div class="col-md-9"> 
+                <div class="right-content-bg">
+                    <h3>
+                    ${aula.curso.conteudo.nome}
+                    -
+                    ${aula.conteudo.nome}
+                    </h3>
+                    <div id="conteudoAula">
+                            <div class="container">
+                                    <div class="row">
+                                       <div class="col-md-6">
             <form action="${pageContext.request.contextPath}/aula/edita" method="POST">
             	<input type="hidden" name="conteudoId" value="${aula.conteudo.id}" />
                 <Div class="container">
@@ -52,6 +55,12 @@
                 </Div>
                 <br>
             </form>
-        </div>
-    </div>
+                                      </div>
+                                    </div>
+                                </div>
+                    </div>
+                    <br><br><br>
+                </div>
+            </div>
+            </div>
 <jsp:include page="../includes/footer.jsp" />
