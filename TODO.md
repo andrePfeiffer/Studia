@@ -93,12 +93,7 @@ UCS09
 1 Sistema exibe ao Ator em campos editáveis Título, Descrição, Assunto e se a aula é pública ou privada e exibe a opção “Salvar” com cada campo contendo os valores previamente preenchidos, uma lista ordenável de materiais, vídeos e exercícios da aula com uma opção de “remover” para cada item e as opções de “adicionar vídeo”, “adicionar material” e “adicionar exercício”.  
 
 ~~**Fluxo Alternativo 6:** Validação da aula falha ao editar aula.~~  
-
-**Fluxo Alternativo 7:** Ator seleciona adicionar exercício.  
-1 Sistema solicita ao Ator que informe a descrição, se o exercício é público ou privado e exibe a opção “salvar”.  
-2 Ator preenche as informações acima e seleciona a opção “Salvar”.  
-3 Sistema exibe mensagem de exercício gravado com sucesso.  
-4 Retorna ao passo 1 do Fluxo Alternativo 5.  
+~~**Fluxo Alternativo 7:** Ator seleciona adicionar exercício.~~  
 
 **Fluxo Alternativo 8:** Ator seleciona editar exercício.  
 1 Sistema solicita ao Ator que informe a descrição, marque o exercício como público ou privado e exibe a opção “salvar” com cada campo contendo os valores previamente preenchidos.  
@@ -106,11 +101,7 @@ UCS09
 3 Sistema exibe mensagem de exercício gravado com sucesso.  
 4 Retorna ao passo 1 do Fluxo Alternativo 5.  
 
-**Fluxo Alternativo 9:** Ator seleciona adicionar material.  
-1 Sistema solicita ao Ator que informe a descrição, campo para enviar o material e se o material é público ou privado e exibe a opção “salvar”.  
-2 Ator preenche as informações acima e seleciona a opção “Salvar”.  
-3 Sistema exibe mensagem de material gravado com sucesso.  
-4 Retorna ao passo 1 do Fluxo Alternativo 5.  
+~~**Fluxo Alternativo 9:** Ator seleciona adicionar material.~~  
 
 **Fluxo Alternativo 10:** Ator seleciona editar material.  
 1 Sistema solicita ao Ator que informe a descrição e marque o material como público ou privado e exibe a opção “salvar” com cada campo contendo os valores previamente preenchidos.  
