@@ -46,6 +46,13 @@ public class AulaController {
 		return "redirect:/aula/verTodos";
 	}
 	
+	@GetMapping("/ver")
+	public String listarAulas(@RequestParam("aulaId") int aulaId, Model model) {
+		Aula aula = aulaService.ver(aulaId);
+		model.addAttribute("aula", aula);
+		return "aula/ver-aula";
+	}
+	
 	@GetMapping("/verTodos")
 	public String listarAulas(Model model) {
 		List<Aula> aulas = aulaService.verTodos();

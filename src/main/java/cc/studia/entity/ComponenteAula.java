@@ -27,6 +27,9 @@ public class ComponenteAula {
 	@Column(name="descricao")
 	private String descricao;
 	
+	@Column(name="idaula")
+	private int idAula;
+	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="idaula", nullable=false, insertable=false, updatable=false)
 	private Aula aula;
@@ -61,6 +64,14 @@ public class ComponenteAula {
 
 	public void setAula(Aula aula) {
 		this.aula = aula;
+	}
+
+	public int getIdAula() {
+		return idAula;
+	}
+
+	public void setIdAula(int idAula) {
+		this.idAula = idAula;
 	}
 
 	@Override

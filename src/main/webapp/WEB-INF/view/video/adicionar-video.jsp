@@ -32,7 +32,7 @@
             </div>
         </div>
         <div id="formWrapper">
-	
+	<h2>Message : ${message}</h2>
             <form action="${pageContext.request.contextPath}/video/adiciona" method="POST" enctype="multipart/form-data">
             	<input type="hidden" name="aulaId" value="${aula.conteudo.id}" />
                 <Div class="container">
@@ -41,7 +41,7 @@
                     <input type="file" name="video" class="form-control" required />
                     <br>
                     <label>Descrição</label>
-                    <input type="text" name="descricao" class="form-control" value="${aula.conteudo.descricao}" required/>
+                    <input type="text" name="descricao" class="form-control" required/>
                     <br>
                     <label class="radio-inline"><input type="radio" name="videoPublico" value="true" checked />Video público</label>
                     <label class="radio-inline"><input type="radio" name="videoPublico" value="false" />Video privado</label>

@@ -1,0 +1,18 @@
+package cc.studia.service;
+
+import java.util.List;
+
+import cc.studia.entity.Aula;
+import cc.studia.entity.ComponenteAula;
+
+public interface ComponenteAulaService {
+	List<ComponenteAula> verTodos(Aula aula);
+
+	int salvar(ComponenteAula componenteAula);
+
+	ComponenteAula ver(int id);
+
+	void editar(ComponenteAula componenteAula);
+
+	void remover(int id);
+}
