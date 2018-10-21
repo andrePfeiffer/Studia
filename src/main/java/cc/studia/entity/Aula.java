@@ -13,15 +13,23 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name="aula")
 public class Aula {
 	@Id
 	@Column(name="idconteudo")
+	@JsonProperty("idConteudo")
 	private int idConteudo;
 	
 	@Column(name="idcurso")
+	@JsonProperty("idCurso")
 	private int idCurso;
+	
+	@Column(name="ordem")
+	@JsonProperty("ordem")
+	private int ordem;
 	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="idconteudo", nullable=false, insertable=false, updatable=false)
@@ -74,7 +82,18 @@ public class Aula {
 		this.componenteAulas = componenteAulas;
 	}
 
-	
+	public int getOrdem() {
+		return ordem;
+	}
 
+	public void setOrdem(int ordem) {
+		this.ordem = ordem;
+	}
+
+	@Override
+	public String toString() {
+		return "Aula [idConteudo=" + idConteudo + ", idCurso=" + idCurso + ", ordem=" + ordem + ", conteudo=" + conteudo
+				+ ", curso=" + curso + ", componenteAulas=" + componenteAulas + "]";
+	}
 	
 }

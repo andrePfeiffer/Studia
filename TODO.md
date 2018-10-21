@@ -6,7 +6,7 @@ UCS01 5/5
 UCS02 7/8  
 UCS04 0/3  
 UCS05 0/2  
-UCS09 13/16  
+UCS09 15/16  
   
 ## UCS01 Autenticar usuário  
 ~~**FT: login**~~  
@@ -71,23 +71,12 @@ UCS09 13/16
 
 
 # UCS09 Manter curso  
-**FT:** o usuario reordena a lista de cursos  
-1 Ator escolhe a opção de Gerenciamento de Cursos.  
-2 Sistema mostra o Gerenciamento de Cursos com um campo para “Pesquisar Curso”, uma opção para “Incluir Curso” e uma lista dos cursos criados pelo ator com a opção “Editar Curso” para cada item da lista.  
-3 O ator seleciona o curso desejado.  
-4 Sistema solicita ao autor o Título, Descrição, Assunto, uma opção para tornar o curso público ou privado com cada campo contendo os valores previamente preenchidos e a lista de aulas com conteúdo arrastável e com a opção “Editar aula” para cada item da lista, uma opção de “Adicionar aula” e a opção “Salvar”.  
-5 Ator altera a ordem de exibição do conteúdo e edita as informações que deseja alterar e clica em “Salvar”.  
-6 Sistema exibe a mensagem de curso gravado com sucesso.  
-7 Fim do caso de uso.  
-
+~~**FT:** o usuario reordena a lista de cursos~~  
 ~~**Fluxo Alternativo 1:** Pesquisar curso.~~  
 ~~**Fluxo Alternativo 2:** Incluir curso.~~  
 ~~**Fluxo Alternativo 3:** Adicionar aula.~~  
 ~~**Fluxo Alternativo 4:** Validação da aula falha ao incluir aula.~~  
-
-**Fluxo Alternativo 5:** Editar aula.  
-1 Sistema exibe ao Ator em campos editáveis Título, Descrição, Assunto e se a aula é pública ou privada e exibe a opção “Salvar” com cada campo contendo os valores previamente preenchidos, uma lista ordenável de materiais, vídeos e exercícios da aula com uma opção de “remover” para cada item e as opções de “adicionar vídeo”, “adicionar material” e “adicionar exercício”.  
-
+~~**Fluxo Alternativo 5:** Editar aula.~~  
 ~~**Fluxo Alternativo 6:** Validação da aula falha ao editar aula.~~  
 ~~**Fluxo Alternativo 7:** Ator seleciona adicionar exercício.~~  
 ~~**Fluxo Alternativo 8:** Ator seleciona editar exercício.~~  

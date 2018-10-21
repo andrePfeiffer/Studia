@@ -18,4 +18,6 @@ public interface AulaService {
 
 	void removeAula(int id);
 
+	void modificaOrdem(List<Aula> listaAulas);
+
 }

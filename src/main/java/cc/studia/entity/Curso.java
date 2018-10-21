@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +30,7 @@ public class Curso {
 	private Assunto assunto;
 	
 	@OneToMany(mappedBy="curso", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OrderBy("ordem")
 	private List<Aula> aulas;
 
 	public int getIdConteudo() {

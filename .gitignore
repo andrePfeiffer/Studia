@@ -1,3 +1,7 @@
+# File uploads
+src/main/webapp/videos
+src/main/webapp/material
+
 # Local configurations
 src/main/resources/mysql-username.properties
 src/main/resources/mail-username.properties

@@ -49,7 +49,7 @@
 				<c:url var="deleteLink" value="/aula/remove">
 					<c:param name="aulaId" value="${aula.conteudo.id}" />
 				</c:url>
-                <li class="list-group-item" id="1">
+                <li class="list-group-item ordenamento" id="${aula.conteudo.id}" ordem="${aula.ordem}" >
                     <div class="col-xs-12 col-sm-3">
                         <br/>
                         <img style="width: 20%; height: auto; border-radius: 10px" src="../../assets/images/cursos/cursos.png"/>
@@ -72,9 +72,41 @@
                 </li>
                 </c:forEach>
         </ul>
-        <script src="../../assets/studia/jquery.sortable.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/studia/jquery.sortable.js"></script>
         <script>
             $('.sortable').sortable();
+            function reordenaAulas() {
+            	var i = 0;
+				var arrayIds = [];
+				$(".ordenamento").each(function(){
+					var actualid = $(this)[0].id;
+					arrayIds.push({
+							idConteudo:actualid,
+							idCurso:${curso.conteudo.id},
+							ordem:i+1
+						});
+					i++;
+					})
+				listaAulas = JSON.stringify(arrayIds)
+				console.log(listaAulas);
+				$.ajax({
+		    		type: "POST",
+		    		url: "${pageContext.request.contextPath}/aula/modifica-ordem",
+		    		contentType: "application/json; charset=utf-8",
+		    		data: 'json',
+		    		data: listaAulas,
+		    		async: false,
+		    		cache: false,
+		    		processData: false,
+		    	success: function(response){
+		    		console.log(response)
+		    	},
+		    	error: function(jqXHR, textStatus, errorThrown){
+		    		console.log(textStatus);
+		    		console.log(errorThrown);
+		    	}
+		    	});
+			}
         </script>
     </div>
 <jsp:include page="../includes/footer.jsp" />

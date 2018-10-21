@@ -51,4 +51,12 @@ public class AulaServiceImpl implements AulaService {
 		aulaDAO.removeAula(id);
 	}
 
+	@Override
+	@Transactional
+	public void modificaOrdem(List<Aula> listaAulas) {
+		for (Aula aula : listaAulas) {
+			aulaDAO.editaAula(aula);
+		}
+	}
+
 }
