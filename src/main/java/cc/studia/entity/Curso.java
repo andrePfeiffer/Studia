@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="curso")
 public class Curso {
@@ -30,6 +33,7 @@ public class Curso {
 	private Assunto assunto;
 	
 	@OneToMany(mappedBy="curso", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Fetch(FetchMode.SELECT)
 	@OrderBy("ordem")
 	private List<Aula> aulas;
 
