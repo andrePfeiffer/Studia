@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cc.studia.entity.Aula;
 import cc.studia.entity.ComponenteAula;
@@ -45,36 +46,47 @@ public class VideoController {
 
 	@PostMapping("/adiciona")
 	public String adicionaVideo(
+			RedirectAttributes attributes,
 			@RequestParam("video") MultipartFile file,
 			@RequestParam("aulaId") int aulaId,
 			@RequestParam("descricao") String descricao,
 			@RequestParam("videoPublico") boolean videoPublico,
 			Model model) {
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-                Files.write(path, bytes);
-                ComponenteAula componenteAula = new ComponenteAula();
-                System.out.println(aulaId);
-                componenteAula.setAula(aulaService.ver(aulaId));
-                componenteAula.setIdAula(aulaId);
-                componenteAula.setDescricao(descricao);
-                componenteAula.setPublico(videoPublico);
-                int componenteAulaId = componenteAulaService.salvar(componenteAula);
-                Video video = new Video();
-                video.setArquivo(file.getOriginalFilename());
-                video.setTipoArquivo(file.getContentType());
-                video.setComponenteAula(componenteAula);
-                video.setIdComponente(componenteAulaId);
-                videoService.salvar(video);
-                
-                
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+		String mensagem = "";
+        if (file.isEmpty()) {
+			mensagem = mensagem + "O campo arquivo é obrigatório<br>";
+        }else {
+        	if(!file.getContentType().equals("video/mp4")) {
+    			mensagem = mensagem + "O video deve ser no formato MP4 e utilizado o codec H.264<br>";
+        	}else {
+                try {
+                    byte[] bytes = file.getBytes();
+                    Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+                    Files.write(path, bytes);
+                    ComponenteAula componenteAula = new ComponenteAula();
+                    System.out.println(aulaId);
+                    componenteAula.setAula(aulaService.ver(aulaId));
+                    componenteAula.setIdAula(aulaId);
+                    componenteAula.setDescricao(descricao);
+                    componenteAula.setPublico(videoPublico);
+                    int componenteAulaId = componenteAulaService.salvar(componenteAula);
+                    Video video = new Video();
+                    video.setArquivo(file.getOriginalFilename());
+                    video.setTipoArquivo(file.getContentType());
+                    video.setComponenteAula(componenteAula);
+                    video.setIdComponente(componenteAulaId);
+                    videoService.salvar(video);
+                    attributes.addFlashAttribute("mensagemFlash", "Video cadastrado com sucesso");
+            		return "redirect:/aula/edita?aulaId=" + aulaId;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        	}
         }
-		return "redirect:/aula/edita?aulaId=" + aulaId;
+        Aula aula = aulaService.ver(aulaId);
+		model.addAttribute("aula", aula);
+		model.addAttribute("mensagem", mensagem);
+        return "video/adicionar-video";
 	}
 
 }

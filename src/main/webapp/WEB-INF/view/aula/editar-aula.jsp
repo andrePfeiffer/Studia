@@ -36,6 +36,7 @@
                             <div class="container">
                                     <div class="row">
                                        <div class="col-md-6">
+                                       <h1>${mensagemFlash}</h1>
             <form action="${pageContext.request.contextPath}/aula/edita" method="POST">
             	<input type="hidden" name="conteudoId" value="${aula.conteudo.id}" />
                 <Div class="container">

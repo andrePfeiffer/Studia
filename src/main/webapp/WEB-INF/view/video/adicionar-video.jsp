@@ -32,7 +32,7 @@
             </div>
         </div>
         <div id="formWrapper">
-	<h2>Message : ${message}</h2>
+	<h2>Message : ${message}${mensagem}</h2>
             <form action="${pageContext.request.contextPath}/video/adiciona" method="POST" enctype="multipart/form-data">
             	<input type="hidden" name="aulaId" value="${aula.conteudo.id}" />
                 <Div class="container">
