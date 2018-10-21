@@ -128,6 +128,7 @@ CREATE TABLE `ComponenteAula` (
   `publico` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'F',
   `descricao` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `idAula` int unsigned NOT NULL,
+  `ordem` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `idAula_idx` (`idAula`),
   CONSTRAINT `fk_componenteaula_aula` 
