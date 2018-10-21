@@ -21,7 +21,12 @@
             <div class="col-md-3">
             <ul class="list-group" style="color:black !important" id="mainPanel">
             <c:forEach var="componenteAula" items="${aula.componenteAulas}">
-                <li class="list-group-item" id="content1"> <a href="componente-aula/ver?componenteId=${componenteAula.id}">${componenteAula.descricao}</a></li>
+                <li class="list-group-item" id="content1">
+                	<a href="${pageContext.request.contextPath}/componente/ver?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">${componenteAula.descricao}</a>
+                	-
+                	<a href="${pageContext.request.contextPath}/componente/editar?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">edita</a> |
+                	<a href="${pageContext.request.contextPath}/componente/remover?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">remove</a>
+               	</li>
             </c:forEach>
             </ul>
             </div>

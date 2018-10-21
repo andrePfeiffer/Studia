@@ -6,12 +6,8 @@ UCS01 5/5
 UCS02 7/8  
 UCS04 0/3  
 UCS05 0/2  
-UCS09 8/16  
-
-## Working on  
-UCS09
-
-
+UCS09 13/16  
+  
 ## UCS01 Autenticar usuário  
 ~~**FT: login**~~  
 ~~**Fluxo Alternativo 1:** O nome de usuário ou a senha não são válidos.~~  
@@ -94,37 +90,15 @@ UCS09
 
 ~~**Fluxo Alternativo 6:** Validação da aula falha ao editar aula.~~  
 ~~**Fluxo Alternativo 7:** Ator seleciona adicionar exercício.~~  
-
-**Fluxo Alternativo 8:** Ator seleciona editar exercício.  
-1 Sistema solicita ao Ator que informe a descrição, marque o exercício como público ou privado e exibe a opção “salvar” com cada campo contendo os valores previamente preenchidos.  
-2 Ator preenche as informações acima e seleciona a opção “Salvar”.  
-3 Sistema exibe mensagem de exercício gravado com sucesso.  
-4 Retorna ao passo 1 do Fluxo Alternativo 5.  
-
+~~**Fluxo Alternativo 8:** Ator seleciona editar exercício.~~  
 ~~**Fluxo Alternativo 9:** Ator seleciona adicionar material.~~  
-
-**Fluxo Alternativo 10:** Ator seleciona editar material.  
-1 Sistema solicita ao Ator que informe a descrição e marque o material como público ou privado e exibe a opção “salvar” com cada campo contendo os valores previamente preenchidos.  
-2 Ator preenche as informações acima e seleciona a opção “Salvar”.  
-3 Sistema exibe mensagem de material gravado com sucesso.  
-4 Retorna ao passo 1 do Fluxo Alternativo 5.  
-
+~~**Fluxo Alternativo 10:** Ator seleciona editar material.~~  
 ~~**Fluxo Alternativo 11:** Ator seleciona adicionar vídeo.~~  
 
-**Fluxo Alternativo 12:** Sistema verifica que o vídeo não possui tamanho correto.errado  
+**Fluxo Alternativo 12:** Sistema verifica que o vídeo não possui tamanho correto.  
 1 Sistema retorna com mensagem informando que o tamanho do vídeo está errado e qual é o tamanho e formato aceitáveis  
 2 Retorna para o passo 1 do Fluxo Alternativo 11  
 
-**Fluxo Alternativo 13:** Sistema verifica que o vídeo não possui formato correto.  
-1 Sistema retorna com mensagem informando que o formato do vídeo está errado e qual é o tamanho e formato aceitáveis  
-2 Retorna para o passo 1 do Fluxo Alternativo 11  
-
-**Fluxo Alternativo 14:** Ator seleciona editar vídeo.  
-1 Sistema solicita ao Ator que informe a descrição e marque o vídeo como público ou privado e exibe a opção “salvar” com cada campo contendo os valores previamente preenchidos  
-2 Ator preenche as informações acima e seleciona a opção “Salvar”.  
-3 Sistema exibe mensagem de vídeo gravado com sucesso.  
-4 Retorna ao passo 1 do Fluxo Alternativo 5  
-
-**Fluxo Alternativo 15:** Ator seleciona remover material, vídeo ou exercício.  
-1 Sistema exibe mensagem de conteúdo removido com sucesso.  
-2 Retorna ao passo 1 do Fluxo Alternativo 5  
+~~**Fluxo Alternativo 13:** Sistema verifica que o vídeo não possui formato correto.~~  
+~~**Fluxo Alternativo 14:** Ator seleciona editar vídeo.~~  
+~~**Fluxo Alternativo 15:** Ator seleciona remover material, vídeo ou exercício.~~  

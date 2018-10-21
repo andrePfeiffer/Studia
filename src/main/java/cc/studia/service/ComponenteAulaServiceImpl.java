@@ -32,22 +32,19 @@ public class ComponenteAulaServiceImpl implements ComponenteAulaService {
 	@Override
 	@Transactional
 	public ComponenteAula ver(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return componenteAulaDAO.ver(id);
 	}
 
 	@Override
 	@Transactional
 	public void editar(ComponenteAula componenteAula) {
-		// TODO Auto-generated method stub
-
+		componenteAulaDAO.editar(componenteAula);
 	}
 
 	@Override
 	@Transactional
 	public void remover(int id) {
-		// TODO Auto-generated method stub
-
+		componenteAulaDAO.remover(id);
 	}
 
 }
