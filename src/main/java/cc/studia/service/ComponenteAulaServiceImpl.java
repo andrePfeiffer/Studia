@@ -47,4 +47,14 @@ public class ComponenteAulaServiceImpl implements ComponenteAulaService {
 		componenteAulaDAO.remover(id);
 	}
 
+	@Override
+	@Transactional
+	public void modificaOrdem(List<ComponenteAula> listaComponentes) {
+		for (ComponenteAula componenteAula : listaComponentes) {
+			ComponenteAula componenteAulaFinal = componenteAulaDAO.ver(componenteAula.getId());
+			componenteAulaFinal.setOrdem(componenteAula.getOrdem());
+			componenteAulaDAO.editar(componenteAulaFinal);
+		}
+	}
+
 }

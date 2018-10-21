@@ -15,4 +15,6 @@ public interface ComponenteAulaService {
 	void editar(ComponenteAula componenteAula);
 
 	void remover(int id);
+
+	void modificaOrdem(List<ComponenteAula> listaComponentes);
 }

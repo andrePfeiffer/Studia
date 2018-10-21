@@ -34,10 +34,12 @@
 
         <div class="container" style="margin-top:40px; margin-left:0px;">
             <div class="col-md-3">
-            <ul class="list-group" style="color:black !important" id="mainPanel">
-            <c:forEach var="componenteAula" items="${aula.componenteAulas}">
-                <li class="list-group-item" id="content1"> <a href="componente-aula/ver?componenteId=${componenteAula.id}">${componenteAula.descricao}</a></li>
-            </c:forEach>
+            <ul class="list-group" style="color:black !important" id="componenteAula-list">
+	            <c:forEach var="componenteAula" items="${aula.componenteAulas}">
+	                <li class="list-group-item" id="${componenteAula.id}" ordem="${componenteAula.ordem}"> 
+	                	<a href="componente-aula/ver?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">${componenteAula.descricao}</a>
+                	</li>
+	            </c:forEach>
             </ul>
             
             &nbsp;&nbsp;&nbsp;<a class="concluirConteudo">Concluir conteúdo</a>
@@ -151,4 +153,5 @@
 
         <!-- Fim conteudo aula -->
         
-    </div><jsp:include page="../includes/footer.jsp" />
+    </div>
+    <jsp:include page="../includes/footer.jsp" />

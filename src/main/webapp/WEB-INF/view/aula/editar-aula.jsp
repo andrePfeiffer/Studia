@@ -19,9 +19,9 @@
         </div>                
         <div class="container" style="margin-top:40px; margin-left:0px;">
             <div class="col-md-3">
-            <ul class="list-group" style="color:black !important" id="mainPanel">
+            <ul class="sortable list-group" style="color:black !important" id="componenteAula-list">
             <c:forEach var="componenteAula" items="${aula.componenteAulas}">
-                <li class="list-group-item" id="content1">
+                <li class="list-group-item ordenamento" id="${componenteAula.id}" ordem="${componenteAula.ordem}">
                 	<a href="${pageContext.request.contextPath}/componente/ver?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">${componenteAula.descricao}</a>
                 	-
                 	<a href="${pageContext.request.contextPath}/componente/editar?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">edita</a> |
@@ -69,4 +69,40 @@
                 </div>
             </div>
             </div>
+        <script src="${pageContext.request.contextPath}/assets/studia/jquery.sortable.js"></script>
+        <script>
+            $('.sortable').sortable();
+            function reordenaAulas() {
+            	var i = 0;
+				var arrayIds = [];
+				$(".ordenamento").each(function(){
+					var actualid = $(this)[0].id;
+					arrayIds.push({
+							id:actualid,
+							ordem:i+1
+						});
+					i++;
+					})
+				listaAulas = JSON.stringify(arrayIds)
+				console.log(listaAulas);
+				$.ajax({
+		    		type: "POST",
+		    		url: "${pageContext.request.contextPath}/componente/modifica-ordem",
+		    		contentType: "application/json; charset=utf-8",
+		    		data: 'json',
+		    		data: listaAulas,
+		    		async: false,
+		    		cache: false,
+		    		processData: false,
+		    	success: function(response){
+		    		console.log(response)
+		    	},
+		    	error: function(jqXHR, textStatus, errorThrown){
+		    		console.log(textStatus);
+		    		console.log(errorThrown);
+		    	}
+		    	});
+			}
+        </script>
+
 <jsp:include page="../includes/footer.jsp" />

@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name="componenteaula")
 public class ComponenteAula {
@@ -26,6 +28,10 @@ public class ComponenteAula {
 	
 	@Column(name="descricao")
 	private String descricao;
+	
+	@Column(name="ordem")
+	@JsonProperty("ordem")
+	private int ordem;
 	
 	@Column(name="idaula")
 	private int idAula;
@@ -72,6 +78,14 @@ public class ComponenteAula {
 
 	public void setIdAula(int idAula) {
 		this.idAula = idAula;
+	}
+
+	public int getOrdem() {
+		return ordem;
+	}
+
+	public void setOrdem(int ordem) {
+		this.ordem = ordem;
 	}
 
 	@Override
