@@ -192,6 +192,20 @@ CREATE TABLE `Solucao` (
 ) 
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+DROP TABLE IF EXISTS `Historico`;
+CREATE TABLE `Historico` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `usuarioId` INT UNSIGNED NOT NULL,
+  `tipoConteudo` VARCHAR(45) NOT NULL,
+  `dataCompletado` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  INDEX `usuarioId` (`usuarioId` ASC) VISIBLE,
+  CONSTRAINT `fk_historico_usuario`
+    FOREIGN KEY (`usuarioId`) REFERENCES `studia`.`usuario` (`id`)
+    ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Comentario
 --
