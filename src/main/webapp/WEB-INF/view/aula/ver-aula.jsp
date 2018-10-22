@@ -37,7 +37,10 @@
             <ul class="list-group" style="color:black !important" id="componenteAula-list">
 	            <c:forEach var="componenteAula" items="${aula.componenteAulas}">
 	                <li class="list-group-item" id="${componenteAula.id}" ordem="${componenteAula.ordem}"> 
-	                	<a href="componente-aula/ver?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">${componenteAula.descricao}</a>
+	                	<a href="componente-aula/ver?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">
+	                	<img src="${pageContext.request.contextPath}/assets/images/checkedSmall.png" />
+	                	${componenteAula.descricao}
+	                	</a>
                 	</li>
 	            </c:forEach>
             </ul>

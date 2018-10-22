@@ -38,7 +38,7 @@
                 <Div class="container">
                     <h2>Adicionar video</h2>
                     <label>Arquivo</label>
-                    <input type="file" name="video" class="form-control" required />
+                    <input type="file" id="upload" name="video" class="form-control" required />
                     <br>
                     <label>Descrição</label>
                     <input type="text" name="descricao" class="form-control" required/>
@@ -54,4 +54,71 @@
             </form>
         </div>
     </div>
+    <div id="videoTeste" class="hidden"></div>
+    <div id="toast"></div>
+<script>
+function startToast(msg) {
+	var x = document.getElementById("toast");
+	x.className = "show";
+	$("#toast").text(msg);
+	setTimeout(function(){
+			x.className = x.className.replace("show", "");
+		}, 6000);
+}
+$('#upload').change( function(event) {
+
+    let fileInput = $(this);
+    let validos = /(\.mp4)$/i;
+
+    if(!validaFormato(fileInput, validos)){
+        console.log("Formato inválido");
+    }
+    else{
+
+    //criando URL temporária do video
+    var tmppath = URL.createObjectURL(event.target.files[0]);
+   
+    //Criando tag video com url temporária
+    var novoVideo = "<video id='fakeVideo' width='400' controls> <source id='virtualVideo' " +
+                    " src=" + tmppath + " type='video/mp4'></video><div id='meta'></div>"
+
+    $("#videoTeste").append(novoVideo);
+
+      var myVideoPlayer = document.getElementById('fakeVideo'),
+            meta = document.getElementById('meta');
+
+        myVideoPlayer.addEventListener('loadedmetadata', function () {
+            var duration = myVideoPlayer.duration;
+
+            console.log(duration);
+
+            if(duration > 300 && duration < 1200){
+                console.log("Tamanho e formato aceitos");
+                startToast("Tamanho e formato aceitos");
+                $("#videoTeste").empty();
+                $("#upload").val("");
+            }else{
+               console.log("Duração do vídeo inválida");
+               startToast("Duração do vídeo inválida");
+               $("#videoTeste").empty();
+               $("#upload").val("");
+            }
+            
+
+        });
+
+    }
+});
+
+function validaFormato(fileInput, validos){
+
+   let nome = fileInput.get(0).files["0"].name;
+   if (validos.test(nome)) {
+       return true;
+   } else {
+       return false;
+   }
+}
+
+</script>
 <jsp:include page="../includes/footer.jsp" />

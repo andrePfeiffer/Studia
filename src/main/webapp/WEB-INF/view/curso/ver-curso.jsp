@@ -52,14 +52,19 @@
                 <li class="list-group-item ordenamento" id="${aula.conteudo.id}" ordem="${aula.ordem}" >
                     <div class="col-xs-12 col-sm-3">
                         <br/>
-                        <img style="width: 20%; height: auto; border-radius: 10px" src="../../assets/images/cursos/cursos.png"/>
+                        <img style="width: 20%; height: auto; border-radius: 10px" src="${pageContext.request.contextPath}/assets/images/cursos/cursos.png"/>
                     </div>
                     <div class="col-xs-12 col-sm-7">
                     <br>
-                        <span class="cursoName"><h4><strong>${aula.conteudo.nome}</strong></h4></span>
+                        <span class="cursoName">
+                        <h4>
+                        <strong>${aula.conteudo.nome}</strong>
+                        <img src="${pageContext.request.contextPath}/assets/images/checkedSmall.png" />
+                        </h4></span>
                         <div style="margin:7px">
                             <label>${aula.conteudo.descricao}</label>                           
                         </div>
+                        <h6>aula concluída</h6>
                     </div>
                     <div class="col-xs-12 col-sm-2">
                     <br><br>

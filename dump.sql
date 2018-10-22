@@ -197,6 +197,7 @@ CREATE TABLE `Historico` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `usuarioId` INT UNSIGNED NOT NULL,
   `tipoConteudo` VARCHAR(45) NOT NULL,
+  `conteudoId` INT UNSIGNED NOT NULL,
   `dataCompletado` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `usuarioId` (`usuarioId` ASC) VISIBLE,
