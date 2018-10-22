@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cc.studia.entity.Aula;
 import cc.studia.entity.ComponenteAula;
@@ -101,6 +102,7 @@ public class ComponenteAulaController {
 	
 	@PostMapping("/editar")
 	public String editaComponente(
+			RedirectAttributes attributes,
 			@RequestParam("aulaId") int aulaId,
 			@RequestParam("componenteId") int componenteId,
 			@RequestParam("titulo") String titulo,
@@ -111,12 +113,14 @@ public class ComponenteAulaController {
 		componente.setDescricao(descricao);
 		componente.setPublico(componentePublico);
 		componenteAulaService.editar(componente);
+		attributes.addFlashAttribute("mensagemFlash", "Conteúdo salvo com sucesso");
 		return "redirect:/componente/editar?componenteId=" + componenteId + "&aulaId=" + aulaId;
 	}
 
 	@GetMapping("/remover")
-	public String removeComponente(@RequestParam("componenteId") int componenteId, @RequestParam("aulaId") int aulaId) {
+	public String removeComponente(RedirectAttributes attributes, @RequestParam("componenteId") int componenteId, @RequestParam("aulaId") int aulaId) {
 		componenteAulaService.remover(componenteId);
+		attributes.addFlashAttribute("mensagemFlash", "Conteúdo removido com sucesso");
 		return "redirect:/aula/edita?aulaId=" + aulaId;
 	}
 	

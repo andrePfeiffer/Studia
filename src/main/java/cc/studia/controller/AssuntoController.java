@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cc.studia.entity.Assunto;
 import cc.studia.service.AssuntoService;
@@ -29,7 +30,6 @@ public class AssuntoController {
 	
 	@GetMapping("/verTodos")
 	public String listarAssuntos(Model model) {
-		System.out.println(">>> CONTROLLER VERTODOS <<<");
 		List<Assunto> assuntos = assuntoService.verTodos();
 		model.addAttribute("assuntos", assuntos);
 		return "assunto/listar-assuntos";
@@ -38,14 +38,12 @@ public class AssuntoController {
 	@ResponseBody
 	@GetMapping("/verTodosAPI")
 	public List<Assunto> listarAssuntosAPI(Model model) {
-		System.out.println(">>> CONTROLLER VERTODOS <<<");
 		List<Assunto> assuntos = assuntoService.verTodos();
 		return assuntos;
 	}
 
 	@PostMapping("/busca")
 	public String buscaAssunto(@RequestParam("busca") String busca, Model model) {
-		System.out.println(">>> CONTROLLER BUSCA <<<");
 		List<Assunto> assuntos = assuntoService.busca(busca);
 		model.addAttribute("assuntos", assuntos);
 		return "assunto/listar-assuntos";
@@ -53,52 +51,39 @@ public class AssuntoController {
 	
 	@GetMapping("/adiciona")
 	public String mostrarFormulario(Model model) {
-		System.out.println(">>> CONTROLLER ADICIONA GET <<<");
 		model.addAttribute("assunto", new Assunto());
 		return "assunto/adicionar-assunto";
 	}
-	/*
+
 	@PostMapping("/adiciona")
-	public String adicionarAssunto(@ModelAttribute("assunto") @Valid Assunto assunto, BindingResult result) {
-		System.out.println(">>> CONTROLLER ADICIONA POST <<<");
-		if(result.hasErrors()) {
-			return "assunto/adicionar-assunto";
-		}else {
-			assuntoService.salvarAssunto(assunto);
-			return "redirect:/assunto/verTodos";
-		}
-	}
-	*/
-	@PostMapping("/adiciona")
-	public String adicionarAssunto(@RequestParam("nome") String nome) {
-		System.out.println(">>> CONTROLLER ADICIONA POST <<<");
+	public String adicionarAssunto(RedirectAttributes attributes, @RequestParam("nome") String nome) {
 		if(nome != null) {
 			Assunto assunto = new Assunto();
 			assunto.setNome(nome);
 			assuntoService.salvarAssunto(assunto);
+			attributes.addFlashAttribute("mensagemFlash", "Assunto criado com sucesso");
 		}
 		return "redirect:/assunto/verTodos";
 	}
 	
 	@GetMapping("/edita")
 	public String mostrarFormularioEdicao(@RequestParam("assuntoId") int id, Model model) {
-		System.out.println(">>> CONTROLLER EDITA GET <<<");
 		Assunto assunto = assuntoService.ver(id);
 		model.addAttribute("assunto", assunto);
 		return "assunto/editar-assunto";
 	}
 
 	@PostMapping("/edita")
-	public String editaAssunto(@ModelAttribute("assunto") Assunto assunto) {
-		System.out.println(">>> CONTROLLER EDITA POST <<<");
+	public String editaAssunto(RedirectAttributes attributes, @ModelAttribute("assunto") Assunto assunto) {
 		assuntoService.editaAssunto(assunto);;
+		attributes.addFlashAttribute("mensagemFlash", "Assunto salvo com sucesso");
 		return "redirect:/assunto/verTodos";
 	}
 
 	@GetMapping("/remove")
-	public String removeAssunto(@RequestParam("assuntoId") int id) {
-		System.out.println(">>> CONTROLLER REMOVE <<<");
+	public String removeAssunto(RedirectAttributes attributes, @RequestParam("assuntoId") int id) {
 		assuntoService.removeAssunto(id);
+		attributes.addFlashAttribute("mensagemFlash", "Assunto removido com sucesso");
 		return "redirect:/assunto/verTodos";
 	}
 	

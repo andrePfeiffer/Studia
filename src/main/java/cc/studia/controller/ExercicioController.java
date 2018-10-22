@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cc.studia.entity.Aula;
 import cc.studia.entity.ComponenteAula;
@@ -37,6 +38,7 @@ public class ExercicioController {
 
 	@PostMapping("/adiciona")
 	public String adicionaExercicio(
+			RedirectAttributes attributes,
 			@RequestParam("aulaId") int aulaId,
 			@RequestParam("titulo") String titulo,
 			@RequestParam("descricao") String descricao,
@@ -53,6 +55,7 @@ public class ExercicioController {
         exercicio.setComponenteAula(componenteAula);
         exercicio.setIdComponente(componenteAulaId);
         exercicioService.salvar(exercicio);
+        attributes.addFlashAttribute("mensagemFlash", "Exercício criado com sucesso");
 		return "redirect:/aula/edita?aulaId=" + aulaId;
 	}
 

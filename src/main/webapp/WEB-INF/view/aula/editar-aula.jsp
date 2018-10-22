@@ -41,9 +41,9 @@
                             <div class="container">
                                     <div class="row">
                                        <div class="col-md-6">
-                                       <h1>${mensagemFlash}</h1>
             <form action="${pageContext.request.contextPath}/aula/edita" method="POST">
             	<input type="hidden" name="conteudoId" value="${aula.conteudo.id}" />
+            	<input type="hidden" name="cursoId" value="${aula.curso.conteudo.id}" />
                 <Div class="container">
                     <h2>Edição de aula</h2>
                     <label>Título</label>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cc.studia.entity.Assunto;
 import cc.studia.entity.Conteudo;
@@ -70,6 +71,7 @@ public class CursoController {
 	
 	@PostMapping("/adiciona")
 	public String adicionarCurso(
+			RedirectAttributes attributes,
 			Authentication authentication,
 			@RequestParam("conteudoPublico") boolean conteudoPublico,
 			@RequestParam("assuntoId") int assuntoId,
@@ -88,6 +90,7 @@ public class CursoController {
 		curso.setAssunto(assunto);
 		curso.setIdConteudo(conteudoId);
 		cursoService.salvarCurso(curso);
+		attributes.addFlashAttribute("mensagemFlash", "Curso criado com sucesso");
 		return "redirect:/curso/verTodos";
 	}
 	
@@ -100,6 +103,7 @@ public class CursoController {
 	
 	@PostMapping("/edita")
 	public String editaCurso(
+			RedirectAttributes attributes,
 			@RequestParam("conteudoId") int conteudoId,
 			@RequestParam("nome") String nome,
 			@RequestParam("descricao") String descricao,
@@ -109,12 +113,14 @@ public class CursoController {
 		conteudo.setDescricao(descricao);
 		conteudo.setPublico(conteudoPublico);
 		conteudoService.editaConteudo(conteudo);
+		attributes.addFlashAttribute("mensagemFlash", "Curso salvo com sucesso");
 		return "redirect:/curso/verTodos";
 	}
 
 	@GetMapping("/remove")
-	public String removeCurso(@RequestParam("cursoId") int id) {
+	public String removeCurso(RedirectAttributes attributes, @RequestParam("cursoId") int id) {
 		cursoService.removeCurso(id);
+		attributes.addFlashAttribute("mensagemFlash", "Curso removido com sucesso");
 		return "redirect:/curso/verTodos";
 	}
 	

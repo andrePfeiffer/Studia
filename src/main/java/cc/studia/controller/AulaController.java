@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cc.studia.entity.Assunto;
 import cc.studia.entity.Aula;
@@ -87,6 +88,7 @@ public class AulaController {
 	
 	@PostMapping("/adiciona")
 	public String adicionarAula(
+			RedirectAttributes attributes,
 			Authentication authentication,
 			@RequestParam("tituloAula") String tituloAula,
 			@RequestParam("descricaoAula") String descricaoAula, 
@@ -105,6 +107,7 @@ public class AulaController {
 		aula.setIdCurso(cursoId);
 		aula.setCurso(curso);
 		aulaService.salvarAula(aula);
+		attributes.addFlashAttribute("mensagemFlash", "Aula criada com sucesso");
 		return "redirect:/curso/ver?cursoId=" + cursoId;
 	}
 	
@@ -117,21 +120,25 @@ public class AulaController {
 	
 	@PostMapping("/edita")
 	public String editaAula(
+			RedirectAttributes attributes,
 			@RequestParam("conteudoId") int conteudoId,
 			@RequestParam("nome") String nome,
 			@RequestParam("descricao") String descricao, 
+			@RequestParam("cursoId") int cursoId,
 			@RequestParam("conteudoPublico") boolean conteudoPublico){
 		Conteudo conteudo = conteudoService.ver(conteudoId);
 		conteudo.setPublico(conteudoPublico);
 		conteudo.setDescricao(descricao);
 		conteudo.setNome(nome);
 		conteudoService.editaConteudo(conteudo);
-		return "redirect:/aula/edita?aulaId=" + conteudoId;
+		attributes.addFlashAttribute("mensagemFlash", "Aula salva com sucesso");
+		return "redirect:/curso/ver?cursoId=" + cursoId;
 	}
 
 	@GetMapping("/remove")
-	public String removeAula(@RequestParam("aulaId") int id) {
+	public String removeAula(RedirectAttributes attributes, @RequestParam("aulaId") int id) {
 		aulaService.removeAula(id);
+		attributes.addFlashAttribute("mensagemFlash", "Aula removida com sucesso");
 		return "redirect:/aula/verTodos";
 	}
 	
@@ -143,6 +150,7 @@ public class AulaController {
 	
 	@GetMapping("/concluir")
 	public String concluirAula(
+			RedirectAttributes attributes,
 			Authentication authentication,
 			@RequestParam("aulaId") int aulaId,
 			@RequestParam("cursoId") int cursoId,
@@ -156,6 +164,7 @@ public class AulaController {
 		historico.setUsuarioId(usuario.getId());
 		historico.setUsuario(usuario);
 		historicoService.gravarHistorico(historico);
+		attributes.addFlashAttribute("mensagemFlash", "Aula concluída");
 		return "redirect:/curso/ver?cursoId="+cursoId;
 	}
 }

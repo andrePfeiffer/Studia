@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
     <section class="cid-qSgoZc68Wc" id="footer1-17" style="padding-top: 0 !important;">
         <div class="container">
             <div class="footer-lower">
@@ -89,7 +89,7 @@
 			setTimeout(function(){ x.className = x.className.replace("show", ""); }, 6000);
 	}
     $(".mbr-iconfont-btn").click(function(){
-        startToast("Favorito adicionado com sucesso!");
+        //startToast("Favorito adicionado com sucesso!");
     })
     $("#cadastroButton").click(function(){
         startToast("Assunto cadastrado com sucesso!");
@@ -203,8 +203,12 @@ $("#cadastroUsuarioButton").click(function(){
 	}
 })
 
-
 </script>
+<c:if test="${mensagemFlash != null}">
+<script>
+startToast("${mensagemFlash}");
+</script>
+</c:if>
 
     	</body>
 </html>
