@@ -34,102 +34,26 @@
 
         <div class="container" style="margin-top:40px; margin-left:0px;">
             <div class="col-md-3">
-            <ul class="list-group" style="color:black !important" id="componenteAula-list">
-	            <c:forEach var="componenteAula" items="${aula.componenteAulas}">
-	                <li class="list-group-item" id="${componenteAula.id}" ordem="${componenteAula.ordem}"> 
-	                	<a href="componente-aula/ver?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">
-	                	<img src="${pageContext.request.contextPath}/assets/images/checkedSmall.png" />
-	                	${componenteAula.descricao}
-	                	</a>
-                	</li>
-	            </c:forEach>
-            </ul>
-            
-            &nbsp;&nbsp;&nbsp;<a class="concluirConteudo">Concluir conteúdo</a>
-            <br><br>
-            <a style="color:blue">&nbsp;&nbsp;&nbsp;Próxima aula &nbsp;&nbsp;&nbsp;<span class="mbri-right mbr-iconfont mbr-iconfont-btn"></span></a>
+	            <ul class="list-group" style="color:black !important" id="componenteAula-list">
+		            <c:forEach var="componenteAula" items="${aula.componenteAulas}">
+		                <li class="list-group-item verifica-historico-componente" id="${componenteAula.id}" ordem="${componenteAula.ordem}"> 
+		                	<a href="${pageContext.request.contextPath}/componente/ver?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">
+		                	${componenteAula.titulo}
+		                	</a>
+	                	</li>
+		            </c:forEach>
+	            </ul>
+	            
+			&nbsp;&nbsp;&nbsp;<a style="color:blue" href="${pageContext.request.contextPath}/aula/concluir?aulaId=${aula.conteudo.id}&cursoId=${aula.curso.conteudo.id}">Concluir aula</a>
             </div>
             <div class="col-md-7"> 
                     <div class="right-content-bg">
-                        <h3>Lorem ipsum dolor sit amet</h3>
                         
                         <div id="conteudoAula">
 
                         </div>
                         <br><br><br>
 
-                        <!-- Conteúdo perguntas -->
-
-                        <!--
-                        <input type="text" class="form-control" placeholder="Digite aqui a sua pergunta">
-                        <input type="button" class="btn btn-primary" value="Enviar" onclick="">
-                         <br><br>
-                        <div class="container">
-                            <div class="row">
-                            Perguntas anteriores
-                            <br><br>
-                             <div class="media">
-                                <div class="media-left">
-                                  <img src="../../../assets/images/cursos/user.png" class="media-object" style="width:40px">
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading title">João Alberto</h4>
-                                  <p class="komen">
-                                      Isso funciona no windows 10?<br>
-                                        <div class="utilIcons">
-                                            <a class="inutil"><span class="mbri-sad-face mbr-iconfont mbr-iconfont-btn askIcons"></span></a>
-                                            &nbsp;&nbsp;
-                                            <a class="util"><span class="mbri-smile-face mbr-iconfont mbr-iconfont-btn askIcons"></span></a>
-                                            &nbsp;&nbsp;
-                                            <a class="resposta">Responder</a>
-                                        </div>
-                                  </p>
-                                </div>
-                            </div>
-                            
-                            <div class="geser">
-                             <div class="media">
-                                <div class="media-left">
-                                  <img src="../../../assets/images/cursos/user.png" class="media-object" style="width:40px">
-                                </div>
-                                <div class="media-body">
-                                  <h4 class="media-heading title">Armando Silva</h4>
-                                  <p class="komen">
-                                      Funciona no Linux?<br>
-                                      <div class="utilIcons">
-                                            <a class="inutil"><span class="mbri-sad-face mbr-iconfont mbr-iconfont-btn askIcons"></span></a>
-                                            &nbsp;&nbsp;
-                                            <a class="util"><span class="mbri-smile-face mbr-iconfont mbr-iconfont-btn askIcons"></span></a>
-                                            &nbsp;&nbsp;
-                                            <a class="resposta">Responder</a>
-                                        </div>
-                                  </p>
-                                </div>
-                            </div>
-                            </div>
-
-                            <div class="geser">
-                                    <div class="media">
-                                       <div class="media-left">
-                                         <img src="../../../assets/images/cursos/user.png" class="media-object" style="width:40px">
-                                       </div>
-                                       <div class="media-body">
-                                         <h4 class="media-heading title">Armando Silva</h4>
-                                         <p class="komen">
-                                             Funciona no Linux?<br>
-                                             <div class="utilIcons">
-                                                   <a class="inutil"><span class="mbri-sad-face mbr-iconfont mbr-iconfont-btn askIcons"></span></a>
-                                                   &nbsp;&nbsp;
-                                                   <a class="util"><span class="mbri-smile-face mbr-iconfont mbr-iconfont-btn askIcons"></span></a>
-                                                   &nbsp;&nbsp;
-                                                   <a class="resposta">Responder</a>
-                                               </div>
-                                         </p>
-                                       </div>
-                                   </div>
-                                   </div>
-                            </div>
-                            </div> -->
                     </div>
             </div>
             <div class="col-md-1">
@@ -157,4 +81,26 @@
         <!-- Fim conteudo aula -->
         
     </div>
+    <script>
+$(".verifica-historico-componente").each(function(){
+	verificaComponente($(this)[0].id, 1)
+})
+function verificaComponente(idConteudo, idUsuario){
+	$.ajax({
+		type: "POST",
+		url: "${pageContext.request.contextPath}/historico/verifica",
+		data: {
+			conteudoId: idConteudo,
+			tipoConteudo: 'componente',
+			usuarioId: idUsuario
+		},
+		success: function(response){
+			if(response == "true"){
+				console.log(idConteudo)
+				$("#"+idConteudo).prepend('<img src="${pageContext.request.contextPath}/assets/images/checkedSmall.png" alt="conteúdo concluído" />')
+			}
+		},
+	});
+}
+</script>
     <jsp:include page="../includes/footer.jsp" />

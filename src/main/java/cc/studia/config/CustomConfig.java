@@ -111,6 +111,8 @@ public class CustomConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/assets/**").addResourceLocations("/assets/").setCachePeriod(31556926);
+        registry.addResourceHandler("/material/**").addResourceLocations("/material/").setCachePeriod(31556926);
+        registry.addResourceHandler("/video/**").addResourceLocations("/video/").setCachePeriod(31556926);
     }
 
 	@Override

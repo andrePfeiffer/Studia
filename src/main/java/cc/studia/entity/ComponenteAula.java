@@ -26,6 +26,9 @@ public class ComponenteAula {
 	@Column(name="publico")
 	private boolean publico;
 	
+	@Column(name="titulo")
+	private String titulo;
+	
 	@Column(name="descricao")
 	private String descricao;
 	
@@ -39,6 +42,15 @@ public class ComponenteAula {
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="idaula", nullable=false, insertable=false, updatable=false)
 	private Aula aula;
+	
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
 	public int getId() {
 		return id;
@@ -90,8 +102,10 @@ public class ComponenteAula {
 
 	@Override
 	public String toString() {
-		return "ComponenteAula [id=" + id + ", publico=" + publico + ", descricao=" + descricao + ", aula=" + aula
-				+ "]";
+		return "ComponenteAula [id=" + id + ", publico=" + publico + ", titulo=" + titulo + ", descricao=" + descricao
+				+ ", ordem=" + ordem + ", idAula=" + idAula + ", aula=" + aula + "]";
 	}
+	
+	
 
 }

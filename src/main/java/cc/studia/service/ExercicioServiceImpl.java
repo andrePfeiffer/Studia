@@ -32,8 +32,7 @@ public class ExercicioServiceImpl implements ExercicioService {
 	@Override
 	@Transactional
 	public Exercicio ver(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return exercicioDAO.ver(id);
 	}
 
 	@Override

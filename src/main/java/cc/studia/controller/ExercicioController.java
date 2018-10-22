@@ -38,12 +38,14 @@ public class ExercicioController {
 	@PostMapping("/adiciona")
 	public String adicionaExercicio(
 			@RequestParam("aulaId") int aulaId,
+			@RequestParam("titulo") String titulo,
 			@RequestParam("descricao") String descricao,
 			@RequestParam("exercicioPublico") boolean exercicioPublico,
 			Model model) {
         ComponenteAula componenteAula = new ComponenteAula();
         componenteAula.setAula(aulaService.ver(aulaId));
         componenteAula.setIdAula(aulaId);
+        componenteAula.setTitulo(titulo);
         componenteAula.setDescricao(descricao);
         componenteAula.setPublico(exercicioPublico);
         int componenteAulaId = componenteAulaService.salvar(componenteAula);

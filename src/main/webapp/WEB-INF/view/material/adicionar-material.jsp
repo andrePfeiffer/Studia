@@ -40,8 +40,11 @@
                     <label>Arquivo</label>
                     <input type="file" name="material" class="form-control" required />
                     <br>
+                    <label>Título</label>
+                    <input type="text" name="titulo" class="form-control" required />
+                    <br>
                     <label>Descrição</label>
-                    <input type="text" name="descricao" class="form-control" required/>
+                    <textarea name="descricao" class="form-control" required></textarea>
                     <br>
                     <label class="radio-inline"><input type="radio" name="materialPublico" value="true" checked />Material público</label>
                     <label class="radio-inline"><input type="radio" name="materialPublico" value="false" />Material privado</label>

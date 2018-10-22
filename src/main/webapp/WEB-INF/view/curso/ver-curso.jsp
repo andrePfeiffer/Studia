@@ -49,7 +49,7 @@
 				<c:url var="deleteLink" value="/aula/remove">
 					<c:param name="aulaId" value="${aula.conteudo.id}" />
 				</c:url>
-                <li class="list-group-item ordenamento" id="${aula.conteudo.id}" ordem="${aula.ordem}" >
+                <li class="list-group-item ordenamento verifica-historico-aula" id="${aula.conteudo.id}" ordem="${aula.ordem}" >
                     <div class="col-xs-12 col-sm-3">
                         <br/>
                         <img style="width: 20%; height: auto; border-radius: 10px" src="${pageContext.request.contextPath}/assets/images/cursos/cursos.png"/>
@@ -59,12 +59,10 @@
                         <span class="cursoName">
                         <h4>
                         <strong>${aula.conteudo.nome}</strong>
-                        <img src="${pageContext.request.contextPath}/assets/images/checkedSmall.png" />
                         </h4></span>
                         <div style="margin:7px">
                             <label>${aula.conteudo.descricao}</label>                           
                         </div>
-                        <h6>aula concluída</h6>
                     </div>
                     <div class="col-xs-12 col-sm-2">
                     <br><br>
@@ -114,4 +112,25 @@
 			}
         </script>
     </div>
+<script>
+$(".verifica-historico-aula").each(function(){
+	verificaAula($(this)[0].id, 1)
+})
+function verificaAula(idAula, idUsuario){
+	$.ajax({
+		type: "POST",
+		url: "${pageContext.request.contextPath}/historico/verifica",
+		data: {
+			conteudoId: idAula,
+			tipoConteudo: 'aula',
+			usuarioId: idUsuario
+		},
+		success: function(response){
+			if(response == "true"){
+				$("#"+idAula+" h4").prepend('<img src="${pageContext.request.contextPath}/assets/images/checkedSmall.png" alt="aula concluída" />')
+			}
+		},
+	});
+}
+</script>
 <jsp:include page="../includes/footer.jsp" />

@@ -29,4 +29,5 @@ public class ConteudoServiceImpl implements ConteudoService {
 	public void editaConteudo(Conteudo conteudo) {
 		conteudoDAO.editaConteudo(conteudo);
 	}
+
 }

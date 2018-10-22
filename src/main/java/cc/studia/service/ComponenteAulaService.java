@@ -17,4 +17,6 @@ public interface ComponenteAulaService {
 	void remover(int id);
 
 	void modificaOrdem(List<ComponenteAula> listaComponentes);
+	
+	String tipoComponente(int componenteId);
 }

@@ -35,7 +35,7 @@ public class VideoController {
 	@Autowired
 	public VideoService videoService;
 	
-	private static String UPLOADED_FOLDER = "C:\\Users\\andre\\eclipse-workspace\\video\\src\\main\\webapp\\videos\\";
+	private static String UPLOADED_FOLDER = "C:\\Users\\andre\\eclipse-workspace\\video\\src\\main\\webapp\\video\\";
 	
 	@GetMapping("/adiciona")
 	public String mostrarFormulario(@RequestParam("aulaId") int aulaId, Model model) {
@@ -49,6 +49,7 @@ public class VideoController {
 			RedirectAttributes attributes,
 			@RequestParam("video") MultipartFile file,
 			@RequestParam("aulaId") int aulaId,
+			@RequestParam("titulo") String titulo,
 			@RequestParam("descricao") String descricao,
 			@RequestParam("videoPublico") boolean videoPublico,
 			Model model) {
@@ -67,6 +68,7 @@ public class VideoController {
                     System.out.println(aulaId);
                     componenteAula.setAula(aulaService.ver(aulaId));
                     componenteAula.setIdAula(aulaId);
+                    componenteAula.setTitulo(titulo);
                     componenteAula.setDescricao(descricao);
                     componenteAula.setPublico(videoPublico);
                     int componenteAulaId = componenteAulaService.salvar(componenteAula);

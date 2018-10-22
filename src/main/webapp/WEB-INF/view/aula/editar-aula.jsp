@@ -22,7 +22,7 @@
             <ul class="sortable list-group" style="color:black !important" id="componenteAula-list">
             <c:forEach var="componenteAula" items="${aula.componenteAulas}">
                 <li class="list-group-item ordenamento" id="${componenteAula.id}" ordem="${componenteAula.ordem}">
-                	<a href="${pageContext.request.contextPath}/componente/ver?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">${componenteAula.descricao}</a>
+                	<a href="${pageContext.request.contextPath}/componente/ver?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">${componenteAula.titulo}</a>
                 	-
                 	<a href="${pageContext.request.contextPath}/componente/editar?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">edita</a> |
                 	<a href="${pageContext.request.contextPath}/componente/remover?componenteId=${componenteAula.id}&aulaId=${aula.conteudo.id}">remove</a>

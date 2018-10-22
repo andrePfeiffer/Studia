@@ -8,7 +8,7 @@ import javax.servlet.ServletRegistration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class CustomMvcDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-    private int maxUploadSizeInMb = 50 * 1024 * 1024; // 5 MB
+    private int maxUploadSizeInMb = 500 * 1024 * 1024;
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		return null;

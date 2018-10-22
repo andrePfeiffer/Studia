@@ -47,6 +47,7 @@ public class MaterialController {
 	public String adicionaVideo(
 			@RequestParam("material") MultipartFile file,
 			@RequestParam("aulaId") int aulaId,
+			@RequestParam("titulo") String titulo,
 			@RequestParam("descricao") String descricao,
 			@RequestParam("materialPublico") boolean materialPublico,
 			Model model) {
@@ -58,6 +59,7 @@ public class MaterialController {
                 ComponenteAula componenteAula = new ComponenteAula();
                 componenteAula.setAula(aulaService.ver(aulaId));
                 componenteAula.setIdAula(aulaId);
+                componenteAula.setTitulo(titulo);
                 componenteAula.setDescricao(descricao);
                 componenteAula.setPublico(materialPublico);
                 int componenteAulaId = componenteAulaService.salvar(componenteAula);

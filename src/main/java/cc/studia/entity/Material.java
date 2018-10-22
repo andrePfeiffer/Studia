@@ -3,6 +3,7 @@ package cc.studia.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -21,7 +22,7 @@ public class Material {
 	@Column(name="tipoArquivo")
 	private String tipoArquivo;
 
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@OneToOne(fetch = FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name="idcomponente", nullable=false, insertable=false, updatable=false)
 	private ComponenteAula componenteAula;
 
@@ -59,8 +60,7 @@ public class Material {
 
 	@Override
 	public String toString() {
-		return "Video [idComponente=" + idComponente + ", arquivo=" + arquivo + ", tipoArquivo=" + tipoArquivo
-				+ ", componenteAula=" + componenteAula + "]";
+		return "Video [idComponente=" + idComponente + ", arquivo=" + arquivo + ", tipoArquivo=" + tipoArquivo + "]";
 	}
 
 	

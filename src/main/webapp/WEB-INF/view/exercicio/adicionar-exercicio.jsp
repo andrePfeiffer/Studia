@@ -37,6 +37,9 @@
             	<input type="hidden" name="aulaId" value="${aula.conteudo.id}" />
                 <Div class="container">
                     <h2>Adicionar exercício</h2>
+                    <label>Título</label>
+                    <input type="text" name="titulo" class="form-control" required />
+                    <br>
                     <label>Descrição</label>
                     <textarea name="descricao" class="form-control" required></textarea>
                     <br>

@@ -4,7 +4,7 @@ Ordenação de aulas, ordenação de componentes da aula
 ## Progress  
 UCS01 5/5  
 UCS02 7/8  
-UCS04 0/3  
+UCS04 3/3  
 UCS05 0/2  
 UCS09 15/16  
   
@@ -33,27 +33,9 @@ UCS09 15/16
 ~~**Fluxo Alternativo 7:** Campo obrigatório não preenchido.~~  
 
 ## UCS04 Assistir aula  
-**FT:** o aluno escolhe o curso, escolhe a aula, assiste e marca como concluída  
-1 O sistema exibe as aulas do curso escolhido.  
-2 O ator escolhe uma aula.  
-3 O sistema exibe a lista de vídeos, de material didático e de exercícios da aula escolhida em uma ordem pré-determinada pelo instrutor.  
-4 O ator escolhe um conteúdo.  
-5 O sistema exibe o conteúdo.  
-6 O ator escolhe a opção “concluir conteúdo”.  
-7 O sistema grava que o conteúdo foi concluído pelo ator.  
-8 O sistema verifica que não existe um conteúdo seguinte.  
-9 O sistema exibe uma mensagem de “aula concluída”.  
-10 Fim de caso de uso.  
-
-**Fluxo Alternativo 1:** Existe um conteúdo seguinte.  
-1 O sistema exibe o próximo conteúdo.  
-2 Retorna ao passo 6 do Fluxo Típico.  
-
-**Fluxo Alternativo 2:** O conteúdo selecionado é um exercício.  
-1 O sistema exibe o enunciado do exercício escolhido e solicita ao ator que informe a solução.  
-2 O ator preenche a solução ao exercício e confirma.  
-3 O sistema apresenta uma mensagem de confirmação de envio de solução e a opção “concluir conteúdo”.  
-4 Retorna ao passo 6 do Fluxo Típico.  
+~~**FT:** o aluno escolhe o curso, escolhe a aula, assiste e marca como concluída~~  
+~~**Fluxo Alternativo 1:** Existe um conteúdo seguinte.~~  
+~~**Fluxo Alternativo 2:** O conteúdo selecionado é um exercício.~~  
 
 # UCS05 Avaliar conteúdo  
 **FT:** o usuario avalia um conteudo  

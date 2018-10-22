@@ -32,8 +32,7 @@ public class MaterialServiceImpl implements MaterialService {
 	@Override
 	@Transactional
 	public Material ver(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return materialDAO.ver(id);
 	}
 
 	@Override

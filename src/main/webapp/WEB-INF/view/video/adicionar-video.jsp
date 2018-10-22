@@ -40,8 +40,11 @@
                     <label>Arquivo</label>
                     <input type="file" id="upload" name="video" class="form-control" required />
                     <br>
+                    <label>Título</label>
+                    <input type="text" name="titulo" class="form-control" required />
+                    <br>
                     <label>Descrição</label>
-                    <input type="text" name="descricao" class="form-control" required/>
+                    <textarea name="descricao" class="form-control" required></textarea>
                     <br>
                     <label class="radio-inline"><input type="radio" name="videoPublico" value="true" checked />Video público</label>
                     <label class="radio-inline"><input type="radio" name="videoPublico" value="false" />Video privado</label>
@@ -57,7 +60,6 @@
     <div id="videoTeste" class="hidden"></div>
     
 <script>
-
 $('#upload').change( function(event) {
 
     let fileInput = $(this);
@@ -89,7 +91,6 @@ $('#upload').change( function(event) {
                 console.log("Tamanho e formato aceitos");
                 startToast("Tamanho e formato aceitos");
                 $("#videoTeste").empty();
-                $("#upload").val("");
             }else{
                console.log("Duração do vídeo inválida");
                startToast("Duração do vídeo inválida");

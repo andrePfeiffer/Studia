@@ -32,8 +32,7 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	@Transactional
 	public Video ver(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return videoDAO.ver(id);
 	}
 
 	@Override

@@ -153,7 +153,6 @@ CREATE TABLE `Video` (
   `idComponente` int unsigned NOT NULL,
   `arquivo` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tipoArquivo` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `duracao` INT NOT NULL,
   PRIMARY KEY (`idComponente`),
   CONSTRAINT `fk_video_componenteaula` 
   FOREIGN KEY (`idComponente`) REFERENCES `ComponenteAula` (`id`)

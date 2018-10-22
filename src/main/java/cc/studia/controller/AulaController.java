@@ -16,10 +16,13 @@ import cc.studia.entity.Assunto;
 import cc.studia.entity.Aula;
 import cc.studia.entity.Conteudo;
 import cc.studia.entity.Curso;
+import cc.studia.entity.Historico;
+import cc.studia.entity.Usuario;
 import cc.studia.service.AssuntoService;
 import cc.studia.service.AulaService;
 import cc.studia.service.ConteudoService;
 import cc.studia.service.CursoService;
+import cc.studia.service.HistoricoService;
 import cc.studia.service.UsuarioService;
 
 @Controller
@@ -40,6 +43,10 @@ public class AulaController {
 	
 	@Autowired
 	public UsuarioService usuarioService;
+	
+	@Autowired
+	public HistoricoService historicoService;
+	
 
 	@GetMapping("/")
 	public String home() {
@@ -132,5 +139,23 @@ public class AulaController {
 	public String modificaOrdem(@RequestBody List<Aula> listaAulas) {
 		aulaService.modificaOrdem(listaAulas);
 		return "Nova ordenação salva";
+	}
+	
+	@GetMapping("/concluir")
+	public String concluirAula(
+			Authentication authentication,
+			@RequestParam("aulaId") int aulaId,
+			@RequestParam("cursoId") int cursoId,
+			Model model
+			) {
+		Usuario usuario = usuarioService.findByUserName(authentication.getName());
+		String tipoConteudo = "aula";
+		Historico historico = new Historico();
+		historico.setConteudoId(aulaId);
+		historico.setTipoConteudo(tipoConteudo);
+		historico.setUsuarioId(usuario.getId());
+		historico.setUsuario(usuario);
+		historicoService.gravarHistorico(historico);
+		return "redirect:/curso/ver?cursoId="+cursoId;
 	}
 }
