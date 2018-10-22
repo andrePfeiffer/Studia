@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="usuario")
+@Table(name="Usuario")
 public class Usuario {
 	
 	@Id
@@ -34,9 +34,9 @@ public class Usuario {
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
-			name = "usuario_perfil", 
-			joinColumns = @JoinColumn(name = "idusuario"), 
-			inverseJoinColumns = @JoinColumn(name = "idperfil")
+			name = "Usuario_Perfil", 
+			joinColumns = @JoinColumn(name = "idUsuario"), 
+			inverseJoinColumns = @JoinColumn(name = "idPerfil")
 	)
 	private List<Perfil> perfils = new ArrayList<>();
 

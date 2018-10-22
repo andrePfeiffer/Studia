@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="assunto")
+@Table(name="Assunto")
 public class Assunto {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -21,31 +21,26 @@ public class Assunto {
 	private String nome;
 	
 	public int getId() {
-		System.out.println(">>> GETTER ID DO ASSUNTO <<<");
 		System.out.println(this.toString());
 		return id;
 	}
 
 	public void setId(int id) {
-		System.out.println(">>> SETTER ID DO ASSUNTO <<<");
 		System.out.println(this.toString());
 		this.id = id;
 	}
 
 	public String getNome() {
-		System.out.println(">>> GETTER NOME DO ASSUNTO <<<");
 		System.out.println(this.toString());
 		return nome;
 	}
 
 	public void setNome(String nome) {
-		System.out.println(">>> SETTER NOME DO ASSUNTO <<<");
 		System.out.println(this.toString());
 		this.nome = nome;
 	}
 	
 	public Assunto() {
-		System.out.println(">>> OBJETO ASSUNTO CRIADO <<<");
 		System.out.println(this.toString());
 	}
 

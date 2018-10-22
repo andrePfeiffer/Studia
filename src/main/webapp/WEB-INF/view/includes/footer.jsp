@@ -8,9 +8,11 @@
                     </div>
                 </div>
                 <div class="media-container-row mbr-white">
-                    <div class="col-sm-6 copyright">
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Copyright © 2018 StudiaTech Todos os direitos reservados
+                    <div class="col-sm-12 copyright">
+                        <p class="mbr-text mbr-fonts-style display-7" style="text-align: center;">
+                            Manual do usuário: 
+                            <a href="${pageContext.request.contextPath}/assets/manual/manual.pdf" target="_blank">versão pdf</a> | 
+                            <a href="${pageContext.request.contextPath}/assets/manual/manual.html" target="_blank">versão html</a>
                         </p>
                     </div>
                     

@@ -35,7 +35,7 @@ public class VideoController {
 	@Autowired
 	public VideoService videoService;
 	
-	private static String UPLOADED_FOLDER = "C:\\Users\\andre\\eclipse-workspace\\video\\src\\main\\webapp\\video\\";
+	private static String UPLOADED_FOLDER = "/home/andre/eclipse-workspace/Studia/src/main/webapp/video/";
 	
 	@GetMapping("/adiciona")
 	public String mostrarFormulario(@RequestParam("aulaId") int aulaId, Model model) {

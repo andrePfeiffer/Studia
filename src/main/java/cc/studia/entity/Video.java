@@ -9,10 +9,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="video")
+@Table(name="Video")
 public class Video {
 	@Id
-	@Column(name="idcomponente")
+	@Column(name="idComponente")
 	private int idComponente;
 	
 	@Column(name="arquivo")
@@ -22,7 +22,7 @@ public class Video {
 	private String tipoArquivo;
 
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idcomponente", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="idComponente", nullable=false, insertable=false, updatable=false)
 	private ComponenteAula componenteAula;
 
 	public int getIdComponente() {

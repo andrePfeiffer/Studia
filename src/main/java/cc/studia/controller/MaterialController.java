@@ -35,7 +35,7 @@ public class MaterialController {
 	@Autowired
 	public MaterialService materialService;
 	
-	private static String UPLOADED_FOLDER = "C:\\Users\\andre\\eclipse-workspace\\video\\src\\main\\webapp\\material\\";
+	private static String UPLOADED_FOLDER = "/home/andre/eclipse-workspace/Studia/src/main/webapp/material/";
 	
 	@GetMapping("/adiciona")
 	public String mostrarFormulario(@RequestParam("aulaId") int aulaId, Model model) {

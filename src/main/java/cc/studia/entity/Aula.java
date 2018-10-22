@@ -17,14 +17,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name="aula")
+@Table(name="Aula")
 public class Aula {
 	@Id
-	@Column(name="idconteudo")
+	@Column(name="idConteudo")
 	@JsonProperty("idConteudo")
 	private int idConteudo;
 	
-	@Column(name="idcurso")
+	@Column(name="idCurso")
 	@JsonProperty("idCurso")
 	private int idCurso;
 	
@@ -33,11 +33,11 @@ public class Aula {
 	private int ordem;
 	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idconteudo", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="idConteudo", nullable=false, insertable=false, updatable=false)
 	private Conteudo conteudo;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idcurso", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="idCurso", nullable=false, insertable=false, updatable=false)
 	private Curso curso;
 
 	@OneToMany(mappedBy="aula", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

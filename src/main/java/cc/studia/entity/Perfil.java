@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="perfil")
+@Table(name="Perfil")
 public class Perfil {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +23,11 @@ public class Perfil {
 	private int id;
 
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idpapel", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="idPapel", nullable=false, insertable=false, updatable=false)
 	private Papel papel;
 	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idassunto", nullable=true, insertable=false, updatable=false)
+	@JoinColumn(name="idAssunto", nullable=true, insertable=false, updatable=false)
 	private Assunto assunto;
 	
 	@ManyToMany(mappedBy="perfils", cascade = CascadeType.ALL)

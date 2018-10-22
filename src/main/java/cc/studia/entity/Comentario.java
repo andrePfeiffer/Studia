@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="comentario")
+@Table(name="Comentario")
 public class Comentario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,14 +22,14 @@ public class Comentario {
 	private String descricao;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idusuario")
+	@JoinColumn(name="idUsuario")
 	private Usuario autor;
 	
-	@Column(name="datacriado")
+	@Column(name="dataCriado")
 	private String dataCriado;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idconteudo")
+	@JoinColumn(name="idConteudo")
 	private Conteudo conteudo;
 
 	public int getId() {

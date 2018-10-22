@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name="papel")
+@Table(name="Papel")
 public class Papel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +21,11 @@ public class Papel {
 	private String nome;
 	
 	@Type(type="true_false")
-	@Column(name="mantemconteudo")
+	@Column(name="mantemConteudo")
 	private boolean mantemConteudo;
 
 	@Type(type="true_false")
-	@Column(name="aprovaconteudo")
+	@Column(name="aprovaConteudo")
 	private boolean aprovaConteudo;
 
 	public int getId() {

@@ -17,19 +17,19 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(name="curso")
+@Table(name="Curso")
 public class Curso {
 	
 	@Id
-	@Column(name="idconteudo")
+	@Column(name="idConteudo")
 	private int idConteudo;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idconteudo", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="idConteudo", nullable=false, insertable=false, updatable=false)
 	private Conteudo conteudo;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idassunto")
+	@JoinColumn(name="idAssunto")
 	private Assunto assunto;
 	
 	@OneToMany(mappedBy="curso", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

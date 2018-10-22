@@ -15,7 +15,7 @@ import org.hibernate.annotations.Type;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name="componenteaula")
+@Table(name="ComponenteAula")
 public class ComponenteAula {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -36,11 +36,11 @@ public class ComponenteAula {
 	@JsonProperty("ordem")
 	private int ordem;
 	
-	@Column(name="idaula")
+	@Column(name="idAula")
 	private int idAula;
 	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idaula", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="idAula", nullable=false, insertable=false, updatable=false)
 	private Aula aula;
 	
 

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name="conteudo")
+@Table(name="Conteudo")
 public class Conteudo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -41,11 +41,11 @@ public class Conteudo {
 	private List<Comentario> comentarios;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idautor")
+	@JoinColumn(name="idAutor")
 	private Usuario autor;
 	
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name="idaprovador")
+	@JoinColumn(name="idAprovador")
 	private Usuario aprovador;
 
 	public int getId() {
