@@ -6,51 +6,29 @@
 	<jsp:param name="modal" value="false" />
 </jsp:include>
     
-        <security:authorize access="hasAuthority('ADMIN')">
-	        User: <security:authentication property="principal.username" /><br />
-	        Role: <security:authentication property="principal.authorities" /><br />
-	    </security:authorize>
-        <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-        	<input type="submit" value="Logout" />
-        </form:form>
-        <security:authorize access="isAuthenticated()">
-        	<h1>logado</h1>
-        </security:authorize>
-        <security:authorize access="isAnonymous()">
-        	<h1>nao logado</h1>
-        </security:authorize>
-    
     <!-- INICIO TEXTO -->
     <section class="mbr-section article content1 cid-qSg7ltdNzT" id="content2-w">
         <div class="container">
             <div class="media-container-row">
                 <div class="mbr-text col-12 col-md-12 mbr-fonts-style display-7" style="text-align: justify;font-family=font-family: 'Yantramanav', sans-serif;">
-        <security:authorize access="hasAuthority('EMPLOYEE')">
-        <h1>é EMPLOYEE</h1>
-        </security:authorize>
-        <security:authorize access="hasAuthority('ADMIN')">
-        <h1>é ADMIN</h1>
-        </security:authorize>
-        <security:authorize access="isAuthenticated()">
-        <security:authentication property="principal.username"/>
-        <security:authentication property="principal.authorities"/>
-        </security:authorize>
 	<c:if test="${mensagem != null }">
 		${mensagem}<br />
 	</c:if>	        
 <form:form action="${pageContext.request.contextPath}/autenticateTheUser" method="POST">
 	<c:if test="${param.error != null }">
-		Sorry! You entered invalid username/password<br />
+		Você digitou usuário ou senha errados<br />
 	</c:if>
 	<c:if test="${param.logout != null }">
-		You have been logged out<br />
+		Você saiu com sucesso<br />
 	</c:if>
 	<c:if test="${param.denied != null }">
-		Access denied<br />
+		Acesso negado<br />
 	</c:if>
-	Username: <input type="text" name="username" /><br />
-	Password: <input type="password" name="password" /><br />
-	<input type="submit" value="Login" /><br />
+	   <input type="text" name="username" id="userLogin" class="form-control" placeholder="Usuário" required>
+	   <br>
+	   <input type="password" name="password" id="password" class="form-control" placeholder="Senha" required>
+	   <br>
+	<input type="submit" id="loginButton" class="btn btn-primary btn-block" value="Entrar" style="margin:0px;">
 	<!--
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 	 -->

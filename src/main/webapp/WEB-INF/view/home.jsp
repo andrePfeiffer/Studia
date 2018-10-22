@@ -9,21 +9,7 @@
     <div style="width:100%">
         <img src="${pageContext.request.contextPath}/assets/images/cursosOut.jpg" style="width:100%"/>
         <span style="position:absolute; top:15%; left:10%; font-size:5vw; color:white">Cursos online gratuitos de tecnologia.</span>
-        <security:authorize access="hasAuthority('ADMIN')">
-	        User: <security:authentication property="principal.username" /><br />
-	        Role: <security:authentication property="principal.authorities" /><br />
-	    </security:authorize>
-        <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-        	<input type="submit" value="Logout" />
-        </form:form>
     </div>
-        <security:authorize access="isAuthenticated()">
-        	<h1>logado</h1>
-        </security:authorize>
-        <security:authorize access="isAnonymous()">
-        	<h1>nao logado</h1>
-        </security:authorize>
-    
     <!-- INICIO TEXTO -->
     <section class="mbr-section article content1 cid-qSg7ltdNzT" id="content2-w">
         <div class="container">
