@@ -48,9 +48,11 @@
 	                    <a href="${showLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-search mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
 					<a href="#" data-toggle="tooltip" data-placement="top" >
 						<span class="mbri-hearth mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span>
-					</a>                        
+					</a>    
+					<security:authorize access="hasAnyAuthority('Administrador')">                    
 	                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="${updateLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
 	                    <a href="${deleteLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-trash mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
+	                    </security:authorize>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<br><br>
 				</div>

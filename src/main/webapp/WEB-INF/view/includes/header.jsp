@@ -232,7 +232,9 @@
                     </a>
                     <div class="dropdown-menu">
                             <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/curso/verTodos"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Listar Cursos</a>
+                        <security:authorize access="hasAnyAuthority('Administrador','Instrutor')">
                         <a class="dropdown-item text-secondary display-4 submenu" href="${pageContext.request.contextPath}/curso/adiciona"><span class="mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Manter Cursos</a>
+                        </security:authorize>
                         
                     </div>
                 </li>
@@ -243,13 +245,16 @@
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item text-secondary display-4 submenu"  data-toggle="modal" data-target="#PesquisaAssuntoModal" aria-expanded="false"><span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>Pesquisar assuntos</a>
+                        <security:authorize access="hasAnyAuthority('Administrador')">
                         <a class="dropdown-item text-secondary display-4 submenu" data-toggle="modal" data-target="#CadastroAssuntoModal" aria-expanded="false"><span class="mbri-plus mbr-iconfont mbr-iconfont-btn"></span>Criar um novo assunto</a>
+                        </security:authorize>
                         
                     </div>
                 </li>
                 <li class="nav-item">
                         <a class="nav-link link text-secondary display-4" href="/favoritos"><span class="mbri-hearth mbr-iconfont mbr-iconfont-btn"></span>Favoritos</a>
                 </li>
+                <security:authorize access="hasAnyAuthority('Administrador')">
                 <li class="nav-item dropdown">
                     <a class="nav-link link dropdown-toggle text-secondary display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">
                         <span class="mbri-setting3 mbr-iconfont mbr-iconfont-btn"></span>
@@ -266,6 +271,7 @@
                         
                     </div>
                 </li>
+                </security:authorize>
                 <li class="nav-item dropdown">
                         <a class="nav-link link dropdown-toggle text-secondary btn btn-sm btn-primary display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="false">
                             &nbsp;&nbsp;&nbsp;&nbsp;

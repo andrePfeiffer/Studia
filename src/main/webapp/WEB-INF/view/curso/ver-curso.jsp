@@ -18,10 +18,12 @@
                     </h3></span>
                 </div>
                 <div class="col-sm-2 form-inline" style="padding-top:10px;">
+                <security:authorize access="hasAnyAuthority('Administrador')">
                         <a class="btn btn-sm btn-primary display-4" id="criaAulaButton"  data-toggle="modal" data-target="#CadastroAulaModal">
                                 <span class="mbri-plus mbr-iconfont mbr-iconfont-btn"></span>
                                 Criar Aula
                         </a>
+                </security:authorize>
                 </div>
                 <div class="col-sm-4 form-inline" style="padding-top:10px;">
                     <input type="text" id="cursoSearch" class="form-control" placeholder="Pesquise pelo nome">
@@ -67,8 +69,10 @@
                     <div class="col-xs-12 col-sm-2">
                     <br><br>
 	                    <a href="${showLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-search mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
+	                    <security:authorize access="hasAnyAuthority('Administrador')">
 	                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="${updateLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
 	                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="${deleteLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-trash mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
+	                    </security:authorize>
                     <br><br>
                     </div>
                     <div class="clearfix"><br/></div>

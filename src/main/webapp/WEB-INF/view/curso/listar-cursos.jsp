@@ -58,8 +58,10 @@
 	                    <div class="col-xs-12 col-sm-2">
 	                    <br><br>
 	                    <a href="${showLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-search mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
+	                    <security:authorize access="hasAnyAuthority('Administrador')">
 	                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="${updateLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-edit2 mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
 	                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="${deleteLink}" data-toggle="tooltip" data-placement="top" ><span class="mbri-trash mbr-iconfont mbr-iconfont-btn" style="font-size:30px;"></span></a>
+	                    </security:authorize>
 	                    <br><br>
 	                    </div>
 	                    <div class="clearfix"><br/></div>
