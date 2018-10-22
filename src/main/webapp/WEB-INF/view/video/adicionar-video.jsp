@@ -55,16 +55,9 @@
         </div>
     </div>
     <div id="videoTeste" class="hidden"></div>
-    <div id="toast"></div>
+    
 <script>
-function startToast(msg) {
-	var x = document.getElementById("toast");
-	x.className = "show";
-	$("#toast").text(msg);
-	setTimeout(function(){
-			x.className = x.className.replace("show", "");
-		}, 6000);
-}
+
 $('#upload').change( function(event) {
 
     let fileInput = $(this);

@@ -24,7 +24,7 @@
             <p style="text-align: center;margin: auto;padding: 0;color: #acacac;">Desenvolvido por <a target="_blank" href="#" style="color:#f76f3e;text-decoration:none;">TeamPuc</a></p>
         </div>
     </footer>
-    
+    <div id="toast"></div>
     <div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i></i></a></div>
     <input name="animation" type="hidden">
     
