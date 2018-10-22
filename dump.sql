@@ -126,6 +126,7 @@ DROP TABLE IF EXISTS `ComponenteAula`;
 CREATE TABLE `ComponenteAula` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `publico` char(1) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'F',
+  `titulo` VARCHAR(100) NOT NULL,
   `descricao` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `idAula` int unsigned NOT NULL,
   `ordem` int NOT NULL DEFAULT 0,
@@ -152,6 +153,7 @@ CREATE TABLE `Video` (
   `idComponente` int unsigned NOT NULL,
   `arquivo` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tipoArquivo` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `duracao` INT NOT NULL,
   PRIMARY KEY (`idComponente`),
   CONSTRAINT `fk_video_componenteaula` 
   FOREIGN KEY (`idComponente`) REFERENCES `ComponenteAula` (`id`)
