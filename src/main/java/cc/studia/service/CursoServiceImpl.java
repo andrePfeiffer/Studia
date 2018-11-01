@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cc.studia.dao.AssuntoDAO;
+import cc.studia.dao.ConteudoDAO;
 import cc.studia.dao.CursoDAO;
 import cc.studia.entity.Curso;
 
@@ -13,6 +15,12 @@ import cc.studia.entity.Curso;
 public class CursoServiceImpl implements CursoService {
 	@Autowired
 	private CursoDAO cursoDAO;
+	
+	@Autowired
+	private AssuntoDAO assuntoDAO;
+	
+	@Autowired
+	private ConteudoDAO conteudoDAO;
 	
 	@Override
 	@Transactional
@@ -23,6 +31,16 @@ public class CursoServiceImpl implements CursoService {
 	@Override
 	@Transactional
 	public void salvarCurso(Curso curso) {
+		cursoDAO.salvarCurso(curso);
+	}
+	
+	@Override
+	@Transactional
+	public void salvar(int conteudoId, int assuntoId) {
+		Curso curso = new Curso();
+		curso.setIdConteudo(conteudoId);
+		curso.setConteudo(conteudoDAO.ver(conteudoId));
+		curso.setAssunto(assuntoDAO.ver(assuntoId));
 		cursoDAO.salvarCurso(curso);
 	}
 

@@ -16,4 +16,6 @@ public interface ExercicioService {
 
 	void remover(int id);
 
+	int salvar(int componenteAulaId);
+
 }

@@ -19,4 +19,8 @@ public interface ComponenteAulaService {
 	void modificaOrdem(List<ComponenteAula> listaComponentes);
 	
 	String tipoComponente(int componenteId);
+
+	int salvar(int aulaId, String titulo, String descricao, boolean publico);
+
+	void editar(int componenteId, String titulo, String descricao, boolean componentePublico);
 }

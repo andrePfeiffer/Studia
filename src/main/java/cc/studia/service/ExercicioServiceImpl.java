@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cc.studia.dao.ComponenteAulaDAO;
 import cc.studia.dao.ExercicioDAO;
 import cc.studia.entity.Aula;
 import cc.studia.entity.Exercicio;
@@ -15,6 +16,9 @@ public class ExercicioServiceImpl implements ExercicioService {
 	
 	@Autowired
 	private ExercicioDAO exercicioDAO;
+	
+	@Autowired
+	private ComponenteAulaDAO componenteAulaDAO;
 
 	@Override
 	@Transactional
@@ -29,6 +33,15 @@ public class ExercicioServiceImpl implements ExercicioService {
 		return exercicioDAO.salvar(exercicio);
 	}
 
+	@Override
+	@Transactional
+	public int salvar(int componenteAulaId) {
+        Exercicio exercicio = new Exercicio();
+        exercicio.setComponenteAula(componenteAulaDAO.ver(componenteAulaId));
+        exercicio.setIdComponente(componenteAulaId);
+		return exercicioDAO.salvar(exercicio);
+	}
+	
 	@Override
 	@Transactional
 	public Exercicio ver(int id) {

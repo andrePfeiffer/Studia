@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cc.studia.dao.AulaDAO;
 import cc.studia.dao.ComponenteAulaDAO;
 import cc.studia.dao.ExercicioDAO;
 import cc.studia.dao.MaterialDAO;
@@ -31,6 +32,9 @@ public class ComponenteAulaServiceImpl implements ComponenteAulaService {
 	@Autowired
 	private MaterialDAO materialDAO;
 	
+	@Autowired
+	private AulaDAO aulaDAO;
+	
 	@Override
 	@Transactional
 	public List<ComponenteAula> verTodos(Aula aula) {
@@ -46,6 +50,18 @@ public class ComponenteAulaServiceImpl implements ComponenteAulaService {
 
 	@Override
 	@Transactional
+	public int salvar(int aulaId, String titulo, String descricao, boolean publico) {
+	    ComponenteAula componenteAula = new ComponenteAula();
+	    componenteAula.setAula(aulaDAO.ver(aulaId));
+	    componenteAula.setIdAula(aulaId);
+	    componenteAula.setTitulo(titulo);
+	    componenteAula.setDescricao(descricao);
+	    componenteAula.setPublico(publico);
+		return componenteAulaDAO.salvar(componenteAula);
+	}
+	
+	@Override
+	@Transactional
 	public ComponenteAula ver(int id) {
 		return componenteAulaDAO.ver(id);
 	}
@@ -55,7 +71,17 @@ public class ComponenteAulaServiceImpl implements ComponenteAulaService {
 	public void editar(ComponenteAula componenteAula) {
 		componenteAulaDAO.editar(componenteAula);
 	}
-
+	
+	@Override
+	@Transactional
+	public void editar(int componenteId, String titulo, String descricao, boolean componentePublico) {
+		ComponenteAula componente = componenteAulaDAO.ver(componenteId);
+		componente.setTitulo(titulo);
+		componente.setDescricao(descricao);
+		componente.setPublico(componentePublico);
+		componenteAulaDAO.editar(componente);
+	}
+	
 	@Override
 	@Transactional
 	public void remover(int id) {
@@ -89,4 +115,5 @@ public class ComponenteAulaServiceImpl implements ComponenteAulaService {
 		}
 		return null;
 	}
+
 }

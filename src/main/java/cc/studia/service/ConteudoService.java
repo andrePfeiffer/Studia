@@ -10,4 +10,8 @@ public interface ConteudoService {
 
 	void editaConteudo(Conteudo conteudo);
 
+	int salvarConteudo(String login, String nome, String descricao, boolean conteudoPublico);
+
+	void editar(int conteudoId, String nome, String descricao, boolean conteudoPublico);
+
 }

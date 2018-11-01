@@ -7,12 +7,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cc.studia.dao.AulaDAO;
+import cc.studia.dao.ConteudoDAO;
+import cc.studia.dao.CursoDAO;
 import cc.studia.entity.Aula;
 
 @Service
 public class AulaServiceImpl implements AulaService {
 	@Autowired
 	private AulaDAO aulaDAO;
+	
+	@Autowired
+	private CursoDAO cursoDAO;
+	
+	@Autowired
+	private ConteudoDAO conteudoDAO;
 	
 	@Override
 	@Transactional
@@ -22,10 +30,21 @@ public class AulaServiceImpl implements AulaService {
 
 	@Override
 	@Transactional
-	public void salvarAula(Aula curso) {
-		aulaDAO.salvarAula(curso);
+	public void salvarAula(Aula aula) {
+		aulaDAO.salvarAula(aula);
 	}
 
+	@Override
+	@Transactional
+	public void salvar(int conteudoId, int cursoId) {
+		Aula aula = new Aula();
+		aula.setIdConteudo(conteudoId);
+		aula.setIdCurso(cursoId);
+		aula.setConteudo(conteudoDAO.ver(conteudoId));
+		aula.setCurso(cursoDAO.ver(cursoId));
+		aulaDAO.salvarAula(aula);
+	}
+	
 	@Override
 	@Transactional
 	public Aula ver(int id) {

@@ -18,4 +18,6 @@ public interface CursoService {
 
 	void removeCurso(int id);
 
+	void salvar(int conteudoId, int assuntoId);
+
 }

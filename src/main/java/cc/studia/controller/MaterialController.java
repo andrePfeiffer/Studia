@@ -16,8 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cc.studia.entity.Aula;
-import cc.studia.entity.ComponenteAula;
-import cc.studia.entity.Material;
 import cc.studia.service.AulaService;
 import cc.studia.service.ComponenteAulaService;
 import cc.studia.service.MaterialService;
@@ -58,19 +56,8 @@ public class MaterialController {
                 byte[] bytes = file.getBytes();
                 Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
                 Files.write(path, bytes);
-                ComponenteAula componenteAula = new ComponenteAula();
-                componenteAula.setAula(aulaService.ver(aulaId));
-                componenteAula.setIdAula(aulaId);
-                componenteAula.setTitulo(titulo);
-                componenteAula.setDescricao(descricao);
-                componenteAula.setPublico(materialPublico);
-                int componenteAulaId = componenteAulaService.salvar(componenteAula);
-                Material material = new Material();
-                material.setArquivo(file.getOriginalFilename());
-                material.setTipoArquivo(file.getContentType());
-                material.setComponenteAula(componenteAula);
-                material.setIdComponente(componenteAulaId);
-                materialService.salvar(material);
+                int componenteAulaId = componenteAulaService.salvar(aulaId, titulo, descricao, materialPublico);
+                materialService.salvar(file.getOriginalFilename(), file.getContentType(), componenteAulaId);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -16,4 +16,6 @@ public interface MaterialService {
 
 	void remover(int id);
 
+	int salvar(String originalFilename, String contentType, int componenteAulaId);
+
 }

@@ -15,10 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cc.studia.entity.Assunto;
 import cc.studia.entity.Aula;
-import cc.studia.entity.Conteudo;
 import cc.studia.entity.Curso;
-import cc.studia.entity.Historico;
-import cc.studia.entity.Usuario;
 import cc.studia.service.AssuntoService;
 import cc.studia.service.AulaService;
 import cc.studia.service.ConteudoService;
@@ -94,19 +91,9 @@ public class AulaController {
 			@RequestParam("descricaoAula") String descricaoAula, 
 			@RequestParam("aulaPublica") boolean aulaPublica, 
 			@RequestParam("cursoId") int cursoId) {
-		Curso curso = cursoService.ver(cursoId);
-		Conteudo conteudo = new Conteudo();
-		conteudo.setAutor(usuarioService.findByUserName(authentication.getName()));
-		conteudo.setNome(tituloAula);
-		conteudo.setDescricao(descricaoAula);
-		conteudo.setPublico(aulaPublica);
-		int conteudoId = conteudoService.salvarConteudo(conteudo);
-		Aula aula = new Aula();
-		aula.setIdConteudo(conteudoId);
-		aula.setConteudo(conteudo);
-		aula.setIdCurso(cursoId);
-		aula.setCurso(curso);
-		aulaService.salvarAula(aula);
+		String login = authentication.getName();
+		int conteudoId = conteudoService.salvarConteudo(login, tituloAula, descricaoAula, aulaPublica);
+		aulaService.salvar(conteudoId, cursoId);
 		attributes.addFlashAttribute("mensagemFlash", "Aula criada com sucesso");
 		return "redirect:/curso/ver?cursoId=" + cursoId;
 	}
@@ -126,11 +113,7 @@ public class AulaController {
 			@RequestParam("descricao") String descricao, 
 			@RequestParam("cursoId") int cursoId,
 			@RequestParam("conteudoPublico") boolean conteudoPublico){
-		Conteudo conteudo = conteudoService.ver(conteudoId);
-		conteudo.setPublico(conteudoPublico);
-		conteudo.setDescricao(descricao);
-		conteudo.setNome(nome);
-		conteudoService.editaConteudo(conteudo);
+		conteudoService.editar(conteudoId, nome, descricao, conteudoPublico);
 		attributes.addFlashAttribute("mensagemFlash", "Aula salva com sucesso");
 		return "redirect:/curso/ver?cursoId=" + cursoId;
 	}
@@ -156,14 +139,9 @@ public class AulaController {
 			@RequestParam("cursoId") int cursoId,
 			Model model
 			) {
-		Usuario usuario = usuarioService.findByUserName(authentication.getName());
+		String login = authentication.getName();
 		String tipoConteudo = "aula";
-		Historico historico = new Historico();
-		historico.setConteudoId(aulaId);
-		historico.setTipoConteudo(tipoConteudo);
-		historico.setUsuarioId(usuario.getId());
-		historico.setUsuario(usuario);
-		historicoService.gravarHistorico(historico);
+		historicoService.gravarHistorico(login, aulaId, tipoConteudo);
 		attributes.addFlashAttribute("mensagemFlash", "Aula concluída");
 		return "redirect:/curso/ver?cursoId="+cursoId;
 	}

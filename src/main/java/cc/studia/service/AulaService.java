@@ -20,4 +20,6 @@ public interface AulaService {
 
 	void modificaOrdem(List<Aula> listaAulas);
 
+	void salvar(int conteudoId, int cursoId);
+
 }

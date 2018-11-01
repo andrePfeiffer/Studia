@@ -16,8 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cc.studia.entity.Aula;
-import cc.studia.entity.ComponenteAula;
-import cc.studia.entity.Video;
 import cc.studia.service.AulaService;
 import cc.studia.service.ComponenteAulaService;
 import cc.studia.service.VideoService;
@@ -64,20 +62,8 @@ public class VideoController {
                     byte[] bytes = file.getBytes();
                     Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
                     Files.write(path, bytes);
-                    ComponenteAula componenteAula = new ComponenteAula();
-                    System.out.println(aulaId);
-                    componenteAula.setAula(aulaService.ver(aulaId));
-                    componenteAula.setIdAula(aulaId);
-                    componenteAula.setTitulo(titulo);
-                    componenteAula.setDescricao(descricao);
-                    componenteAula.setPublico(videoPublico);
-                    int componenteAulaId = componenteAulaService.salvar(componenteAula);
-                    Video video = new Video();
-                    video.setArquivo(file.getOriginalFilename());
-                    video.setTipoArquivo(file.getContentType());
-                    video.setComponenteAula(componenteAula);
-                    video.setIdComponente(componenteAulaId);
-                    videoService.salvar(video);
+                    int componenteAulaId = componenteAulaService.salvar(aulaId, titulo, descricao, videoPublico);
+                    videoService.salvar(file.getOriginalFilename(), file.getContentType(), componenteAulaId);
                     attributes.addFlashAttribute("mensagemFlash", "Video cadastrado com sucesso");
             		return "redirect:/aula/edita?aulaId=" + aulaId;
                 } catch (IOException e) {

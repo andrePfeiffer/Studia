@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cc.studia.entity.Assunto;
-import cc.studia.entity.Conteudo;
 import cc.studia.entity.Curso;
 import cc.studia.service.AssuntoService;
 import cc.studia.service.ConteudoService;
@@ -77,19 +76,9 @@ public class CursoController {
 			@RequestParam("assuntoId") int assuntoId,
 			@RequestParam("nome") String nome,
 			@RequestParam("descricao") String descricao) {
-		Assunto assunto = assuntoService.ver(assuntoId);
-		Conteudo conteudo = new Conteudo();
-		conteudo.setAutor(usuarioService.findByUserName(authentication.getName()));
-		conteudo.setNome(nome);
-		conteudo.setDescricao(descricao);
-		conteudo.setAprovado(false);
-		conteudo.setPublico(conteudoPublico);
-		int conteudoId = conteudoService.salvarConteudo(conteudo);
-		Curso curso = new Curso();
-		curso.setConteudo(conteudo);
-		curso.setAssunto(assunto);
-		curso.setIdConteudo(conteudoId);
-		cursoService.salvarCurso(curso);
+		String login = authentication.getName();
+		int conteudoId = conteudoService.salvarConteudo(login, nome, descricao, conteudoPublico);
+		cursoService.salvar(conteudoId, assuntoId);
 		attributes.addFlashAttribute("mensagemFlash", "Curso criado com sucesso");
 		return "redirect:/curso/verTodos";
 	}
@@ -108,11 +97,7 @@ public class CursoController {
 			@RequestParam("nome") String nome,
 			@RequestParam("descricao") String descricao,
 			@RequestParam("conteudoPublico") boolean conteudoPublico) {
-		Conteudo conteudo = conteudoService.ver(conteudoId);
-		conteudo.setNome(nome);
-		conteudo.setDescricao(descricao);
-		conteudo.setPublico(conteudoPublico);
-		conteudoService.editaConteudo(conteudo);
+		conteudoService.editar(conteudoId, nome, descricao, conteudoPublico);
 		attributes.addFlashAttribute("mensagemFlash", "Curso salvo com sucesso");
 		return "redirect:/curso/verTodos";
 	}

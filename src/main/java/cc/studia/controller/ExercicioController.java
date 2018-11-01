@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cc.studia.entity.Aula;
-import cc.studia.entity.ComponenteAula;
-import cc.studia.entity.Exercicio;
 import cc.studia.service.AulaService;
 import cc.studia.service.ComponenteAulaService;
 import cc.studia.service.ExercicioService;
@@ -44,17 +42,8 @@ public class ExercicioController {
 			@RequestParam("descricao") String descricao,
 			@RequestParam("exercicioPublico") boolean exercicioPublico,
 			Model model) {
-        ComponenteAula componenteAula = new ComponenteAula();
-        componenteAula.setAula(aulaService.ver(aulaId));
-        componenteAula.setIdAula(aulaId);
-        componenteAula.setTitulo(titulo);
-        componenteAula.setDescricao(descricao);
-        componenteAula.setPublico(exercicioPublico);
-        int componenteAulaId = componenteAulaService.salvar(componenteAula);
-        Exercicio exercicio = new Exercicio();
-        exercicio.setComponenteAula(componenteAula);
-        exercicio.setIdComponente(componenteAulaId);
-        exercicioService.salvar(exercicio);
+        int componenteAulaId = componenteAulaService.salvar(aulaId, titulo, descricao, exercicioPublico);
+        exercicioService.salvar(componenteAulaId);
         attributes.addFlashAttribute("mensagemFlash", "Exercício criado com sucesso");
 		return "redirect:/aula/edita?aulaId=" + aulaId;
 	}

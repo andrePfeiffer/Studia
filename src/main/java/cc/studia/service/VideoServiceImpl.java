@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cc.studia.dao.ComponenteAulaDAO;
 import cc.studia.dao.VideoDAO;
 import cc.studia.entity.Aula;
 import cc.studia.entity.Video;
@@ -15,6 +16,9 @@ public class VideoServiceImpl implements VideoService {
 	
 	@Autowired
 	private VideoDAO videoDAO; 
+	
+	@Autowired
+	private ComponenteAulaDAO componenteAulaDAO;
 
 	@Override
 	@Transactional
@@ -26,6 +30,17 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	@Transactional
 	public int salvar(Video video) {
+		return videoDAO.salvar(video);
+	}
+
+	@Override
+	@Transactional
+	public int salvar(String originalFilename, String contentType, int componenteAulaId) {
+		Video video = new Video();
+	    video.setArquivo(originalFilename);
+	    video.setTipoArquivo(contentType);
+	    video.setComponenteAula(componenteAulaDAO.ver(componenteAulaId));
+	    video.setIdComponente(componenteAulaId);
 		return videoDAO.salvar(video);
 	}
 

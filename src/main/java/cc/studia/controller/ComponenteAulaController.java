@@ -16,16 +16,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import cc.studia.entity.Aula;
 import cc.studia.entity.ComponenteAula;
 import cc.studia.entity.Exercicio;
-import cc.studia.entity.Historico;
 import cc.studia.entity.Material;
-import cc.studia.entity.Usuario;
 import cc.studia.entity.Video;
 import cc.studia.service.AulaService;
 import cc.studia.service.ComponenteAulaService;
 import cc.studia.service.ExercicioService;
 import cc.studia.service.HistoricoService;
 import cc.studia.service.MaterialService;
-import cc.studia.service.UsuarioService;
 import cc.studia.service.VideoService;
 
 @Controller
@@ -48,9 +45,6 @@ public class ComponenteAulaController {
 	private ExercicioService exercicioService;
 	
 	@Autowired
-	private UsuarioService usuarioService;
-	
-	@Autowired
 	private HistoricoService historicoService;
 	
 	@GetMapping("/ver")
@@ -59,14 +53,9 @@ public class ComponenteAulaController {
 			@RequestParam("componenteId") int componenteId, 
 			@RequestParam("aulaId") int aulaId, 
 			Model model) {
-		Usuario usuario = usuarioService.findByUserName(authentication.getName());
+		String login = authentication.getName();
 		String tipoConteudo = "componente";
-		Historico historico = new Historico();
-		historico.setConteudoId(componenteId);
-		historico.setTipoConteudo(tipoConteudo);
-		historico.setUsuarioId(usuario.getId());
-		historico.setUsuario(usuario);
-		historicoService.gravarHistorico(historico);
+		historicoService.gravarHistorico(login, componenteId, tipoConteudo);
 		ComponenteAula componente = componenteAulaService.ver(componenteId);
 		Aula aula = aulaService.ver(aulaId);
 		model.addAttribute("aula", aula);
@@ -108,11 +97,7 @@ public class ComponenteAulaController {
 			@RequestParam("titulo") String titulo,
 			@RequestParam("descricao") String descricao,
 			@RequestParam("componentePublico") boolean componentePublico) {
-		ComponenteAula componente = componenteAulaService.ver(componenteId);
-		componente.setTitulo(titulo);
-		componente.setDescricao(descricao);
-		componente.setPublico(componentePublico);
-		componenteAulaService.editar(componente);
+		componenteAulaService.editar(componenteId, titulo, descricao, componentePublico);
 		attributes.addFlashAttribute("mensagemFlash", "Conteúdo salvo com sucesso");
 		return "redirect:/componente/editar?componenteId=" + componenteId + "&aulaId=" + aulaId;
 	}
