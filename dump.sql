@@ -195,6 +195,24 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `Historico`;
 CREATE TABLE `Historico` (
+  `id` int(10) unsigned NOT NULL,
+  `usuarioId` int(10) unsigned NOT NULL,
+  `tipoConteudo` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `conteudoId` int(10) unsigned NOT NULL,
+  `dataCompletado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `fk_Historico_conteudo_idx` (`conteudoId`),
+  KEY `fk_Historico_usuario_idx` (`usuarioId`),
+  CONSTRAINT `fk_historico_conteudo` 
+  FOREIGN KEY (`conteudoId`) REFERENCES `Conteudo` (`id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_historico_usuario` 
+  FOREIGN KEY (`usuarioId`) REFERENCES `Usuario` (`id`) 
+  ON DELETE CASCADE ON UPDATE CASCADE
+) 
+ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `Historico` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `usuarioId` INT UNSIGNED NOT NULL,
   `tipoConteudo` VARCHAR(45) NOT NULL,
